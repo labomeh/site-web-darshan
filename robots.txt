@@ -1,0 +1,6 @@
+# ⚠️ CONFIGURATION TEMPORAIRE - SITE EN DÉVELOPPEMENT
+User-agent: *
+Disallow: /
+
+# Sitemap: https://marie-pierre-garnier-hydrotherapie.netlify.app/sitemap.xml
+# (Ligne commentée temporairement)
