@@ -1,8 +1,21 @@
+// Configuration
+const GITHUB_REPO = 'labomeh/site-pro-marie-pierre-garnier';
+const EVENTS_FOLDER = '_events';
+const API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/${EVENTS_FOLDER}`;
+
+// Fonction utilitaire pour échapper le HTML et prévenir les injections XSS
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 async function loadEvents() {
     const container = document.getElementById('events-container');
 
     try {
-        const response = await fetch('https://api.github.com/repos/labomeh/site-pro-marie-pierre-garnier/contents/_events');
+        const response = await fetch(API_URL);
 
         if (!response.ok) {
             throw new Error('Erreur de chargement');
@@ -59,20 +72,34 @@ function displayEvents(events, container) {
     }
 
     container.innerHTML = events.map(event => {
-        const img = event.image ? '<img src="' + event.image + '" alt="' + event.title + '" class="event-image">' : '';
-        const loc = event.location ? '<span class="event-location">📍 ' + event.location + '</span>' : '';
-        const spots = event.available_spots ? '<p class="spots">Places disponibles : ' + event.available_spots + '</p>' : '';
-        const contact = event.contact_info ? '<div class="event-contact"><strong>Pour vous inscrire :</strong><br>' + event.contact_info + '</div>' : '';
+        const img = event.image
+            ? `<img src="${escapeHtml(event.image)}" alt="${escapeHtml(event.title)}" class="event-image">`
+            : '';
+        const loc = event.location
+            ? `<span class="event-location">📍 ${escapeHtml(event.location)}</span>`
+            : '';
+        const spots = event.available_spots
+            ? `<p class="spots">Places disponibles : ${escapeHtml(event.available_spots)}</p>`
+            : '';
+        const contact = event.contact_info
+            ? `<div class="event-contact"><strong>Pour vous inscrire :</strong><br>${escapeHtml(event.contact_info)}</div>`
+            : '';
 
-        return '<article class="event-card">' + img +
-            '<div class="event-content">' +
-            '<h3>' + event.title + '</h3>' +
-            '<div class="event-meta">' +
-            '<span>📅 ' + formatDate(event.date) + '</span>' +
-            loc + '</div>' +
-            '<div class="event-description">' + markdownToHtml(event.body) + '</div>' +
-            spots + contact +
-            '</div></article>';
+        return `
+            <article class="event-card">
+                ${img}
+                <div class="event-content">
+                    <h3>${escapeHtml(event.title)}</h3>
+                    <div class="event-meta">
+                        <span>📅 ${formatDate(event.date)}</span>
+                        ${loc}
+                    </div>
+                    <div class="event-description">${markdownToHtml(event.body)}</div>
+                    ${spots}
+                    ${contact}
+                </div>
+            </article>
+        `;
     }).join('');
 }
 
@@ -88,10 +115,32 @@ function formatDate(dateString) {
 
 function markdownToHtml(markdown) {
     if (!markdown) return '';
-    return markdown
+
+    // Conversion markdown vers HTML avec échappement de base
+    let html = markdown
+        // Liens [texte](url)
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+        // Gras **texte**
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // Italique *texte*
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        .split('\n\n').map(p => '<p>' + p + '</p>').join('');
+        // Listes non ordonnées
+        .replace(/^\- (.+)$/gm, '<li>$1</li>')
+        // Retours à la ligne simples
+        .replace(/\n/g, '<br>');
+
+    // Envelopper les listes <li> dans <ul>
+    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
+    // Séparer en paragraphes (double retour à la ligne)
+    html = html
+        .split('<br><br>')
+        .map(p => p.trim())
+        .filter(p => p && !p.startsWith('<ul>'))
+        .map(p => `<p>${p}</p>`)
+        .join('');
+
+    return html;
 }
 
 document.addEventListener('DOMContentLoaded', loadEvents);
