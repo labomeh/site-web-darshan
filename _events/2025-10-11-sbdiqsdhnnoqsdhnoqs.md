@@ -1,5 +1,5 @@
 ---
-title: SBDIQSDHNNOQSDHNOQS
+title: SBDIQSDHNNOQSDHNOQS test
 date: 2025-10-13T16:47:00.000+02:00
 available_spots: 12
 ---
