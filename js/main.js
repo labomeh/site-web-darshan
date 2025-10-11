@@ -19,6 +19,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Lazy load hero video
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo) {
+        const videoSource = heroVideo.querySelector('source[data-src]');
+
+        if (videoSource) {
+            // Use IntersectionObserver to load video when hero is visible
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Load the video source
+                        const src = videoSource.getAttribute('data-src');
+                        videoSource.setAttribute('src', src);
+
+                        // Load and play the video
+                        heroVideo.load();
+
+                        // Add loaded class for fade-in effect when video can play
+                        heroVideo.addEventListener('canplay', () => {
+                            heroVideo.classList.add('loaded');
+                            heroVideo.play().catch(err => {
+                                console.log('Autoplay prevented:', err);
+                            });
+                        }, { once: true });
+
+                        // Stop observing
+                        videoObserver.unobserve(heroVideo);
+                    }
+                });
+            }, {
+                rootMargin: '50px' // Start loading slightly before it enters viewport
+            });
+
+            videoObserver.observe(heroVideo);
+        }
+    }
+
     // Fade-in au scroll
     const observerOptions = {
         threshold: 0.1,

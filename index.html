@@ -15,10 +15,10 @@
 <header>
     <nav class="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo" aria-label="Retour à l'accueil">
                 <img src="images/logo.svg" alt="Darshan" class="logo-image">
                 <h1 class="logo-text">DARSHAN</h1>
-            </div>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -35,9 +35,41 @@
 </header>
 <main>
     <section class="hero">
-        <div class="hero-content">
-            <h2>Retrouvez votre bien-être intérieur</h2>
-            <p>Hydrothérapie du côlon et soins holistiques à Saint-Gingolph, Haute-Savoie</p>
+        <video
+            class="hero-video"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="none"
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E">
+            <source data-src="videos/hero-background.webm" type="video/webm">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-welcome">
+            <img src="images/logo.svg" alt="Darshan" class="hero-logo">
+            <h1 class="hero-title">DARSHAN</h1>
+            <p class="hero-tagline">Centre de bien-être et d'hydrothérapie</p>
+
+            <div class="hero-services">
+                <div class="hero-service-item">
+                    <i class="fas fa-water"></i>
+                    <span>Hydrothérapie du côlon</span>
+                </div>
+                <div class="hero-service-item">
+                    <i class="fas fa-hands"></i>
+                    <span>Massages ayurvédiques</span>
+                </div>
+                <div class="hero-service-item">
+                    <i class="fas fa-om"></i>
+                    <span>Méditation tantrique</span>
+                </div>
+            </div>
+
+            <div class="hero-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>21 Route de Chez Monnet, Saint-Gingolph (74)</span>
+            </div>
         </div>
     </section>
     <section class="intro fade-in">
