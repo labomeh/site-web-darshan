@@ -56,6 +56,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Parallax effect for hero video
+    const heroSection = document.querySelector('.hero');
+    if (heroSection && heroVideo) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroHeight = heroSection.offsetHeight;
+
+            // Only apply parallax while hero is in view
+            if (scrolled <= heroHeight) {
+                const parallaxSpeed = 0.5; // Video moves at 50% of scroll speed
+                heroVideo.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+            }
+        });
+    }
+
+    // Scroll indicator with delayed appearance
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        let hasScrolled = false;
+
+        // Show indicator after 3 seconds if user hasn't scrolled
+        setTimeout(() => {
+            if (!hasScrolled) {
+                scrollIndicator.classList.add('visible');
+                // Start bounce animation after fade-in completes
+                setTimeout(() => {
+                    scrollIndicator.classList.add('active');
+                }, 600);
+            }
+        }, 3000);
+
+        // Click handler for smooth scroll
+        scrollIndicator.addEventListener('click', () => {
+            const introSection = document.querySelector('.intro');
+            if (introSection) {
+                introSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Hide indicator only when user scrolls
+        window.addEventListener('scroll', () => {
+            if (!hasScrolled) {
+                hasScrolled = true;
+                scrollIndicator.classList.remove('visible', 'active');
+            }
+        }, { passive: true });
+    }
+
     // Fade-in au scroll
     const observerOptions = {
         threshold: 0.1,
