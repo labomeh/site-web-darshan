@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Contact - Hydrothérapie Haute-Savoie</title>
-    <meta name="description" content="Contactez Marie-Pierre Garnier pour prendre rendez-vous. Cabinet à Saint-Gingolph, Haute-Savoie.">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <title>Contact - Darshan</title>
+    <meta name="description" content="Contactez Darshan pour prendre rendez-vous. Cabinet à Saint-Gingolph, Haute-Savoie.">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -16,8 +16,8 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <h1>Hydrothérapie Haute-Savoie</h1>
-                <p>Marie-Pierre Garnier</p>
+                <img src="images/logo.svg" alt="Darshan" class="logo-image">
+                <h1 class="logo-text">DARSHAN</h1>
             </div>
             <button class="menu-toggle" id="menuToggle" aria-label="Menu">
                 <span></span>
@@ -49,7 +49,7 @@
                 <!-- Informations de contact -->
                 <div class="contact-info">
                     <div class="contact-card fade-in">
-                        <h3>📍 Adresse</h3>
+                        <h3><i class="fas fa-map-marker-alt"></i> Adresse</h3>
                         <p>
                             <strong>Cabinet de Saint-Gingolph</strong><br>
                             21 Route de Chez Monnet<br>
@@ -59,25 +59,25 @@
                     </div>
 
                     <div class="contact-card fade-in">
-                        <h3>📞 Téléphone</h3>
+                        <h3><i class="fas fa-phone"></i> Téléphone</h3>
                         <p>
-                            <a href="tel:+33621953168" style="color: var(--primary); font-weight: bold; text-decoration: none;">
+                            <a href="tel:+33621953168">
                                 06 21 95 31 68
                             </a>
                         </p>
                     </div>
 
                     <div class="contact-card fade-in">
-                        <h3>📧 Email</h3>
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
                         <p>
-                            <a href="mailto:contact@hydrotherapie-colon-savoie.fr" style="color: var(--primary); font-weight: bold; text-decoration: none;">
+                            <a href="mailto:contact@hydrotherapie-colon-savoie.fr">
                                 contact@hydrotherapie-colon-savoie.fr
                             </a>
                         </p>
                     </div>
 
                     <div class="contact-card fade-in">
-                        <h3>🕐 Horaires d'ouverture</h3>
+                        <h3><i class="fas fa-clock"></i> Horaires d'ouverture</h3>
                         <p>
                             <strong>Lundi - Samedi :</strong> 8h00 - 18h00<br>
                             <strong>Dimanche :</strong> Fermé
@@ -91,7 +91,7 @@
                 <!-- Formulaire de contact (placeholder pour futur développement) -->
                 <div class="contact-form-container fade-in">
                     <div class="form-placeholder">
-                        <h3>Écrire un message</h3>
+                        <h3><i class="fas fa-paper-plane"></i> Écrire un message</h3>
                         <p style="color: var(--gray); margin-bottom: 2rem;">
                             Le formulaire de contact sera bientôt disponible.<br>
                             En attendant, vous pouvez me joindre directement par téléphone ou email.
@@ -115,16 +115,16 @@
                                 <label>Message</label>
                                 <textarea disabled rows="5" placeholder="Votre message..." style="background: #f5f5f5;"></textarea>
                             </div>
-                            <button disabled style="background: #ccc; cursor: not-allowed; padding: 1rem 2rem; border: none; border-radius: 5px; width: 100%;">
+                            <button class="btn-primary" disabled style="opacity: 0.5; cursor: not-allowed; width: 100%;">
                                 Formulaire à venir
                             </button>
                         </div>
 
-                        <div style="margin-top: 2rem; padding: 1rem; background: #e7f3ef; border-radius: 8px; border-left: 4px solid var(--primary);">
-                            <p style="margin: 0; font-size: 0.9rem;">
-                                <strong>💡 Pour l'instant :</strong><br>
-                                Appelez-moi au <a href="tel:+33621953168" style="color: var(--primary);">06 21 95 31 68</a><br>
-                                Ou écrivez-moi à <a href="mailto:contact@hydrotherapie-colon-savoie.fr" style="color: var(--primary);">contact@hydrotherapie-colon-savoie.fr</a>
+                        <div class="form-info-box">
+                            <p>
+                                <strong><i class="fas fa-lightbulb" style="color: var(--primary);"></i> Pour l'instant :</strong><br>
+                                Appelez-moi au <a href="tel:+33621953168">06 21 95 31 68</a><br>
+                                Ou écrivez-moi à <a href="mailto:contact@hydrotherapie-colon-savoie.fr">contact@hydrotherapie-colon-savoie.fr</a>
                             </p>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
     <!-- Google Maps (optionnel) -->
     <section class="map-section">
         <div class="container">
-            <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Localisation</h3>
+            <h2><i class="fas fa-map-marked-alt"></i> Localisation</h2>
             <div class="map-container">
                 <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2751.5836060257834!2d6.767251792456602!3d46.39748316603168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ba0a3b6ececbb%3A0x144b691290669f6e!2sGarnier%20Marie-Pierre!5e0!3m2!1sfr!2sfr!4v1760058506918!5m2!1sfr!2sfr"
@@ -154,7 +154,7 @@
 
 <footer>
     <div class="container">
-        <p>&copy; 2025 Marie-Pierre Garnier - Hydrothérapie Haute-Savoie</p>
+        <p>&copy; 2025 Darshan</p>
         <p>21 Route de Chez Monnet, 74500 Saint-Gingolph</p>
         <p><a href="mentions-legales.html" >Mentions légales</a></p>
     </div>

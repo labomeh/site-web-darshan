@@ -1,5 +1,5 @@
 // Configuration
-const GITHUB_REPO = 'labomeh/site-pro-marie-pierre-garnier';
+const GITHUB_REPO = 'labomeh/site-web-darshan';
 const EVENTS_FOLDER = '_events';
 const API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/${EVENTS_FOLDER}`;
 

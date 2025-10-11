@@ -2,5 +2,5 @@
 User-agent: *
 Disallow: /
 
-# Sitemap: https://marie-pierre-garnier-hydrotherapie.netlify.app/sitemap.xml
+# Sitemap: https://centre-darshan.netlify.app/sitemap.xml
 # (Ligne commentée temporairement)

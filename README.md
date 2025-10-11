@@ -1,10 +1,10 @@
-# Site Hydrothérapie Haute-Savoie
+# Site Darshan - Centre de Bien-être et Hydrothérapie
 
-Site web pour Marie-Pierre Garnier, hydrothérapeute à Saint-Gingolph (Haute-Savoie).
+Site web pour Darshan, centre de bien-être et d'hydrothérapie à Saint-Gingolph (Haute-Savoie).
 
 ## 🌐 Site en ligne
 
-[Voir le site](https://marie-pierre-garnier-hydrotherapie.netlify.app)
+[Voir le site](https://centre-darshan.netlify.app)
 
 ## 🏗️ Technologies
 

@@ -2,8 +2,8 @@
 /* Voir DESIGN_SYSTEM.md pour la documentation complète */
 @import './design-tokens.css';
 
-/* Import de la police Roboto depuis Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+/* Import des polices Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Medula+One&family=Libre+Baskerville:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -16,7 +16,7 @@ html {
 }
 
 body {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
     font-size: var(--body-size);
     font-weight: var(--body-weight);
     line-height: var(--body-line-height);
@@ -32,7 +32,7 @@ body {
 
 /* Navigation */
 .navbar {
-    background: var(--white);
+    background: var(--secondary); /* Fond bleu foncé */
     box-shadow: var(--shadow-md);
     position: sticky;
     top: 0;
@@ -46,25 +46,36 @@ body {
     padding: var(--space-md) var(--space-lg);
 }
 
-.logo h1 {
-    font-family: var(--font-family-primary);
-    color: var(--black);
-    font-size: 24px; /* Taille personnalisée pour le logo */
-    font-weight: 500;
-    letter-spacing: 0.5px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.logo-image {
+    height: 45px;
+    width: auto;
     transition: transform var(--transition-base) ease;
+    /* Le SVG sera coloré en or #C9A961 */
+    filter: brightness(0) saturate(100%) invert(65%) sepia(24%) saturate(671%) hue-rotate(7deg) brightness(94%) contrast(87%);
 }
 
-.logo h1:hover {
-    transform: scale(1.02);
+.logo-image:hover {
+    transform: scale(1.05);
 }
 
-.logo p {
-    font-family: var(--font-family-primary);
-    font-size: var(--small-size);
-    font-weight: var(--small-weight);
-    color: var(--dark-gray);
-    letter-spacing: 0.5px;
+.logo-text {
+    font-family: var(--font-logo);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--primary); /* Or */
+    letter-spacing: 2px;
+    margin: 0;
+    transition: color var(--transition-base) ease;
+}
+
+.logo-text:hover {
+    color: var(--primary-light);
 }
 
 .menu-toggle {
@@ -107,7 +118,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--dark-gray);
+    color: var(--off-white); /* Texte clair sur fond bleu */
     font-weight: 500;
     transition: color var(--transition-base) ease;
     position: relative;
@@ -124,7 +135,7 @@ body {
     left: var(--space-md);
     width: 0;
     height: 2px;
-    background: var(--primary-dark);
+    background: var(--primary); /* Soulignement doré */
     transition: width var(--transition-base) ease;
 }
 
@@ -135,7 +146,7 @@ body {
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: var(--primary-dark);
+    color: var(--primary); /* Or au hover */
 }
 
 /* Focus state pour accessibilité */
@@ -153,10 +164,10 @@ body {
 /* Boutons */
 .btn-primary {
     background: var(--primary);
-    color: var(--white);
+    color: var(--secondary);
     padding: 14px 32px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: var(--radius-md);
     border: none;
     cursor: pointer;
@@ -166,7 +177,7 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
 }
 
 .btn-primary:hover {
@@ -181,13 +192,13 @@ body {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--primary-dark);
+    background: var(--secondary);
+    color: var(--primary);
     padding: 14px 32px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: var(--radius-md);
-    border: 2px solid var(--primary-dark);
+    border: 2px solid var(--secondary);
     cursor: pointer;
     transition: all var(--transition-base) ease;
     min-height: var(--min-touch-target-android);
@@ -195,12 +206,12 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
 }
 
 .btn-secondary:hover {
-    background: var(--primary-dark);
-    color: var(--white);
+    background: var(--secondary-light);
+    border-color: var(--secondary-light);
     transform: translateY(-2px);
 }
 
@@ -291,17 +302,17 @@ body {
 }
 
 .hero-content h2 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h1-size);
     font-weight: var(--h1-weight);
     margin-bottom: var(--space-lg);
     letter-spacing: var(--h1-letter-spacing);
-    color: var(--black);
+    color: var(--black); /* Noir pour accessibilité */
     line-height: var(--h1-line-height);
 }
 
 .hero-content p {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
     font-size: var(--h5-size);
     font-weight: var(--body-weight);
     letter-spacing: 0.3px;
@@ -315,35 +326,53 @@ section {
 }
 
 section h2 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h2-size);
     font-weight: var(--h2-weight);
-    color: var(--black);
+    color: var(--black); /* Noir pour accessibilité */
     margin-bottom: var(--space-2xl);
     text-align: center;
     letter-spacing: var(--h2-letter-spacing);
     line-height: var(--h2-line-height);
+    position: relative;
+}
+
+section h2 i {
+    color: var(--primary);
+    margin-right: var(--space-sm);
+}
+
+/* Accent doré sous les titres - centré par défaut */
+section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    margin-top: var(--space-md);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 section h3 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h3-size);
     font-weight: var(--h3-weight);
     letter-spacing: 0;
-    color: var(--dark-gray);
+    color: var(--black); /* Noir pour accessibilité */
     line-height: var(--h3-line-height);
 }
 
 section h4 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h4-size);
     font-weight: var(--h4-weight);
-    color: var(--dark-gray);
+    color: var(--black); /* Noir pour accessibilité */
     line-height: var(--h4-line-height);
 }
 
 section p {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
     font-size: var(--body-size);
     line-height: var(--body-line-height);
     color: var(--dark-gray);
@@ -424,13 +453,26 @@ section p {
 }
 
 .about-text h2 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h2-size);
     font-weight: var(--h2-weight);
     text-align: left;
     margin-bottom: var(--space-2xl);
-    color: var(--black);
+    color: var(--black); /* Noir pour accessibilité */
     line-height: var(--h2-line-height);
+    position: relative;
+}
+
+/* Trait doré aligné à gauche pour les titres à gauche */
+.about-text h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    margin-top: var(--space-md);
+    margin-left: 0;
+    margin-right: auto;
 }
 
 .about-text p {
@@ -473,10 +515,10 @@ section p {
 }
 
 .page-header h2 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h1-size);
     font-weight: var(--h1-weight);
-    color: var(--black);
+    color: var(--black); /* Noir pour accessibilité */
     margin-bottom: var(--space-md);
     line-height: var(--h1-line-height);
     letter-spacing: var(--h1-letter-spacing);
@@ -548,10 +590,10 @@ section p {
 }
 
 .event-content h3 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h3-size);
     font-weight: var(--h3-weight);
-    color: var(--black);
+    color: var(--black); /* Noir pour accessibilité */
     margin-bottom: var(--space-md);
     transition: color var(--transition-base) ease;
     line-height: var(--h3-line-height);
@@ -602,8 +644,8 @@ section p {
 
 /* Footer */
 footer {
-    background: var(--primary-dark);
-    color: var(--white);
+    background: var(--secondary);
+    color: var(--off-white);
     text-align: center;
     padding: var(--space-3xl) 0 var(--space-xl);
     margin-top: var(--space-3xl);
@@ -615,13 +657,13 @@ footer p {
 }
 
 footer a {
-    color: var(--white);
+    color: var(--primary);
     text-decoration: underline;
     transition: color var(--transition-base) ease;
 }
 
 footer a:hover {
-    color: var(--off-white);
+    color: var(--primary-light);
 }
 
 /* Responsive */
@@ -679,7 +721,7 @@ footer a:hover {
         left: -100%;
         width: 100%;
         height: calc(100vh - 70px);
-        background: var(--white);
+        background: var(--secondary); /* Même fond bleu que le header */
         flex-direction: column;
         padding: var(--space-xl);
         transition: left var(--transition-base) ease;
@@ -769,7 +811,7 @@ footer a:hover {
 }
 
 .services-nav-item span {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
     letter-spacing: 0.3px;
 }
 
@@ -849,8 +891,8 @@ footer a:hover {
 }
 
 .service-content h2 {
-    font-family: var(--font-family-primary);
-    color: var(--black);
+    font-family: var(--font-headings);
+    color: var(--black); /* Noir pour accessibilité */
     font-size: var(--h2-size);
     font-weight: var(--h2-weight);
     margin-bottom: var(--space-sm);
@@ -865,7 +907,7 @@ footer a:hover {
 }
 
 .service-subtitle {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
     font-size: var(--h5-size);
     font-weight: var(--body-weight);
     color: var(--gray);
@@ -874,8 +916,8 @@ footer a:hover {
 }
 
 .service-description h4 {
-    font-family: var(--font-family-primary);
-    color: var(--dark-gray);
+    font-family: var(--font-headings);
+    color: var(--black); /* Noir pour accessibilité */
     font-size: var(--h4-size);
     font-weight: var(--h4-weight);
     margin: var(--space-2xl) 0 var(--space-md);
@@ -920,7 +962,7 @@ footer a:hover {
 
 /* CTA Section */
 .cta-section {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
     color: var(--white);
     text-align: center;
     padding: var(--space-3xl) var(--space-xl);
@@ -928,11 +970,11 @@ footer a:hover {
 }
 
 .cta-section h3 {
-    font-family: var(--font-family-primary);
+    font-family: var(--font-headings);
     font-size: var(--h2-size);
     font-weight: var(--h2-weight);
     margin-bottom: var(--space-md);
-    color: var(--white);
+    color: var(--white); /* Blanc sur fond avec dégradé */
     line-height: var(--h2-line-height);
 }
 
@@ -943,12 +985,12 @@ footer a:hover {
 }
 
 .cta-section .cta-button {
-    background: var(--secondary);
-    color: var(--black);
+    background: var(--primary);
+    color: var(--secondary);
     padding: var(--space-md) var(--space-2xl);
     text-decoration: none;
     border-radius: var(--radius-md);
-    font-weight: 500;
+    font-weight: 600;
     font-size: var(--body-size);
     letter-spacing: 0.5px;
     display: inline-block;
@@ -961,7 +1003,7 @@ footer a:hover {
 }
 
 .cta-section .cta-button:hover {
-    background: var(--secondary-dark);
+    background: var(--primary-light);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -991,24 +1033,34 @@ footer a:hover {
 
 .contact-card {
     background: var(--white);
-    padding: var(--space-lg);
+    padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    border-left: 4px solid var(--primary);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
 }
 
 .contact-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--primary-dark);
 }
 
 .contact-card h3 {
-    font-family: var(--font-family-primary);
-    color: var(--primary-dark);
+    font-family: var(--font-headings);
+    color: var(--black);
     font-size: var(--h4-size);
     font-weight: var(--h4-weight);
     margin-bottom: var(--space-md);
     line-height: var(--h4-line-height);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.contact-card h3 i {
+    color: var(--primary);
+    font-size: 1.2em;
 }
 
 .contact-card p {
@@ -1018,12 +1070,14 @@ footer a:hover {
 }
 
 .contact-card a {
-    transition: opacity var(--transition-base);
-    color: var(--primary-dark);
+    transition: color var(--transition-base);
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .contact-card a:hover {
-    opacity: 0.8;
+    color: var(--primary-dark);
 }
 
 .contact-card a:focus-visible {
@@ -1037,16 +1091,25 @@ footer a:hover {
     background: var(--white);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--primary);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-placeholder h3 {
-    font-family: var(--font-family-primary);
-    color: var(--primary-dark);
+    font-family: var(--font-headings);
+    color: var(--black);
     font-size: var(--h3-size);
     font-weight: var(--h3-weight);
     margin-bottom: var(--space-md);
     line-height: var(--h3-line-height);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.form-placeholder h3 i {
+    color: var(--primary);
+    font-size: 1em;
 }
 
 .form-preview {
@@ -1070,7 +1133,7 @@ footer a:hover {
     padding: var(--space-md);
     border: 1px solid var(--light-gray);
     border-radius: var(--radius-md);
-    font-family: var(--font-family-primary);
+    font-family: var(--font-body);
     font-size: var(--body-size);
     transition: border-color var(--transition-base) ease;
 }
@@ -1078,8 +1141,33 @@ footer a:hover {
 .form-field input:focus,
 .form-field textarea:focus {
     outline: none;
-    border-color: var(--primary-dark);
-    box-shadow: 0 0 0 3px rgba(107, 125, 99, 0.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.15);
+}
+
+.form-info-box {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--off-white);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--primary);
+}
+
+.form-info-box p {
+    margin: 0;
+    font-size: var(--small-size);
+    line-height: var(--body-line-height);
+}
+
+.form-info-box a {
+    color: var(--secondary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.form-info-box a:hover {
+    color: var(--primary-dark);
 }
 
 /* Map Section */

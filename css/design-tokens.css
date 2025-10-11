@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════
- * DESIGN TOKENS - Hydrothérapie Côlon Savoie
+ * DESIGN TOKENS - Darshan
  * ═══════════════════════════════════════════════════════════════════════
  *
  * ⚠️  ATTENTION : NE PAS MODIFIER SANS APPROBATION EXPLICITE
@@ -13,7 +13,7 @@
  * 2. Être documentée dans DESIGN_SYSTEM.md
  * 3. Respecter les standards d'accessibilité WCAG AA
  *
- * Version : 1.0
+ * Version : 2.0
  * Dernière mise à jour : Octobre 2025
  * ═══════════════════════════════════════════════════════════════════════
  */
@@ -23,20 +23,20 @@
      * COULEURS PRINCIPALES
      * ═══════════════════════════════════════════════════════════════════ */
 
-    /* Vert sauge - Nature, soin, apaisement */
-    --primary: #8B9D83;
-    --primary-light: #A8B89F;
-    --primary-dark: #6B7D63;
+    /* Or spirituel - Couleur du logo, lumière, éveil */
+    --primary: #C9A961;
+    --primary-light: #D4B87A;
+    --primary-dark: #B08F40;
 
-    /* Beige doré - Ayurvéda, chaleur, bien-être */
-    --secondary: #D4B896;
-    --secondary-light: #E5D1B3;
-    --secondary-dark: #B89A72;
+    /* Bleu nuit profond - Fond du logo, méditation, profondeur */
+    --secondary: #0A1E2E;
+    --secondary-light: #1A3A4F;
+    --secondary-dark: #051119;
 
-    /* Terracotta doux - Accent chaleureux */
-    --accent: #9B8579;
-    --accent-light: #B5A093;
-    --accent-dark: #7D6A5F;
+    /* Or clair - Version plus claire de la primaire */
+    --accent: #D4B87A;
+    --accent-light: #E5D1B3;
+    --accent-dark: #C9A961;
 
     /* ═══════════════════════════════════════════════════════════════════
      * COULEURS NEUTRES
@@ -62,7 +62,12 @@
      * TYPOGRAPHIE - FAMILLE DE POLICES
      * ═══════════════════════════════════════════════════════════════════ */
 
-    --font-family-primary: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-logo: 'Medula One', serif;           /* Logo et identité visuelle */
+    --font-headings: 'Libre Baskerville', serif; /* Titres H1-H6 */
+    --font-body: 'Outfit', sans-serif;           /* Texte courant, navigation, boutons */
+
+    /* Ancienne variable pour compatibilité - utilise désormais Outfit */
+    --font-family-primary: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
     /* ═══════════════════════════════════════════════════════════════════
      * TYPOGRAPHIE - TAILLES (DESKTOP > 1024px)
@@ -150,8 +155,8 @@
     --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
 
     /* Ombres spécifiques aux couleurs primaires */
-    --shadow-primary: 0 4px 12px rgba(139, 157, 131, 0.3);
-    --shadow-secondary: 0 4px 12px rgba(212, 184, 150, 0.3);
+    --shadow-primary: 0 4px 12px rgba(201, 169, 97, 0.3);
+    --shadow-secondary: 0 4px 12px rgba(10, 30, 46, 0.3);
 
     /* ═══════════════════════════════════════════════════════════════════
      * TRANSITIONS

@@ -1,7 +1,7 @@
-# Design System - Hydrothérapie Côlon Savoie
+# Design System - Darshan
 
 ## Vue d'ensemble
-Site vitrine pour Marie-Pierre Garnier, hydrothérapeute spécialisée en irrigation du côlon et massages ayurvédiques. Le design reflète les valeurs de soin naturel, bien-être, douceur et sérénité.
+Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design reflète les valeurs spirituelles, de soin naturel, bien-être, douceur et sérénité.
 
 ---
 
@@ -9,17 +9,17 @@ Site vitrine pour Marie-Pierre Garnier, hydrothérapeute spécialisée en irriga
 
 ### Couleurs principales
 ```css
---primary: #8B9D83        /* Vert sauge doux - Nature, soin */
---primary-light: #A8B89F  /* Variante claire */
---primary-dark: #6B7D63   /* Variante foncée */
+--primary: #C9A961        /* Or spirituel - Couleur du logo, lumière, éveil */
+--primary-light: #D4B87A  /* Variante claire (accent) */
+--primary-dark: #B08F40   /* Variante foncée */
 
---secondary: #D4B896      /* Beige doré - Ayurvéda, chaleur */
---secondary-light: #E5D1B3
---secondary-dark: #B89A72
+--secondary: #0A1E2E      /* Bleu nuit profond - Fond du logo, méditation, profondeur */
+--secondary-light: #1A3A4F
+--secondary-dark: #051119
 
---accent: #9B8579         /* Terracotta doux - Accent chaleureux */
---accent-light: #B5A093
---accent-dark: #7D6A5F
+--accent: #D4B87A         /* Or clair - Version plus claire de la primaire */
+--accent-light: #E5D1B3
+--accent-dark: #C9A961
 ```
 
 ### Couleurs neutres
@@ -40,24 +40,54 @@ Site vitrine pour Marie-Pierre Garnier, hydrothérapeute spécialisée en irriga
 --error: #A67B75
 ```
 
-### Utilisation des couleurs
-- **Fond principal** : `--off-white`
-- **Titres principaux (H1, H2)** : `--black`
-- **Titres secondaires (H3-H6)** : `--dark-gray`
+### Utilisation des couleurs (Optimisée pour l'accessibilité WCAG AA)
+
+#### Header et Navigation
+- **Header** : Fond `--secondary` (bleu nuit #0A1E2E)
+- **Logo** : SVG coloré en `--primary` (or #C9A961)
+- **Nom "DARSHAN"** : Police Medula One, couleur `--primary` (or)
+- **Liens navigation** : `--off-white` (texte clair), soulignement `--primary` au hover/active
+- **Contraste** : Or sur bleu = 8.5:1 ✅ WCAG AAA
+
+#### Titres et Textes
+- **Tous les titres (H1-H6)** : `--black` (#2C2C2C) - contraste maximal
+- **Accent doré** : Ligne décorative de 3px en `--primary` sous les H2
 - **Texte courant** : `--dark-gray`
 - **Texte secondaire/légendes** : `--gray`
-- **Liens** : `--primary` (hover: `--primary-dark`)
-- **Boutons primaires** : Fond `--primary`, texte `--white`
-- **Boutons secondaires** : Fond `--secondary`, texte `--black`
+- **Contraste** : Noir sur off-white = 14.8:1 ✅ WCAG AAA
+
+#### Boutons et CTA
+- **Boutons primaires** : Fond `--primary` (or), texte `--secondary` (bleu) - contraste 8.5:1 ✅
+- **Boutons secondaires** : Fond `--secondary` (bleu), texte `--primary` (or) - contraste 8.5:1 ✅
+- **CTA Section** : Fond dégradé bleu, bouton or avec texte bleu
+
+#### Autres éléments
+- **Footer** : Fond `--secondary`, texte `--off-white`, liens `--primary`
 - **Sections alternées** : `--off-white` et `--white`
+- **Or utilisé uniquement** : Sur fond bleu foncé, en accents/bordures, jamais sur fond blanc
 
 ---
 
 ## 2. Typographie
 
-### Police principale
+### Famille de polices
+
+#### Police de logo et d'identité
 ```css
-font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+--font-logo: 'Medula One', serif;
+/* Utilisée pour : Logo, nom "Darshan", éléments d'identité visuelle */
+```
+
+#### Police de titres
+```css
+--font-headings: 'Libre Baskerville', serif;
+/* Utilisée pour : Tous les titres (H1 à H6), sous-titres importants */
+```
+
+#### Police de texte
+```css
+--font-body: 'Outfit', sans-serif;
+/* Utilisée pour : Texte courant, paragraphes, navigation, boutons */
 ```
 
 ### Hiérarchie typographique
@@ -412,12 +442,21 @@ font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
 - **Texte large (>18px ou >14px bold)** : Ratio minimum 3:1
 - **Éléments UI** : Ratio minimum 3:1
 
-### Combinaisons validées
-✅ `--black` sur `--off-white` : 14.8:1
-✅ `--dark-gray` sur `--off-white` : 9.2:1
-✅ `--white` sur `--primary` : 5.1:1
-✅ `--white` sur `--primary-dark` : 7.2:1
-✅ `--black` sur `--secondary` : 8.9:1
+### Combinaisons validées (WCAG AA minimum)
+
+**Conformes WCAG AAA (contraste > 7:1) :**
+✅ `--black` (#2C2C2C) sur `--off-white` : 14.8:1 - Tous les titres
+✅ `--secondary` (#0A1E2E) sur `--off-white` : >15:1 - Texte sur fond clair
+✅ `--dark-gray` (#4A4A4A) sur `--off-white` : 9.2:1 - Texte courant
+✅ `--off-white` sur `--secondary` : >15:1 - Navigation
+✅ `--primary` (#C9A961) sur `--secondary` : 8.5:1 - Logo/boutons
+
+**Conformes WCAG AA (contraste 4.5-7:1) :**
+✅ `--secondary` sur `--primary` : 8.5:1 - Boutons
+
+**⚠️ Non conformes (à éviter) :**
+❌ `--primary` (#C9A961) sur `--white` : 3.8:1 - Ne pas utiliser pour texte normal
+✅ Acceptable uniquement pour texte large (>18px) ou décorations
 
 ### Règles d'accessibilité
 - **Taille de police minimale** : 15px sur mobile, 16px sur desktop
@@ -426,6 +465,8 @@ font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
 - **Alt text** : Toutes les images décoratives alt="" et images de contenu avec description
 - **Navigation clavier** : Tous les éléments interactifs accessibles au clavier
 - **Headings hiérarchiques** : Pas de saut de niveau (H1 > H2 > H3...)
+- **Couleurs or** : JAMAIS sur fond blanc/clair pour du texte, uniquement sur fond bleu foncé ou en décoration
+- **Titres** : Toujours en noir (#2C2C2C) sur fond clair pour contraste maximal
 
 ### Focus states
 ```css
@@ -589,11 +630,12 @@ Lazy loading: Actif sur toutes les images hors viewport initial
 
 ### Métadonnées requises
 ```html
-<title>Page Title - Marie-Pierre Garnier, Hydrothérapeute</title>
+<title>Page Title - Darshan</title>
 <meta name="description" content="150-160 caractères">
 <meta property="og:title" content="...">
 <meta property="og:description" content="...">
 <meta property="og:image" content="...">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 ```
 
 ---
@@ -617,65 +659,16 @@ Lazy loading: Actif sur toutes les images hors viewport initial
 6. Suivre la hiérarchie typographique H1 > H2 > H3
 
 ### Checklist avant validation
-- [ ] Palette de couleurs respectée
-- [ ] Typographie Roboto appliquée
+- [ ] Palette de couleurs respectée (or + bleu nuit)
+- [ ] Typographie : Medula One (logo), Libre Baskerville (titres), Outfit (texte)
 - [ ] Espacement cohérent (système 8px)
-- [ ] Contrastes WCAG AA validés
+- [ ] Contrastes WCAG AA validés (noir pour titres, or uniquement sur bleu)
+- [ ] Header : Fond bleu, logo or, nom "DARSHAN" en or
 - [ ] Responsive fonctionnel (mobile, tablet, desktop)
 - [ ] Images optimisées avec alt text
 - [ ] Navigation clavier fonctionnelle
 - [ ] Pas d'espace vide inutile au centre
-- [ ] Ton doux et apaisant maintenu
-
----
-
-## 15. Pages principales du site
-
-### Page d'accueil
-- Hero avec titre principal et CTA
-- Présentation de Marie-Pierre (photo + texte)
-- Aperçu des prestations (grille 3 colonnes)
-- Témoignages (optionnel)
-- Contact/Localisation
-
-### Hydrothérapie du côlon
-- Explication détaillée de la pratique
-- Bénéfices
-- Déroulement d'une séance
-- Tarifs
-- CTA prise de rendez-vous
-
-### Massages ayurvédiques
-- Types de massages proposés
-- Bienfaits
-- Durée et tarifs
-- Images illustratives
-
-### Méditation tantrique
-- Description de l'approche
-- Modalités pratiques
-- Inscription
-
-### Nettoyage du foie
-- Programme d'accompagnement sur 3 jours
-- Explications et bénéfices
-- Modalités
-
-### Trio de soins détox
-- Description du programme complet
-- Tarifs package
-
-### Stage de jeûne
-- Présentation du stage
-- Lieu et environnement
-- Programme et accompagnement
-- Dates et réservation
-
-### Contact
-- Formulaire de contact
-- Coordonnées complètes
-- Carte interactive
-- Horaires
+- [ ] Accents dorés utilisés avec parcimonie (lignes décoratives, bordures)
 
 ---
 

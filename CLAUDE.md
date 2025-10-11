@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static website for Marie-Pierre Garnier, a hydrotherapist in Saint-Gingolph (Haute-Savoie). Built with vanilla HTML/CSS/JavaScript and uses Decap CMS for content management (events). Hosted on Netlify.
+Static website for Darshan, a wellness and hydrotherapy center in Saint-Gingolph (Haute-Savoie). Built with vanilla HTML/CSS/JavaScript and uses Decap CMS for content management (events). Hosted on Netlify.
 
-**Live site:** https://marie-pierre-garnier-hydrotherapie.netlify.app
+**Live site:** https://centre-darshan.netlify.app
 
 ## Development
 
@@ -70,7 +70,7 @@ Events are dynamically loaded from GitHub via the GitHub API (`js/events.js:5`):
 ## Important Notes
 
 - This is a static site - no build process or package.json
-- The GitHub repo reference in `js/events.js:5` is hardcoded: `labomeh/site-pro-marie-pierre-garnier`
+- The GitHub repo reference in `js/events.js:2` is hardcoded: `labomeh/site-web-darshan`
 - CMS authentication uses Netlify Identity widget
 - All HTML pages include Netlify Identity script for CMS access
 - Site uses `noindex, nofollow` robots meta tag (see `index.html:6`)
