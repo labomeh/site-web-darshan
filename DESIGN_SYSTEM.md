@@ -393,7 +393,7 @@ Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design r
 ### Footer
 ```css
 .footer {
-  background: var(--primary-dark);
+  background: var(--secondary);
   color: var(--white);
   padding: var(--space-3xl) 0 var(--space-xl);
 }

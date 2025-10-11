@@ -444,7 +444,7 @@ Références aux styles de titres et textes :
 ### SEO
 - Meta robots: `noindex, nofollow` (toutes les pages)
 - Meta description personnalisée par page
-- Favicon: `images/favicon.png`
+- Favicon: `images/favicon.svg`
 
 ---
 

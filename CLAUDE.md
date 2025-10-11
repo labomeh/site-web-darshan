@@ -43,7 +43,7 @@ The site uses **Decap CMS** (formerly Netlify CMS) for managing events:
 
 ### Events System
 
-Events are dynamically loaded from GitHub via the GitHub API (`js/events.js:5`):
+Events are dynamically loaded from GitHub via the GitHub API (`js/events.js:4`):
 
 1. **Fetching:** Loads all `.md` files from `_events/` folder via GitHub API
 2. **Parsing:** Extracts YAML frontmatter (title, date, location, etc.) and markdown body
@@ -55,9 +55,33 @@ Events are dynamically loaded from GitHub via the GitHub API (`js/events.js:5`):
 
 **Important:** Events are fetched from the public GitHub repo, so changes must be committed and pushed to appear on the site.
 
+### CSS Architecture
+
+The styles are split into two files for better maintainability:
+
+- **`css/design-tokens.css`** - Design system variables (326 lines):
+  - Color palette (primary, secondary, accent, neutrals)
+  - Typography tokens (font families, sizes, weights)
+  - Spacing system (based on 8px)
+  - Border radius, shadows, transitions
+  - Responsive breakpoints
+  - Accessibility constants
+  - Utility classes
+- **`css/style.css`** - Component styles and layout:
+  - Base styles and resets
+  - Component-specific CSS (header, footer, cards, buttons, etc.)
+  - Page-specific styles
+  - Responsive media queries
+
+All styles reference variables from `design-tokens.css` to ensure consistency with the design system defined in `DESIGN_SYSTEM.md`.
+
 ### JavaScript Structure
 
-- **`js/main.js`** - Core site functionality: mobile menu toggle, scroll-based fade-in animations using IntersectionObserver
+- **`js/main.js`** - Core site functionality:
+  - Mobile menu toggle (`menuToggle`)
+  - Scroll-based fade-in animations using IntersectionObserver
+  - Services navigation with active state tracking (page services)
+  - Smooth scroll to service sections with scroll position detection
 - **`js/events.js`** - Events loading, parsing frontmatter, markdown-to-HTML conversion, date formatting
 
 ### Deployment
