@@ -1,6 +1,6 @@
 ---
 title: Méditation
-date: 2025-10-11T16:39:00.000+02:00
+date: 2025-10-12T16:39:00.000+02:00
 image: https://img.freepik.com/vecteurs-libre/illustration-meditation-personnes-plates-organiques_23-2148906556.jpg?semt=ais_hybrid&w=740&q=80
 available_spots: 10
 ---
