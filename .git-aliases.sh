@@ -124,13 +124,23 @@ git config alias.finish '!f() {
 
 # === UTILITAIRES ===
 
-# Voir l'historique linéaire avec graph
-# Usage: git tree
-git config alias.tree 'log --oneline --graph --decorate --all'
+# Voir l'historique linéaire avec graph (quitter avec 'q', ou CTRL+C si --no-pager)
+# Usage: git tree [nombre de commits, défaut: 20]
+git config alias.tree '!f() {
+    LIMIT=${1:-20};
+    git --no-pager log --oneline --graph --decorate --all -n $LIMIT;
+}; f'
+
+# Voir l'historique complet avec pager (quitter avec 'q')
+# Usage: git tree-all
+git config alias.tree-all 'log --oneline --graph --decorate --all'
 
 # Voir l'historique de la branche courante uniquement
-# Usage: git history
-git config alias.history 'log --oneline --graph --decorate'
+# Usage: git history [nombre de commits, défaut: 20]
+git config alias.history '!f() {
+    LIMIT=${1:-20};
+    git --no-pager log --oneline --graph --decorate -n $LIMIT;
+}; f'
 
 # Status avec branches
 # Usage: git st
