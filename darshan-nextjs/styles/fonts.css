@@ -1,0 +1,25 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════
+ * FONTS - Darshan
+ * ═══════════════════════════════════════════════════════════════════
+ *
+ * Import des polices custom utilisées dans le design system :
+ * - Medula One : Logo et identité visuelle
+ * - Libre Baskerville : Titres (H1-H6)
+ * - Outfit : Texte courant, navigation, boutons
+ */
+
+/* ═══════════════════════════════════════════════════════════════════
+ * MEDULA ONE - Logo
+ * ═══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Medula+One&display=swap');
+
+/* ═══════════════════════════════════════════════════════════════════
+ * LIBRE BASKERVILLE - Titres
+ * ═══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ═══════════════════════════════════════════════════════════════════
+ * OUTFIT - Texte courant
+ * ═══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
