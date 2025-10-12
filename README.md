@@ -129,7 +129,6 @@ git deploy-prod
 | [`/docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) | Design tokens et composants |
 | [`/docs/BRANCHING_STRATEGY.md`](docs/BRANCHING_STRATEGY.md) | Stratégie Git Flow avec rebase |
 | [`/docs/GIT_ALIASES.md`](docs/GIT_ALIASES.md) | Guide des alias Git automatisés |
-| [`/docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md) | Checklist de déploiement |
 
 ---
 
@@ -190,8 +189,6 @@ publish = "out"
 - **Production :** Branche `main` (indexée par SEO)
 - **Préproduction :** Branche `staging` (noindex)
 
-**Voir la checklist complète :** [`/docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md)
-
 ---
 
 ## 🧪 Scripts npm
@@ -238,8 +235,6 @@ Pour contribuer au projet :
 - **Octobre 2025 :** Migration de vanilla HTML/CSS vers Next.js 15
 - **Architecture :** CSS Modules avec design tokens pour préserver l'identité visuelle
 - **Export :** Site statique (SSG) pour performance optimale sur Netlify
-
-**Archive de migration :** [`/docs/MIGRATION_NEXTJS_ARCHIVE.md`](docs/MIGRATION_NEXTJS_ARCHIVE.md)
 
 ---
 
