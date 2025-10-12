@@ -496,7 +496,7 @@ npm run build
 - ✅ `admin/`, `_content/`, `_events/` (déjà dans `darshan-nextjs/public/admin/` et `darshan-nextjs/_events/`)
 - ✅ `dev.sh` (script de dev pour ancien site)
 
-**Structure finale :**
+**Structure finale (avant migration à la racine) :**
 ```
 site-web-darshan/
 ├── darshan-nextjs/          # 🎯 Projet Next.js (principal)
@@ -506,8 +506,7 @@ site-web-darshan/
 ├── netlify.toml            # ✅ Mis à jour
 ├── README.md
 ├── robots.txt
-├── sitemap.xml
-└── STRUCTURE.md
+└── sitemap.xml
 ```
 
 **Note :** Les fichiers sont dans Git, donc pas besoin d'archivage manuel. L'historique Git conserve toutes les versions précédentes.
@@ -576,38 +575,95 @@ import styles from './Header.module.css';
 
 ---
 
+### Phase 14 : Migration vers la racine du projet ✅ RÉALISÉ
+
+**Contexte :** Pour une structure plus standard et simplifier le déploiement Netlify, le contenu de `darshan-nextjs/` a été déplacé à la racine.
+
+#### 14.1 Déplacement des fichiers (CLAUDE CODE) ✅
+
+**Actions réalisées :**
+1. ✅ Déplacé tous les dossiers Next.js à la racine :
+   - `components/`, `pages/`, `public/`, `styles/`, `lib/`, `types/`, `_events/`
+
+2. ✅ Déplacé les fichiers de configuration :
+   - `package.json`, `package-lock.json`
+   - `tsconfig.json`, `next.config.ts`, `next-env.d.ts`
+   - `eslint.config.mjs`
+
+3. ✅ Fusionné les `.gitignore` (projet + Next.js)
+
+4. ✅ Supprimé le dossier `darshan-nextjs/` vide
+
+#### 14.2 Mise à jour de la configuration (CLAUDE CODE) ✅
+
+**Fichiers modifiés :**
+- ✅ `netlify.toml` - Supprimé `base = "darshan-nextjs"`
+- ✅ `CLAUDE.md` - Structure mise à jour
+- ✅ `DEPLOIEMENT.md` - Commandes sans `cd darshan-nextjs`
+
+#### 14.3 Réinstallation des dépendances (CLAUDE CODE) ✅
+
+```bash
+npm install  # À la racine
+npm run build  # Test du build
+```
+
+**Structure finale :**
+```
+site-web-darshan/              # Projet Next.js à la racine
+├── components/                # Composants React
+├── pages/                    # Pages Next.js
+├── public/                   # Assets + /admin
+├── styles/                   # CSS
+├── lib/                      # Utilitaires
+├── types/                    # Types TypeScript
+├── _events/                  # Événements (CMS)
+├── node_modules/             # Dépendances
+├── out/                      # Build statique
+├── package.json              # Dépendances
+├── next.config.ts            # Config Next.js
+├── tsconfig.json             # Config TypeScript
+├── .gitignore                # Git ignore
+├── CLAUDE.md                 # Documentation
+├── DEPLOIEMENT.md            # Checklist déploiement
+├── DESIGN_SYSTEM.md          # Design system
+├── MIGRATION_NEXTJS.md       # Ce fichier
+├── netlify.toml              # Config Netlify
+├── README.md
+├── robots.txt
+└── sitemap.xml
+```
+
+**Résultat :** Projet standard Next.js prêt pour Netlify ✅
+
+---
+
 ## Commandes récapitulatives
 
 ### Pour VOUS (à exécuter)
 
 ```bash
-# 1. Créer le projet
+# Setup initial (déjà fait)
 npx create-next-app@latest darshan-nextjs
-cd darshan-nextjs
-npm install gray-matter marked
-npm install -D @types/marked
+npm install gray-matter marked @types/marked
 
-# 2. Copier les assets
-cp -r ../images public/images
-cp -r ../videos public/videos
-cp -r ../admin public/admin
-cp -r ../_events _events
-cp ../DESIGN_SYSTEM.md .
-cp ../CLAUDE.md .
+# Migration vers racine (déjà fait)
+# Tout le contenu de darshan-nextjs/ déplacé à la racine
 
-# 3. Développement (après que Claude ait créé les fichiers)
+# Développement
+npm install
 npm run dev
 
-# 4. Build de production
+# Build de production
 npm run build
 
-# 5. Test local du build
+# Test local du build
 npx serve out
 
-# 6. Déploiement
+# Déploiement
 git add .
-git commit -m "Migration vers Next.js"
-git push origin <branche>
+git commit -m "Migration Next.js complète - Projet à la racine"
+git push origin NEXT-JS-MIGRATION
 ```
 
 ### Pour CLAUDE CODE (commandes utilisées)
@@ -767,8 +823,10 @@ git checkout main  # ou votre branche principale
 - ✅ Menu mobile responsive
 - ✅ Build production réussit (génère `out/`)
 - ✅ Ancien site HTML/CSS/JS supprimé
-- ✅ Netlify configuré (`netlify.toml`)
-- ✅ Documentation mise à jour (`CLAUDE.md`, `MIGRATION_NEXTJS.md`)
+- ✅ **Projet migré à la racine** (plus de sous-dossier `darshan-nextjs/`)
+- ✅ Netlify configuré (`netlify.toml` - pas de base directory)
+- ✅ `.gitignore` fusionné (projet + Next.js)
+- ✅ Documentation mise à jour (`CLAUDE.md`, `MIGRATION_NEXTJS.md`, `DEPLOIEMENT.md`)
 - ✅ Projet nettoyé et prêt pour déploiement
 
 **CMS Decap :**
@@ -787,6 +845,7 @@ git checkout main  # ou votre branche principale
 | Plan initial | Réalisé | Notes |
 |--------------|---------|-------|
 | Tailwind CSS | CSS Modules | Changement pour mieux conserver l'architecture CSS |
+| Sous-dossier `darshan-nextjs/` | Projet à la racine | Structure simplifiée pour Netlify |
 | 5 pages | 3 pages + 404 | Pages `/evenements` et `/services` reportées |
 | Archive ancien code | Suppression directe | Historique Git suffit |
 | Hooks animations | Non implémenté | Fonctionnalité reportée |
@@ -796,7 +855,6 @@ git checkout main  # ou votre branche principale
 
 **Build local :**
 ```bash
-cd darshan-nextjs
 npm run build
 # Vérifie que out/ est créé
 ls out/
@@ -811,9 +869,14 @@ npx serve out
 **Déploiement Git :**
 ```bash
 git add .
-git commit -m "Migration Next.js complète - CSS Modules"
+git commit -m "Migration Next.js complète - Projet à la racine"
 git push origin NEXT-JS-MIGRATION
 ```
+
+**Configuration Netlify :**
+- Build command: `npm run build`
+- Publish directory: `out`
+- Base directory: *(laisser vide)*
 
 **Netlify :** Le push déclenchera automatiquement un build si configuré.
 
@@ -821,4 +884,72 @@ git push origin NEXT-JS-MIGRATION
 
 **Migration Next.js terminée !** 🎉
 
-Le projet est maintenant basé sur Next.js 15 avec CSS Modules. Prochaine étape : recréer `/evenements`, tester en production, et optimiser.
+Le projet est maintenant basé sur Next.js 15 avec CSS Modules, à la racine du repo, et prêt pour le déploiement Netlify.
+
+---
+
+## Ce qui reste à faire (fonctionnalités futures)
+
+### 🔴 Avant premier déploiement (optionnel)
+
+Aucune action requise - le projet est déployable en l'état actuel avec 3 pages.
+
+### 🟡 Fonctionnalités à ajouter ultérieurement
+
+#### 1. **Page `/evenements`** (si besoin de gestion d'événements)
+- Créer `pages/evenements.tsx`
+- Implémenter `lib/events.ts` pour parser les fichiers `_events/*.md`
+- Utiliser `getStaticProps()` pour charger les événements au build
+- Afficher avec `EventCard` component
+- **Temps estimé :** 2-3h
+
+#### 2. **Page `/services`** (si besoin d'une page services dédiée)
+- Créer `pages/services.tsx`
+- Migrer le contenu de l'ancien `services.html`
+- Implémenter scroll spy navigation
+- **Temps estimé :** 1-2h
+
+#### 3. **Animations au scroll**
+- Créer `hooks/useScrollAnimation.ts`
+- Ajouter IntersectionObserver pour fade-in
+- Appliquer aux sections
+- **Temps estimé :** 1h
+
+#### 4. **Activation CMS Decap** (après déploiement)
+- Activer Netlify Identity sur le site
+- Configurer Git Gateway
+- Tester création d'événements via `/admin`
+- **Temps estimé :** 30min-1h
+
+#### 5. **Optimisations**
+- Optimiser images (compression, WebP)
+- Audit Lighthouse
+- Améliorer performance
+- **Temps estimé :** 1-2h
+
+### ✅ Tests post-déploiement recommandés
+
+1. **Fonctionnels :**
+   - [ ] Navigation entre pages
+   - [ ] Menu mobile
+   - [ ] Hero vidéo
+   - [ ] Formulaire contact (placeholder)
+
+2. **Responsive :**
+   - [ ] Mobile (< 640px)
+   - [ ] Tablet (640px - 1024px)
+   - [ ] Desktop (> 1024px)
+
+3. **Performance :**
+   - [ ] Lighthouse > 80
+   - [ ] Temps de chargement < 3s
+
+4. **SEO :**
+   - [ ] Métadonnées présentes
+   - [ ] Images avec alt
+   - [ ] Sitemap accessible
+
+---
+
+**État actuel :** ✅ Prêt pour déploiement production
+**Next step :** Commit + Push + Configuration Netlify
