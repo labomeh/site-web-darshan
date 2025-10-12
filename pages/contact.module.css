@@ -1,0 +1,177 @@
+/**
+ * CONTACT PAGE - CSS Module
+ * Based on original css/style.css contact page styles
+ */
+
+/* Contact grid */
+.contactGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    margin-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+    .contactGrid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+}
+
+/* Contact info column */
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Contact card specific styles */
+.contactInfo h3 {
+    font-family: var(--font-headings);
+    color: var(--black);
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    margin-bottom: var(--space-md);
+    line-height: var(--h4-line-height);
+}
+
+.contactInfo h3 i {
+    color: var(--primary);
+    font-size: 1.2em;
+    margin-right: var(--space-sm);
+}
+
+.contactInfo p {
+    line-height: var(--body-line-height);
+    margin: 0;
+    color: var(--dark-gray);
+}
+
+.contactInfo a {
+    transition: color var(--transition-base);
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contactInfo a:hover {
+    color: var(--primary-dark);
+}
+
+/* Contact form container */
+.contactFormContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactFormContainer h3 {
+    font-family: var(--font-headings);
+    color: var(--black);
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+    margin-bottom: var(--space-md);
+    line-height: var(--h4-line-height);
+}
+
+.contactFormContainer h3 i {
+    color: var(--primary);
+    font-size: 1em;
+    margin-right: var(--space-sm);
+}
+
+/* Form placeholder */
+.formPlaceholder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    opacity: 0.5;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+}
+
+.formField label {
+    display: block;
+    font-size: var(--small-size);
+    font-weight: 500;
+    color: var(--dark-gray);
+    margin-bottom: var(--space-xs);
+}
+
+.formField input,
+.formField textarea {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    background: var(--light-gray);
+    cursor: not-allowed;
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+}
+
+.formField textarea {
+    resize: vertical;
+}
+
+.formButton {
+    width: 100%;
+    background: var(--gray);
+    color: var(--white);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: not-allowed;
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    font-weight: 500;
+}
+
+.infoBox {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--off-white);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-md);
+}
+
+.infoBox p {
+    margin: 0;
+    color: var(--dark-gray);
+    font-size: var(--small-size);
+    line-height: var(--body-line-height);
+}
+
+.infoBox strong {
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.infoBox a {
+    color: var(--secondary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.infoBox a:hover {
+    color: var(--primary-dark);
+}
+
+.infoBox a.breakAll {
+    word-break: break-all;
+}
+
+/* Map section */
+.mapContainer {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.mapContainer iframe {
+    display: block;
+    border: 0;
+}

@@ -1,0 +1,19 @@
+/**
+ * CONTAINER - CSS Module
+ */
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.content {
+    max-width: var(--content-max-width);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 var(--space-md);
+    }
+}

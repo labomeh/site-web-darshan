@@ -4,97 +4,179 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static website for Darshan, a wellness and hydrotherapy center in Saint-Gingolph (Haute-Savoie). Built with vanilla HTML/CSS/JavaScript and uses Decap CMS for content management (events). Hosted on Netlify.
+Website for Darshan, a wellness and hydrotherapy center in Saint-Gingolph (Haute-Savoie). Built with **Next.js 15** and uses Decap CMS for content management (events). Hosted on Netlify.
 
 **Live site:** https://centre-darshan.netlify.app
 
+## Project Structure
+
+```
+site-web-darshan/              # Next.js project (root)
+├── components/                # React components
+│   ├── ui/                   # Reusable UI components
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── Container.tsx
+│   │   └── Section.tsx
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   ├── Hero.tsx
+│   ├── Layout.tsx
+│   ├── EventCard.tsx
+│   └── ServiceCard.tsx
+├── pages/                    # Next.js pages (3 pages)
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   ├── index.tsx            # Home page
+│   ├── contact.tsx          # Contact page
+│   ├── mentions-legales.tsx # Legal mentions
+│   └── 404.tsx              # 404 error page
+├── public/                   # Static assets
+│   ├── admin/               # Decap CMS (for future use)
+│   │   ├── config.yml
+│   │   └── index.html
+│   ├── images/
+│   └── videos/
+├── styles/                   # Global styles
+│   ├── global.css           # Global styles and base reset
+│   └── tokens.css           # Design system variables
+├── lib/                      # Utility functions
+├── types/                    # TypeScript types
+├── _events/                  # Events markdown files (for CMS - future use)
+├── CLAUDE.md                 # This file
+├── DEPLOIEMENT.md            # Deployment checklist
+├── DESIGN_SYSTEM.md          # Design system documentation
+├── MIGRATION_NEXTJS.md       # Migration notes
+├── netlify.toml              # Netlify configuration
+├── package.json              # Dependencies
+├── tsconfig.json             # TypeScript config
+├── next.config.ts            # Next.js config
+├── README.md                 # Project README
+├── robots.txt                # SEO configuration
+└── sitemap.xml               # Site map
+```
+
+**Current state:** Next.js project at root level with 3 functional pages (Home, Contact, Legal Mentions). Events and Services pages will be added later.
+
 ## Development
+
+### Prerequisites
+
+- Node.js 18+ and npm
 
 ### Local Development
 
-Run the development environment:
 ```bash
-./dev.sh
+npm install
+npm run dev
 ```
 
-This script:
-- Verifies `local_backend: true` is set in `admin/config.yml`
-- Starts Decap CMS proxy server for local content editing
-- Launches live-server on port 8000
+The development server starts at `http://localhost:3000`
 
-**Note:** `local_backend: true` must be added to `admin/config.yml` for local development, but should NOT be committed to production.
-
-### Manual Development (without CMS)
+### Build & Export
 
 ```bash
-npx live-server --port=8000
+npm run build   # Build production version and export to out/
 ```
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
 ## Architecture
 
-### Content Management System
+### Technology Stack
 
-The site uses **Decap CMS** (formerly Netlify CMS) for managing events:
+- **Framework:** Next.js 15 (React 19)
+- **Styling:** CSS Modules + CSS Variables (design tokens)
+- **TypeScript:** Full type safety
+- **CMS:** Decap CMS (formerly Netlify CMS)
+- **Deployment:** Netlify (static export)
 
-- **CMS Admin:** `/admin/index.html` - Netlify Identity authentication required
-- **CMS Config:** `/admin/config.yml` - Defines content collections and schema
-- **Backend:** Git Gateway (Netlify) - commits directly to `main` branch
-- **Event Files:** `/_events/*.md` - Markdown files with YAML frontmatter
+### Content Management System (Future)
 
-### Events System
+The site has **Decap CMS** configured but not yet activated:
 
-Events are dynamically loaded from GitHub via the GitHub API (`js/events.js:4`):
+- **CMS Admin:** `/admin` (will be accessible at `https://yoursite.com/admin`)
+- **CMS Config:** `public/admin/config.yml`
+- **Backend:** Git Gateway (Netlify) - will commit directly to `main` branch
+- **Event Files:** `_events/*.md` - Markdown files with YAML frontmatter
 
-1. **Fetching:** Loads all `.md` files from `_events/` folder via GitHub API
-2. **Parsing:** Extracts YAML frontmatter (title, date, location, etc.) and markdown body
-3. **Filtering:** Shows only upcoming events (date >= now)
-4. **Rendering:** Displays sorted events on `evenements.html`
+**Status:** CMS infrastructure is in place but events functionality will be implemented later.
 
-**Key fields:**
-- `title`, `date`, `location`, `body` (markdown), `image`, `available_spots`, `contact_info`
-
-**Important:** Events are fetched from the public GitHub repo, so changes must be committed and pushed to appear on the site.
+**Note:** Netlify Identity widget is configured in `_document.tsx` and ready for activation when needed.
 
 ### CSS Architecture
 
-The styles are split into two files for better maintainability:
+The project uses **CSS Modules** for component-scoped styling and **CSS Variables** for the design system:
 
-- **`css/design-tokens.css`** - Design system variables (326 lines):
+#### Design System Files
+
+- **`styles/tokens.css`** - Design system variables:
   - Color palette (primary, secondary, accent, neutrals)
   - Typography tokens (font families, sizes, weights)
   - Spacing system (based on 8px)
   - Border radius, shadows, transitions
   - Responsive breakpoints
   - Accessibility constants
-  - Utility classes
-- **`css/style.css`** - Component styles and layout:
-  - Base styles and resets
-  - Component-specific CSS (header, footer, cards, buttons, etc.)
-  - Page-specific styles
+
+- **`styles/global.css`** - Global styles:
+  - Base resets and typography
+  - Utility classes (`.container`, `.page-header`, etc.)
+  - Section styles
   - Responsive media queries
 
-All styles reference variables from `design-tokens.css` to ensure consistency with the design system defined in `DESIGN_SYSTEM.md`.
+#### Component Styles
 
-### JavaScript Structure
+Each component has its own CSS Module file:
+- `components/Footer.module.css`
+- `components/Header.module.css`
+- `components/Hero.module.css`
+- `components/ui/Card.module.css`
+- `components/ui/Container.module.css`
+- `components/ui/Section.module.css`
+- `pages/contact.module.css`
 
-- **`js/main.js`** - Core site functionality:
-  - Mobile menu toggle (`menuToggle`)
-  - Scroll-based fade-in animations using IntersectionObserver
-  - Services navigation with active state tracking (page services)
-  - Smooth scroll to service sections with scroll position detection
-- **`js/events.js`** - Events loading, parsing frontmatter, markdown-to-HTML conversion, date formatting
+**Usage example:**
+```tsx
+import styles from './Header.module.css';
+
+export default function Header() {
+  return <header className={styles.navbar}>...</header>;
+}
+```
+
+All styles reference variables from `tokens.css` to ensure consistency with the design system defined in `DESIGN_SYSTEM.md`.
+
+### TypeScript Types
+
+All types are defined in `darshan-nextjs/types/index.ts`:
+- `LayoutProps`, `HeaderProps`, `FooterProps`
+- `HeroProps`, `CardProps`, `ButtonProps`
+- `Event`, `Service`
 
 ### Deployment
 
 - **Host:** Netlify
-- **Publish directory:** `.` (root)
+- **Publish directory:** `darshan-nextjs/out` (static export)
+- **Build command:** `cd darshan-nextjs && npm run build`
 - **Branch:** `main`
 - **Headers:** Security headers and cache control configured in `netlify.toml`
 
+**Note:** Update `netlify.toml` to point to `darshan-nextjs/out` as the publish directory.
+
 ## Important Notes
 
-- This is a static site - no build process or package.json
-- The GitHub repo reference in `js/events.js:2` is hardcoded: `labomeh/site-web-darshan`
-- CMS authentication uses Netlify Identity widget
-- All HTML pages include Netlify Identity script for CMS access
-- Site uses `noindex, nofollow` robots meta tag (see `index.html:6`)
+- This is a **static Next.js site** using `output: 'export'`
+- The project uses **CSS Modules** instead of Tailwind CSS
+- CMS authentication uses **Netlify Identity widget** (loaded via script in `_document.tsx`)
+- All images and videos are in `darshan-nextjs/public/`
+- ESLint is configured to allow certain patterns (apostrophes, `<img>` tags, sync scripts)
+- The design system is documented in `DESIGN_SYSTEM.md`
+
+## Migration Notes
+
+The project was migrated from vanilla HTML/CSS to Next.js. See `MIGRATION_NEXTJS.md` for detailed migration notes and architecture decisions.

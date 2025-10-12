@@ -1,0 +1,170 @@
+/**
+ * HEADER / NAVBAR - CSS Module
+ * Based on original css/style.css
+ */
+
+.navbar {
+    background: var(--secondary);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs);
+    margin: calc(-1 * var(--space-xs));
+    transition: transform var(--transition-base) ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo:focus-visible {
+    outline: var(--focus-outline-width) solid var(--primary);
+    outline-offset: var(--focus-outline-offset);
+}
+
+.logoImage {
+    height: 45px;
+    width: auto;
+    /* Filtre CSS pour colorer le SVG en or #C9A961 */
+    filter: brightness(0) saturate(100%) invert(65%) sepia(24%) saturate(671%) hue-rotate(7deg) brightness(94%) contrast(87%);
+}
+
+.logoText {
+    font-family: var(--font-logo);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin: 0;
+    transition: color var(--transition-base) ease;
+}
+
+.logo:hover .logoText {
+    color: var(--primary-light);
+}
+
+.menuToggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-xs);
+    z-index: calc(var(--z-sticky) + 1);
+    min-height: var(--min-touch-target);
+    min-width: var(--min-touch-target);
+}
+
+.menuToggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--primary);
+    margin: var(--space-xs) 0;
+    transition: all var(--transition-base) ease;
+}
+
+.menuToggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menuToggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuToggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.navLinks {
+    display: flex;
+    list-style: none;
+    gap: var(--space-xl);
+    margin: 0;
+    padding: 0;
+}
+
+.navLinks a {
+    text-decoration: none;
+    color: var(--off-white);
+    font-weight: 500;
+    transition: color var(--transition-base) ease;
+    position: relative;
+    min-height: var(--min-touch-target);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+}
+
+.navLinks a::after {
+    content: '';
+    position: absolute;
+    bottom: var(--space-xs);
+    left: var(--space-md);
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width var(--transition-base) ease;
+}
+
+.navLinks a:hover::after,
+.navLinks a.active::after {
+    width: calc(100% - var(--space-xl));
+}
+
+.navLinks a:hover,
+.navLinks a.active {
+    color: var(--primary);
+}
+
+.navLinks a:focus-visible,
+.menuToggle:focus-visible {
+    outline: var(--focus-outline-width) solid var(--primary);
+    outline-offset: var(--focus-outline-offset);
+    border-radius: var(--radius-sm);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .menuToggle {
+        display: block;
+    }
+
+    .navLinks {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--secondary);
+        flex-direction: column;
+        padding: var(--space-2xl);
+        transition: left var(--transition-base) ease;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .navLinks.active {
+        left: 0;
+    }
+
+    .navLinks a::after {
+        display: none;
+    }
+}

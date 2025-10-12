@@ -1,0 +1,20 @@
+/**
+ * CARD - CSS Module
+ */
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base) ease;
+}
+
+.hoverable {
+    cursor: pointer;
+}
+
+.hoverable:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
