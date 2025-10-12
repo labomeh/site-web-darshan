@@ -2,6 +2,11 @@
 command = "npm run build"
 publish = "out"
 
+# Configuration spécifique à la branche staging
+[context.staging]
+command = "npm run build"
+publish = "out"
+
 # Headers spécifiques à la préproduction (branche staging)
 # Bloque l'indexation SEO sur l'environnement de test
 [context.staging.headers]
