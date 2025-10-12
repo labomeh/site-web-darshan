@@ -2,6 +2,20 @@
 command = "npm run build"
 publish = "out"
 
+# Headers spécifiques à la préproduction (branche staging)
+# Bloque l'indexation SEO sur l'environnement de test
+[context.staging.headers]
+  for = "/*"
+  [context.staging.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Headers pour la branche de migration (temporaire, à supprimer après merge)
+[context.NEXT-JS-MIGRATION.headers]
+  for = "/*"
+  [context.NEXT-JS-MIGRATION.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Headers de sécurité et cache (tous environnements)
 [[headers]]
 for = "/*"
 [headers.values]
