@@ -1,6 +1,6 @@
 # Service Pages Planning Document
 
-**Status:** Planning Phase - Awaiting User Approval
+**Status:** ✅ Planning Complete - Ready for Implementation
 **Created:** January 2025
 **Branch:** `feature/service-pages`
 
@@ -48,10 +48,14 @@ The previous site (hydrotherapie-colon-savoie.com) mixed **practitioner informat
 - ✅ **Individual Services** with tiered pricing and savings
 - ✅ **CMS Configuration** examples with real data
 
-**Remaining decisions needed:**
-- Layout choice (3 options provided)
-- Pricing display strategy (hybrid recommended)
-- Testimonials strategy (both locations recommended)
+**All decisions finalized:**
+- ✅ Layout: Sidebar (desktop) + Sticky bottom bar (mobile)
+- ✅ Pricing: Hybrid approach (service pages + /tarifs)
+- ✅ Testimonials: Both locations (homepage carousel + service-specific)
+- ✅ Contact method: Modal with mailto links (no forms)
+- ✅ Images: CMS-managed, FontAwesome icons only
+- ✅ Page headers: Compact (no large heroes)
+- ✅ TDD workflow: Mandatory for all components
 
 ---
 
@@ -625,18 +629,22 @@ I propose **3 layout options** for service pages. Please choose one:
 
 ---
 
-#### **Option B: Sidebar Layout (Professional)**
+#### **Option B: Sidebar Layout (Professional)** ✅ CHOSEN
+
+**Desktop Layout:**
 ```
 ┌─────────────────────────────────────────┐
-│             HERO SECTION                │
+│      COMPACT HEADER (no large hero)     │
+│      Breadcrumb > Service Name          │
 └─────────────────────────────────────────┘
 ┌───────────────────┬────────────────────┐
 │                   │                    │
 │                   │   STICKY SIDEBAR   │
 │   MAIN CONTENT    │   - Quick Info     │
 │   (Wider area)    │   - Pricing        │
-│                   │   - CTA Button     │
-│                   │   - Related Events │
+│   [Service Image] │   [📅 Réserver]    │
+│                   │   [💬 Questions]   │
+│   Description...  │   - Related Events │
 │                   │                    │
 └───────────────────┴────────────────────┘
 ┌─────────────────────────────────────────┐
@@ -644,15 +652,35 @@ I propose **3 layout options** for service pages. Please choose one:
 └─────────────────────────────────────────┘
 ```
 
+**Mobile Layout:**
+```
+┌─────────────────────────────────────────┐
+│      COMPACT HEADER                     │
+└─────────────────────────────────────────┘
+│   MAIN CONTENT (Full width)             │
+│   [Service Image]                       │
+│   Description...                        │
+│   Pricing...                            │
+│   Testimonials...                       │
+└─────────────────────────────────────────┘
+┌──────────────┬──────────────────────────┐
+│ [Réserver]   │ [Questions]              │ ← Sticky bottom
+└──────────────┴──────────────────────────┘
+```
+
 **Pros:**
 - ✅ Professional medical/wellness site feel
 - ✅ Quick access to key info
-- ✅ Sticky sidebar keeps CTA visible
+- ✅ Sticky sidebar keeps CTA visible (desktop)
+- ✅ Sticky bottom bar on mobile (thumb-friendly)
 - ✅ Better desktop experience
+- ✅ Compact headers (no wasted space)
 
-**Cons:**
-- ❌ More complex responsive design
-- ❌ Sidebar collapses on mobile anyway
+**Implementation Details:**
+- Desktop: Sidebar position: sticky, top: 94px
+- Mobile: Bottom bar position: fixed, bottom: 0, z-index: 50
+- Modal for both "Réserver" and "Questions" CTAs
+- mailto: links with pre-filled templates
 
 ---
 
@@ -872,22 +900,25 @@ I propose **3 layout options** for service pages. Please choose one:
 
 ## Open Questions for User Decision
 
-### 🔴 CRITICAL DECISIONS NEEDED:
+### ✅ ALL CRITICAL DECISIONS RESOLVED:
 
-1. **Layout Choice**: Which service page layout do you prefer?
-   - [ ] Option A: Single Column (Simple)
-   - [ ] Option B: Sidebar Layout (Professional)
-   - [ ] Option C: Tabbed Interface (Modern)
+1. **Layout Choice** ✓
+   - ✅ **Option B: Sidebar Layout (Professional)**
+   - Desktop: Sticky right sidebar with quick info, pricing, CTA
+   - Mobile: **Sticky bottom bar** with "Réserver" + "Questions" CTAs
+   - No large hero images on service pages (compact headers only)
 
-2. **Pricing Display Strategy**:
-   - [ ] Option A: Embedded in service pages only
-   - [ ] Option B: Dedicated pricing page only
-   - [ ] Option C: Hybrid (both) ← **Recommended**
+2. **Pricing Display Strategy** ✓
+   - ✅ **Option C: Hybrid Approach**
+   - Show pricing on each service page (context-aware)
+   - Also create `/tarifs` page for easy comparison
+   - Same CMS data source (no duplication)
 
-3. **Testimonials Strategy**:
-   - [ ] Option A: Service-specific only
-   - [ ] Option B: Homepage only
-   - [ ] Option C: Both ← **Recommended**
+3. **Testimonials Strategy** ✓
+   - ✅ **Option C: Both Locations**
+   - Homepage: Recent testimonials carousel (all services)
+   - Service pages: Filtered testimonials (service-specific)
+   - CMS relation allows filtering by service
 
 ### ✅ RESOLVED QUESTIONS:
 
@@ -911,36 +942,107 @@ I propose **3 layout options** for service pages. Please choose one:
    - ✅ Single scroll page, clear h2/h3 hierarchy (best for SEO)
 
 7. **Event Landing Pages** ✓
-   - ✅ NO separate event type landing pages
+   - ✅ NO separate event type landing pages (would be duplicate content)
    - ✅ Service pages show related events dynamically
    - ✅ Events page is chronological listing only
+   - ✅ Individual event detail pages for registration
 
-### ⚪ OPTIONAL DECISIONS:
+8. **Contact/Booking Method** ✓
+   - ✅ **Modal with contact info + pre-filled mailto links**
+   - Two CTAs per page: "Réserver" + "Poser une question"
+   - Modal shows: email, phone, disclaimer (requires confirmation)
+   - mailto: links with pre-filled subject/body templates
+   - NO booking forms/database (email-based workflow)
 
-8. **Testimonials Collection**:
-   - Do you have existing testimonials to migrate?
-   - Will you collect new ones systematically?
-   - Public or moderated submission?
+9. **Contact Information Source** ✓
+   - ✅ **Single source of truth in CMS**
+   - `content/settings/contact.json` (email, phone, address)
+   - Used everywhere: footer, header, modals, contact page
+   - No duplication - one central configuration
 
-9. **Scientific References** ✓
-   - ✅ Resources section (complementary, not primary)
+10. **Images Strategy** ✓
+   - ✅ All images uploaded via CMS (services, events)
+   - ✅ FontAwesome icons (NO custom icon upload)
+   - ✅ Images optional (mainly for events - meal menus, retreat photos)
+   - ✅ Next.js Image component optimization
+   - ✅ Service pages: images integrated in markdown content
+
+11. **Page Headers** ✓
+   - ✅ **NO large hero images** on service/event pages
+   - ✅ Compact headers only (breadcrumb + title)
+   - ✅ Homepage hero: KEEP (video background, impactful)
+   - ✅ Images integrated naturally in content flow
+
+12. **Scientific References** ✓
+   - ✅ **Complementary "Resources" section** at bottom of page
    - ✅ Main information must be self-contained on the site
+   - ✅ External links for deeper reading (optional)
+   - ✅ CMS-manageable per service
+
+13. **Testimonials Collection** ✓
+   - ✅ Existing testimonials from old website (to be migrated)
+   - ✅ Added via CMS (not systematically collected)
+   - ✅ Moderated submission (user adds via CMS admin)
 
 ---
 
-## Next Steps
+## Next Steps - Implementation Ready
 
-**Once you approve the key decisions above, I will:**
+**All decisions finalized. Ready to implement:**
 
-1. Create the enhanced CMS configuration
-2. Build reusable components
-3. Implement the service pages structure
-4. Integrate everything on the homepage
-5. Create additional pages (About, Events, Pricing)
+### Phase 1: CMS Configuration (2-3 days)
+1. Update `public/admin/config.yml` with enhanced collections
+2. Add contact settings collection (`content/settings/contact.json`)
+3. Create testimonials collection
+4. Test CMS locally with mock data
 
-**Estimated Total Development Time:** 15-20 days (with Claude Code)
+### Phase 2: Core Components with TDD (4-5 days)
+**Using TDD workflow for all components:**
+1. PricingCard - Display service pricing with packages
+2. TestimonialCard - Show reviews with ratings
+3. EventCard - Upcoming events display
+4. ContactModal - Booking + Questions (dual mode)
+5. ServiceSidebar - Desktop sticky sidebar
+6. StickyBottomBar - Mobile CTAs
+7. FAQAccordion - Collapsible Q&A
+
+### Phase 3: Service Pages (3-4 days)
+1. `/pages/services/index.tsx` - Services overview
+2. `/pages/services/[slug].tsx` - Dynamic individual pages
+3. `/pages/services/massages.tsx` - Special massages page (3 sections)
+4. Implement sidebar layout (desktop) + sticky bottom bar (mobile)
+5. Connect to CMS data
+6. Add related events filtering
+7. Add related testimonials filtering
+
+### Phase 4: Additional Pages (2-3 days)
+1. `/pages/a-propos.tsx` - About Marie-Pierre
+2. `/pages/evenements/index.tsx` - Events listing
+3. `/pages/evenements/[slug].tsx` - Individual event pages
+4. `/pages/tarifs.tsx` - Pricing comparison page
+
+### Phase 5: Homepage Integration (2-3 days)
+1. Enhanced services grid
+2. Upcoming events section
+3. Testimonials carousel
+4. Update navigation
+
+### Phase 6: Testing & Refinement (2-3 days)
+1. Component tests (80%+ coverage)
+2. Mobile responsiveness
+3. SEO validation
+4. Accessibility audit
+5. Performance testing
+
+### Phase 7: Content Population (User work - 3-5 days)
+1. Migrate testimonials from old site
+2. Enter service content via CMS
+3. Add initial events
+4. Upload images
+
+**Estimated Total Development Time:** 15-20 days (with Claude Code + TDD)
 
 ---
 
 **Last Updated:** January 2025
-**Status:** ⏸️ Awaiting User Decisions
+**Status:** ✅ All Decisions Finalized - Ready for Implementation
