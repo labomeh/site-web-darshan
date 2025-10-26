@@ -2,22 +2,20 @@ import { useState } from 'react';
 import type { Story } from '@ladle/react';
 import ContactModal from './ContactModal';
 
-const mockContactInfo = {
-  email: 'contact@centre-darshan.fr',
-  phone: '+33 6 12 34 56 78',
-};
-
 export const BookingMode: Story = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-off-white p-8">
-      <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-md">
+    <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <h2 className="mb-4 font-headings text-2xl text-black">
           Test du Modal de Réservation
         </h2>
-        <p className="mb-6 text-dark-gray">
-          Cliquez sur le bouton ci-dessous pour ouvrir le modal de réservation.
+        <p className="mb-4 text-dark-gray">
+          Cliquez sur le bouton ci-dessous pour ouvrir le modal de réservation avec formulaire.
+        </p>
+        <p className="mb-6 text-sm text-dark-gray">
+          Le formulaire envoie un email formaté via Web3Forms avec les informations du client.
         </p>
         <button
           onClick={() => setIsOpen(true)}
@@ -32,7 +30,6 @@ export const BookingMode: Story = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         mode="booking"
-        contactInfo={mockContactInfo}
       />
     </div>
   );
@@ -42,13 +39,13 @@ export const BookingModeWithService: Story = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-off-white p-8">
-      <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-md">
+    <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <h2 className="mb-4 font-headings text-2xl text-black">
           Réservation avec Service Spécifique
         </h2>
         <p className="mb-4 text-dark-gray">
-          Ce modal inclut le nom du service dans l'email pré-rempli.
+          Ce modal inclut le nom du service dans le sujet et le message pré-rempli.
         </p>
         <p className="mb-6 text-sm text-dark-gray">
           Service: <strong>Hydrothérapie du Côlon</strong>
@@ -66,7 +63,6 @@ export const BookingModeWithService: Story = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         mode="booking"
-        contactInfo={mockContactInfo}
         serviceName="Hydrothérapie du Côlon"
       />
     </div>
@@ -77,13 +73,16 @@ export const QuestionMode: Story = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-off-white p-8">
-      <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-md">
+    <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <h2 className="mb-4 font-headings text-2xl text-black">
           Test du Modal Questions
         </h2>
-        <p className="mb-6 text-dark-gray">
+        <p className="mb-4 text-dark-gray">
           Cliquez sur le bouton ci-dessous pour poser une question.
+        </p>
+        <p className="mb-6 text-sm text-dark-gray">
+          Le formulaire envoie un email avec votre question aux coordonnées du centre.
         </p>
         <button
           onClick={() => setIsOpen(true)}
@@ -98,7 +97,6 @@ export const QuestionMode: Story = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         mode="question"
-        contactInfo={mockContactInfo}
       />
     </div>
   );
@@ -108,13 +106,13 @@ export const QuestionModeWithService: Story = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-off-white p-8">
-      <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-md">
+    <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <h2 className="mb-4 font-headings text-2xl text-black">
           Question sur un Service Spécifique
         </h2>
         <p className="mb-4 text-dark-gray">
-          Ce modal inclut le nom du service dans l'email pré-rempli.
+          Ce modal inclut le nom du service dans le sujet et le message pré-rempli.
         </p>
         <p className="mb-6 text-sm text-dark-gray">
           Service: <strong>Massage Ayurvédique</strong>
@@ -132,7 +130,6 @@ export const QuestionModeWithService: Story = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         mode="question"
-        contactInfo={mockContactInfo}
         serviceName="Massage Ayurvédique"
       />
     </div>
@@ -149,7 +146,7 @@ export const MobileView: Story = () => {
           Vue Mobile
         </h2>
         <p className="mb-4 text-sm text-dark-gray">
-          Testez le modal sur mobile. Le modal s'adapte automatiquement à la taille de l'écran.
+          Testez le modal sur mobile. Le formulaire s'adapte automatiquement à la taille de l'écran.
         </p>
         <button
           onClick={() => setIsOpen(true)}
@@ -164,7 +161,6 @@ export const MobileView: Story = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         mode="booking"
-        contactInfo={mockContactInfo}
         serviceName="Méditation Tantrique"
       />
     </div>
@@ -179,8 +175,8 @@ export const InteractionDemo: Story = () => {
   const [mode, setMode] = useState<'booking' | 'question'>('booking');
 
   return (
-    <div className="min-h-screen bg-off-white p-8">
-      <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-md">
+    <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
         <h2 className="mb-4 font-headings text-2xl text-black">
           Démo Interactive
         </h2>
@@ -215,7 +211,40 @@ export const InteractionDemo: Story = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         mode={mode}
-        contactInfo={mockContactInfo}
+        serviceName="Hydrothérapie du Côlon"
+      />
+    </div>
+  );
+};
+
+export const FormInteraction: Story = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
+        <h2 className="mb-4 font-headings text-2xl text-black">
+          Test d'Interaction du Formulaire
+        </h2>
+        <p className="mb-4 text-dark-gray">
+          Modal ouvert par défaut pour tester le formulaire facilement.
+        </p>
+        <p className="mb-6 text-sm text-dark-gray">
+          Remplissez tous les champs obligatoires pour tester la validation et la soumission.
+        </p>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="rounded-lg bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary-dark"
+        >
+          <i className="fa-solid fa-calendar-check mr-2" aria-hidden="true" />
+          Rouvrir le modal
+        </button>
+      </div>
+
+      <ContactModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        mode="booking"
         serviceName="Hydrothérapie du Côlon"
       />
     </div>

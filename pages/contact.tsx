@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import ContactInfoCard from '@/components/contact/ContactInfoCard';
+import ContactModal from '@/components/contact/ContactModal';
 import Layout from '@/components/Layout';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
@@ -6,6 +8,8 @@ import PageHeader from '@/components/ui/PageHeader';
 import { BUSINESS_HOURS, CONTACT, LABELS, METADATA } from '@/config/site';
 
 export default function Contact() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Layout
       currentPage="/contact"
@@ -59,6 +63,14 @@ export default function Contact() {
                   <p className="text-sm text-dark-gray">{BUSINESS_HOURS.note}</p>
                 </div>
               </ContactInfoCard>
+
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="w-full rounded-lg bg-primary px-6 py-4 font-semibold text-white transition-colors hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              >
+                <i className="fa-solid fa-envelope mr-2" aria-hidden="true" />
+                Formulaire de contact
+              </button>
             </div>
 
             {/* Map - Main Content */}
@@ -88,6 +100,12 @@ export default function Contact() {
           </div>
         </Container>
       </section>
+
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        mode="question"
+      />
     </Layout>
   );
 }

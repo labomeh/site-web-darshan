@@ -7,7 +7,10 @@
       "Bash(npm run lint:fix:*)",
       "Bash(npm run format)",
       "Bash(git mv:*)",
-      "WebFetch(domain:hydrotherapie-colon-savoie.com)"
+      "WebFetch(domain:hydrotherapie-colon-savoie.com)",
+      "Bash(npm run ladle:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run validate)"
     ],
     "deny": [],
     "ask": []

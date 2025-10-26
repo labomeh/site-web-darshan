@@ -587,6 +587,19 @@ This project uses **Git Flow with rebase** for linear history.
 
 **See full documentation:** `/docs/BRANCHING_STRATEGY.md`
 
+### User Validation Before Commits (CRITICAL)
+
+**⚠️ ALWAYS ASK USER TO VALIDATE BEFORE COMMITTING**
+
+Before running any `git add` or `git commit` command:
+
+1. **Present changes summary** - List all modified/created files
+2. **Wait for user approval** - User must explicitly approve commit
+3. **Never commit automatically** - User reviews changes first
+4. **Ask about commit message** - If user wants to customize it
+
+This ensures user has full control over what enters version control.
+
 ### Automated Git Aliases
 
 Custom Git commands configured in `.git-aliases.sh`:
@@ -596,6 +609,7 @@ Custom Git commands configured in `.git-aliases.sh`:
 git new-feature events-page
 
 # Develop...
+# ⚠️ WAIT FOR USER VALIDATION BEFORE:
 git add .
 git commit -m "feat: Add events page"
 
