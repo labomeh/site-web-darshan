@@ -12,6 +12,7 @@ Cette documentation couvre tous les aspects du projet Next.js du site Darshan.
 | [**CONFIGURATION.md**](CONFIGURATION.md) | Configuration TypeScript, ESLint, Prettier, outils | Développeurs |
 | [**BRANCHING_STRATEGY.md**](BRANCHING_STRATEGY.md) | Stratégie Git Flow avec rebase, workflow complet | Développeurs |
 | [**GIT_ALIASES.md**](GIT_ALIASES.md) | Guide des alias Git automatisés | Développeurs |
+| [**GITHUB_PROTECTION.md**](GITHUB_PROTECTION.md) | Protection des branches GitHub et prévention des merges directs | Développeurs, admins |
 | [**CMS.md**](CMS.md) | Configuration et utilisation de Sveltia CMS | Développeurs, éditeurs de contenu |
 
 ---
@@ -106,8 +107,9 @@ git deploy-prod
 
 1. **Pour le design** → Consulter [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)
 2. **Pour Git** → Consulter [BRANCHING_STRATEGY.md](BRANCHING_STRATEGY.md) ou [GIT_ALIASES.md](GIT_ALIASES.md)
-3. **Pour le CMS** → Consulter [CMS.md](CMS.md)
-4. **Pour comprendre l'architecture** → Consulter [/CLAUDE.md](../CLAUDE.md)
+3. **Pour GitHub** → Consulter [GITHUB_PROTECTION.md](GITHUB_PROTECTION.md)
+4. **Pour le CMS** → Consulter [CMS.md](CMS.md)
+5. **Pour comprendre l'architecture** → Consulter [/CLAUDE.md](../CLAUDE.md)
 
 ---
 
