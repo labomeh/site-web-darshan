@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { LABELS, SITE } from '@/config/site';
 import { cn } from '@/lib/utils';
+import Logo from '@/components/ui/Logo';
 
 interface NavItem {
   href: string;
@@ -32,11 +33,7 @@ export default function Header({ currentPage = '/' }: HeaderProps) {
             aria-label={LABELS.nav.backToHome}
             onClick={() => setMenuOpen(false)}
           >
-            <img
-              src="/images/logo.svg"
-              alt={SITE.name}
-              className="h-[45px] w-auto brightness-0 brightness-[94%] contrast-[87%] hue-rotate-[7deg] invert-[65%] saturate-100 saturate-[671%] sepia-[24%]"
-            />
+            <Logo variant="primary" size="md" alt={SITE.name} />
             <h1 className="m-0 font-logo text-[28px] tracking-[2px] text-primary transition-colors hover:text-primary-light">
               {SITE.name.toUpperCase()}
             </h1>

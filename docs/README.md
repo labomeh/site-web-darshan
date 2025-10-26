@@ -12,6 +12,7 @@ Cette documentation couvre tous les aspects du projet Next.js du site Darshan.
 | [**CONFIGURATION.md**](CONFIGURATION.md) | Configuration TypeScript, ESLint, Prettier, outils | Développeurs |
 | [**BRANCHING_STRATEGY.md**](BRANCHING_STRATEGY.md) | Stratégie Git Flow avec rebase, workflow complet | Développeurs |
 | [**GIT_ALIASES.md**](GIT_ALIASES.md) | Guide des alias Git automatisés | Développeurs |
+| [**CMS.md**](CMS.md) | Configuration et utilisation de Sveltia CMS | Développeurs, éditeurs de contenu |
 
 ---
 
@@ -93,8 +94,11 @@ git deploy-prod
 - [`/next.config.ts`](../next.config.ts) - Configuration Next.js
 
 ### Styles
-- [`/styles/tokens.css`](../styles/tokens.css) - Design tokens (CSS Variables)
+- [`/styles/tailwind.css`](../styles/tailwind.css) - Tailwind CSS v4 config avec @theme
 - [`/styles/global.css`](../styles/global.css) - Styles globaux
+
+### CMS
+- [`/public/admin/config.yml`](../public/admin/config.yml) - Configuration Sveltia CMS
 
 ---
 
@@ -102,8 +106,9 @@ git deploy-prod
 
 1. **Pour le design** → Consulter [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)
 2. **Pour Git** → Consulter [BRANCHING_STRATEGY.md](BRANCHING_STRATEGY.md) ou [GIT_ALIASES.md](GIT_ALIASES.md)
-3. **Pour comprendre l'architecture** → Consulter [/CLAUDE.md](../CLAUDE.md)
+3. **Pour le CMS** → Consulter [CMS.md](CMS.md)
+4. **Pour comprendre l'architecture** → Consulter [/CLAUDE.md](../CLAUDE.md)
 
 ---
 
-**Dernière mise à jour :** Octobre 2025
+**Dernière mise à jour :** Janvier 2025

@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { HeroProps } from '@/types';
+import { SERVICES } from '@/config/site';
+import Logo from '@/components/ui/Logo';
 import ServiceItem from './ServiceItem';
 
 export default function Hero({
@@ -11,40 +13,67 @@ export default function Hero({
   showServices = true,
   showLocation = true,
 }: HeroProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const video1Ref = useRef<HTMLVideoElement>(null);
+  const video2Ref = useRef<HTMLVideoElement>(null);
+  const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
 
   useEffect(() => {
-    const videoElement = videoRef.current;
+    const video1 = video1Ref.current;
+    const video2 = video2Ref.current;
 
-    if (!videoElement) return;
+    if (!video1 || !video2) return;
+
+    const fadeStartTime = 1.5; // Start fade 1.5 seconds before end
+
+    const loadVideo = (videoElement: HTMLVideoElement) => {
+      const source = videoElement.querySelector('source');
+      if (source && !source.getAttribute('src')) {
+        const src = source.getAttribute('data-src');
+        if (src) {
+          source.setAttribute('src', src);
+          videoElement.load();
+        }
+      }
+    };
+
+    const handleVideo1TimeUpdate = () => {
+      const timeRemaining = video1.duration - video1.currentTime;
+      if (timeRemaining <= fadeStartTime && timeRemaining > 0 && activeVideo === 1) {
+        // Start video2 and begin fade transition
+        video2.currentTime = 0;
+        video2.play().catch((err) => console.log('Video 2 play prevented:', err));
+        setActiveVideo(2);
+      }
+    };
+
+    const handleVideo2TimeUpdate = () => {
+      const timeRemaining = video2.duration - video2.currentTime;
+      if (timeRemaining <= fadeStartTime && timeRemaining > 0 && activeVideo === 2) {
+        // Start video1 and begin fade transition
+        video1.currentTime = 0;
+        video1.play().catch((err) => console.log('Video 1 play prevented:', err));
+        setActiveVideo(1);
+      }
+    };
 
     const videoObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const source = videoElement.querySelector('source');
+            loadVideo(video1);
+            loadVideo(video2);
 
-            if (source) {
-              const src = source.getAttribute('data-src');
+            video1.addEventListener(
+              'canplay',
+              () => {
+                video1.play().catch((err) => {
+                  console.log('Autoplay prevented:', err);
+                });
+              },
+              { once: true }
+            );
 
-              if (src) {
-                source.setAttribute('src', src);
-                videoElement.load();
-
-                videoElement.addEventListener(
-                  'canplay',
-                  () => {
-                    videoElement.classList.add('opacity-85');
-                    videoElement.play().catch((err) => {
-                      console.log('Autoplay prevented:', err);
-                    });
-                  },
-                  { once: true }
-                );
-              }
-            }
-
-            videoObserver.unobserve(videoElement);
+            videoObserver.unobserve(video1);
           }
         });
       },
@@ -53,22 +82,41 @@ export default function Hero({
       }
     );
 
-    videoObserver.observe(videoElement);
+    videoObserver.observe(video1);
+
+    video1.addEventListener('timeupdate', handleVideo1TimeUpdate);
+    video2.addEventListener('timeupdate', handleVideo2TimeUpdate);
 
     return () => {
-      if (videoElement) {
-        videoObserver.unobserve(videoElement);
+      if (video1) {
+        videoObserver.unobserve(video1);
+        video1.removeEventListener('timeupdate', handleVideo1TimeUpdate);
+      }
+      if (video2) {
+        video2.removeEventListener('timeupdate', handleVideo2TimeUpdate);
       }
     };
-  }, []);
+  }, [activeVideo]);
 
   return (
-    <section className="relative flex min-h-[calc(100vh-70px)] w-full max-w-full items-center justify-center overflow-hidden bg-secondary text-center md:min-h-[calc(100vh-77px)]">
+    <section className="relative flex min-h-[100dvh] w-full max-w-full items-center justify-center overflow-hidden bg-secondary pb-16 pt-[70px] text-center md:pb-20">
       <video
-        ref={videoRef}
-        className="absolute top-0 left-0 z-0 h-full w-full object-cover opacity-0 transition-opacity duration-[1500ms]"
-        autoPlay
-        loop
+        ref={video1Ref}
+        className={`absolute top-0 left-0 h-full w-full object-cover ${
+          activeVideo === 1 ? 'z-0 opacity-85 transition-none' : 'z-[1] opacity-0 transition-opacity duration-[1500ms]'
+        }`}
+        muted
+        playsInline
+        preload="none"
+      >
+        <source data-src={videoSrc} type="video/webm" />
+      </video>
+
+      <video
+        ref={video2Ref}
+        className={`absolute top-0 left-0 h-full w-full object-cover ${
+          activeVideo === 2 ? 'z-0 opacity-85 transition-none' : 'z-[1] opacity-0 transition-opacity duration-[1500ms]'
+        }`}
         muted
         playsInline
         preload="none"
@@ -80,38 +128,48 @@ export default function Hero({
 
       <div className="hero-vignette-gradient pointer-events-none absolute top-0 left-0 z-[1] h-full w-full" />
 
-      <div className="hero-text-shadow relative z-[2] mx-4 max-w-[700px] text-white md:mx-8">
-        <img
-          src="/images/logo.svg"
-          alt="Darshan"
-          className="animate-fade-in-down mx-auto mb-1 h-auto w-20 [filter:brightness(0)_saturate(100%)_invert(65%)_sepia(24%)_saturate(671%)_hue-rotate(7deg)_brightness(94%)_contrast(87%)] md:w-[200px]"
-        />
-        <h1 className="animate-fade-in-down-delay mb-2 font-logo text-[32px] leading-none font-normal tracking-[3px] text-primary md:mb-4 md:text-[64px] md:tracking-[8px]">
-          {title}
-        </h1>
-        <p className="animate-fade-in-up-delay-1 mb-2 font-headings text-sm text-off-white md:mb-4 md:text-xl">
+      <div className="hero-text-shadow relative z-[2] mx-4 flex max-w-[700px] flex-col items-center text-white md:mx-8">
+        <div className="mb-3 inline-flex flex-col items-center md:mb-6">
+          <Logo
+            variant="primary"
+            size={200}
+            alt="Darshan"
+            className="animate-fade-in-down mb-2 h-auto w-auto md:mb-4 md:h-[200px]"
+          />
+          <h1 className="animate-fade-in-down-delay whitespace-nowrap font-logo text-4xl font-normal leading-none tracking-[2px] text-primary md:text-[64px] md:tracking-[8px]">
+            {title}
+          </h1>
+        </div>
+        <p className="animate-fade-in-up-delay-1 mb-3 font-headings text-base text-off-white md:mb-6 md:text-2xl">
           {tagline}
         </p>
 
         {showServices && (
-          <div className="animate-fade-in-up-delay-2 mb-2 flex flex-col items-center justify-center gap-2 md:mb-4 md:flex-row md:flex-wrap md:gap-8">
-            <ServiceItem icon="fas fa-water" label="Hydrothérapie du côlon" />
-            <ServiceItem icon="fas fa-hands" label="Massages ayurvédiques" />
-            <ServiceItem icon="fas fa-om" label="Méditation tantrique" />
+          <div className="animate-fade-in-up-delay-2 mb-3 grid grid-cols-2 place-items-center gap-x-4 gap-y-2 md:mb-6 md:gap-x-8 md:gap-y-4 lg:grid-cols-3">
+            {SERVICES.map((service) => (
+              <ServiceItem key={service.id} icon={service.icon} label={service.name} />
+            ))}
           </div>
         )}
 
         {showLocation && (
-          <div className="animate-fade-in-up-delay-3 flex items-center justify-center gap-1 text-[13px] text-off-white md:gap-2 md:text-base">
-            <i className="fas fa-map-marker-alt text-[1.2rem] text-primary" />
-            <span>21 Route de Chez Monnet, Saint-Gingolph (74)</span>
+          <div className="animate-fade-in-up-delay-3 flex flex-col items-center justify-center gap-1 text-sm text-off-white md:flex-row md:gap-2 md:text-lg">
+            <i className="fas fa-map-marker-alt text-xl text-primary" aria-hidden="true" />
+            <span className="text-center">
+              21 Route de Chez Monnet,
+              <br className="md:hidden" /> Saint-Gingolph (74)
+            </span>
           </div>
         )}
       </div>
 
-      <div className="absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 cursor-pointer opacity-0 transition-opacity">
-        <i className="fas fa-chevron-down text-[2rem] text-primary [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.3))] transition-all hover:translate-y-1 hover:text-primary-light" />
-      </div>
+      <a
+        href="#content"
+        className="animate-bounce absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 cursor-pointer transition-opacity hover:opacity-80 md:bottom-8"
+        aria-label="Défiler vers le bas"
+      >
+        <i className="fas fa-chevron-down text-3xl text-primary [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.3))] md:text-4xl" />
+      </a>
     </section>
   );
 }

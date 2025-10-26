@@ -12,6 +12,7 @@ export default function Home() {
         showServices
         showLocation
       />
+      <div id="content" className="h-1" aria-hidden="true" />
     </Layout>
   );
 }

@@ -103,3 +103,63 @@ export const SOCIAL = {
   // facebook: '',
   // instagram: '',
 } as const;
+
+/**
+ * Services offered at Darshan
+ * Each service has a unique slug for future routing (/services/[slug])
+ */
+export const SERVICES = [
+  {
+    id: 'hydrotherapie-colon',
+    slug: 'hydrotherapie-du-colon',
+    name: 'Hydrothérapie du côlon',
+    icon: 'fas fa-water',
+    shortDescription: 'Nettoyage en profondeur du côlon par irrigation douce',
+    order: 1,
+  },
+  {
+    id: 'massages-ayurvediques',
+    slug: 'massages-ayurvediques',
+    name: 'Massages ayurvédiques',
+    icon: 'fas fa-hands',
+    shortDescription: 'Massages thérapeutiques issus de la tradition ayurvédique',
+    order: 2,
+  },
+  {
+    id: 'meditation-tantrique',
+    slug: 'meditation-tantrique',
+    name: 'Méditation tantrique',
+    icon: 'fas fa-om',
+    shortDescription: 'Pratiques méditatives pour harmoniser corps et esprit',
+    order: 3,
+  },
+  {
+    id: 'nettoyage-foie',
+    slug: 'nettoyage-du-foie',
+    name: 'Nettoyage du foie',
+    icon: 'fas fa-leaf',
+    shortDescription: 'Détoxification hépatique pour régénérer le foie',
+    order: 4,
+  },
+  {
+    id: 'trio-soins-detox',
+    slug: 'trio-de-soins-detox',
+    name: 'Trio de soins detox',
+    icon: 'fas fa-spa',
+    shortDescription: 'Programme complet de détoxification corps et esprit',
+    order: 5,
+  },
+  {
+    id: 'stage-jeune',
+    slug: 'stage-de-jeune',
+    name: 'Stage de jeûne',
+    icon: 'fas fa-seedling',
+    shortDescription: 'Stage accompagné de jeûne thérapeutique et revitalisation',
+    order: 6,
+  },
+] as const;
+
+/**
+ * Type helper for service IDs
+ */
+export type ServiceId = (typeof SERVICES)[number]['id'];

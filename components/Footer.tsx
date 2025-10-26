@@ -18,21 +18,21 @@ export default function Footer() {
                   {CONTACT.address.postalCode} {CONTACT.address.city.replace('BRET - ', '')}
                 </span>
               </p>
-              <p>
+              <p className="flex items-start gap-2">
+                <i className="fas fa-phone mt-[3px] text-primary" aria-hidden="true" />
                 <a
                   href={`tel:${CONTACT.phone.tel}`}
-                  className="flex items-center gap-2 text-off-white underline decoration-primary decoration-2 underline-offset-4 transition-colors hover:text-primary"
+                  className="text-off-white underline decoration-primary decoration-2 underline-offset-4 transition-colors hover:text-primary"
                 >
-                  <i className="fas fa-phone text-primary" />
                   {CONTACT.phone.display}
                 </a>
               </p>
-              <p>
+              <p className="flex items-start gap-2">
+                <i className="fas fa-envelope mt-[3px] text-primary" aria-hidden="true" />
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="flex items-center gap-2 break-all text-off-white underline decoration-primary decoration-2 underline-offset-4 transition-colors hover:text-primary"
+                  className="break-all text-off-white underline decoration-primary decoration-2 underline-offset-4 transition-colors hover:text-primary"
                 >
-                  <i className="fas fa-envelope text-primary" />
                   {CONTACT.email}
                 </a>
               </p>
