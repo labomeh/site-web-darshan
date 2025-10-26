@@ -1,5 +1,6 @@
-import "@/styles/global.css";
-import type { AppProps } from "next/app";
+import '@/styles/tailwind.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;

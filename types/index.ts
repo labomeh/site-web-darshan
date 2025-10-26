@@ -93,10 +93,6 @@ export interface HeaderProps {
   currentPage?: string;
 }
 
-export interface FooterProps {
-  // Pas de props pour l'instant
-}
-
 // ═══════════════════════════════════════════════════════════════════
 // HERO
 // ═══════════════════════════════════════════════════════════════════

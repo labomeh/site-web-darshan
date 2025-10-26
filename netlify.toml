@@ -14,10 +14,25 @@ publish = "out"
   [context.staging.headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# Headers pour la branche de migration (temporaire, à supprimer après merge)
-[context.NEXT-JS-MIGRATION.headers]
+# Headers pour tous les branch deploys (toutes les branches sauf main)
+# Empêche l'indexation SEO sur tous les environnements de test
+[context.branch-deploy]
+command = "npm run build"
+publish = "out"
+
+[context.branch-deploy.headers]
   for = "/*"
-  [context.NEXT-JS-MIGRATION.headers.values]
+  [context.branch-deploy.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Headers pour les deploy previews (Pull Requests)
+[context.deploy-preview]
+command = "npm run build"
+publish = "out"
+
+[context.deploy-preview.headers]
+  for = "/*"
+  [context.deploy-preview.headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
 # Headers de sécurité et cache (tous environnements)

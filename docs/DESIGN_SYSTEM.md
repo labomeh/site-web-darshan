@@ -3,246 +3,401 @@
 ## Vue d'ensemble
 Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design reflète les valeurs spirituelles, de soin naturel, bien-être, douceur et sérénité.
 
+**Stack technique :** Next.js 15 + **Tailwind CSS v4** (approche CSS-first avec `@theme`)
+
 ---
 
 ## 1. Palette de couleurs
 
-### Couleurs principales
+### Configuration Tailwind CSS v4
+
 ```css
---primary: #C9A961        /* Or spirituel - Couleur du logo, lumière, éveil */
---primary-light: #D4B87A  /* Variante claire (accent) */
---primary-dark: #B08F40   /* Variante foncée */
+/* styles/tailwind.css */
+@theme {
+  /* Couleurs principales */
+  --color-primary: #C9A961;        /* Or spirituel - Brand, lumière, éveil */
+  --color-primary-light: #D4B87A;  /* Variante claire (accent) */
+  --color-primary-dark: #B08F40;   /* Variante foncée */
 
---secondary: #0A1E2E      /* Bleu nuit profond - Fond du logo, méditation, profondeur */
---secondary-light: #1A3A4F
---secondary-dark: #051119
+  --color-secondary: #0A1E2E;      /* Bleu nuit profond - Méditation */
+  --color-secondary-light: #1A3A4F;
+  --color-secondary-dark: #051119;
 
---accent: #D4B87A         /* Or clair - Version plus claire de la primaire */
---accent-light: #E5D1B3
---accent-dark: #C9A961
+  --color-accent: #D4B87A;         /* Or clair */
+  --color-accent-light: #E5D1B3;
+  --color-accent-dark: #C9A961;
+
+  /* Couleurs neutres */
+  --color-white: #FFFFFF;
+  --color-off-white: #FAF9F7;      /* Fond principal - doux pour les yeux */
+  --color-light-gray: #E8E6E3;     /* Bordures, séparateurs */
+  --color-gray: #B5B3B0;           /* Texte secondaire */
+  --color-dark-gray: #4A4A4A;      /* Texte principal */
+  --color-black: #2C2C2C;          /* Titres, éléments importants */
+
+  /* Couleurs sémantiques */
+  --color-success: #7A9B76;
+  --color-info: #8B9DAB;
+  --color-warning: #C9A66B;
+  --color-error: #A67B75;
+}
 ```
 
-### Couleurs neutres
-```css
---white: #FFFFFF
---off-white: #FAF9F7      /* Fond principal - doux pour les yeux */
---light-gray: #E8E6E3     /* Bordures, séparateurs */
---gray: #B5B3B0           /* Texte secondaire */
---dark-gray: #4A4A4A      /* Texte principal */
---black: #2C2C2C          /* Titres, éléments importants */
-```
+### Classes Tailwind générées
 
-### Couleurs sémantiques
-```css
---success: #7A9B76        /* Harmonisé avec la palette */
---info: #8B9DAB
---warning: #C9A66B
---error: #A67B75
+```tsx
+// Couleurs principales
+<div className="bg-primary text-white">          // Fond or, texte blanc
+<div className="bg-secondary text-primary">      // Fond bleu, texte or
+<div className="bg-off-white text-dark-gray">    // Fond beige, texte gris
+
+// Bordures et états
+<div className="border-primary hover:bg-primary-dark">
+<button className="text-primary-light focus:ring-primary">
 ```
 
 ### Utilisation des couleurs (Optimisée pour l'accessibilité WCAG AA)
 
 #### Header et Navigation
-- **Header** : Fond `--secondary` (bleu nuit #0A1E2E)
-- **Logo** : SVG coloré en `--primary` (or #C9A961)
-- **Nom "DARSHAN"** : Police Medula One, couleur `--primary` (or)
-- **Liens navigation** : `--off-white` (texte clair), soulignement `--primary` au hover/active
+```tsx
+<header className="bg-secondary">
+  <h1 className="font-logo text-primary">DARSHAN</h1>
+  <nav className="text-off-white hover:text-primary">...</nav>
+</header>
+```
 - **Contraste** : Or sur bleu = 8.5:1 ✅ WCAG AAA
 
 #### Titres et Textes
-- **Tous les titres (H1-H6)** : `--black` (#2C2C2C) - contraste maximal
-- **Accent doré** : Ligne décorative de 3px en `--primary` sous les H2
-- **Texte courant** : `--dark-gray`
-- **Texte secondaire/légendes** : `--gray`
+```tsx
+<h1 className="text-black font-headings">Titre Principal</h1>
+<h2 className="text-black border-b-[3px] border-primary pb-2">Section</h2>
+<p className="text-dark-gray">Texte courant</p>
+<span className="text-gray text-sm">Légende</span>
+```
 - **Contraste** : Noir sur off-white = 14.8:1 ✅ WCAG AAA
 
 #### Boutons et CTA
-- **Boutons primaires** : Fond `--primary` (or), texte `--secondary` (bleu) - contraste 8.5:1 ✅
-- **Boutons secondaires** : Fond `--secondary` (bleu), texte `--primary` (or) - contraste 8.5:1 ✅
-- **CTA Section** : Fond dégradé bleu, bouton or avec texte bleu
+```tsx
+// Bouton primaire
+<button className="bg-primary text-secondary hover:bg-primary-dark">
+  Réserver
+</button>
+
+// Bouton secondaire
+<button className="bg-secondary text-primary border-2 border-primary">
+  En savoir plus
+</button>
+```
+- **Contraste** : 8.5:1 ✅ WCAG AAA
 
 #### Autres éléments
-- **Footer** : Fond `--secondary`, texte `--off-white`, liens `--primary`
-- **Sections alternées** : `--off-white` et `--white`
+- **Footer** : `bg-secondary text-off-white`, liens avec `text-primary`
+- **Sections alternées** : `bg-off-white` et `bg-white`
 - **Or utilisé uniquement** : Sur fond bleu foncé, en accents/bordures, jamais sur fond blanc
+
+---
+
+## 1.5 Stratégie d'Utilisation des Couleurs
+
+### Hiérarchie Chromatique : Or en Premier
+
+**Règle principale :** L'or (primary) est la couleur de marque dominante. Le bleu (secondary) joue un rôle de support structurel.
+
+#### Répartition Visuelle
+- **70% Or** - Éléments de marque, interactions clés
+- **20% Bleu** - Structure, profondeur
+- **80% Neutres chauds** - Fonds, base
+
+### Toujours utiliser l'Or pour :
+- ✅ Icônes dans les cartes (services, contact, fonctionnalités)
+- ✅ Underlines des titres de section (h1, h2)
+- ✅ CTAs primaires (boutons, liens importants)
+- ✅ Cercles d'icônes avec fond (`bg-primary/10`)
+- ✅ États hover sur éléments interactifs
+- ✅ Accents décoratifs (bordures, séparateurs)
+
+**Exemple d'utilisation correcte :**
+```tsx
+// Icône de carte - Or
+<div className="rounded-full bg-primary/10">
+  <i className="text-primary" />
+</div>
+
+// Titre de section - Underline or
+<h2 className="text-black">Services</h2>
+<div className="h-[3px] w-[60px] bg-primary" />
+
+// CTA primaire - Fond or
+<button className="bg-primary hover:bg-primary-dark">
+  Prendre rendez-vous
+</button>
+```
+
+### Utiliser le Bleu pour :
+
+**1. Navigation/Header**
+- Fond bleu foncé (`bg-secondary`) optionnel
+- Texte bleu sur fond clair (actuel)
+
+**2. Footer**
+- Fond bleu foncé obligatoire (`bg-secondary`)
+- Crée un "bookend" visuel avec le header
+
+**3. Overlays Hero**
+- Overlay sombre (`bg-secondary-dark/60`) sur vidéos/images
+- Rend le texte blanc/or lisible
+
+**4. Éléments informationnels** (usage restreint)
+- Callouts avec `border-info` et `bg-info/5`
+- Badges secondaires
+- ⚠️ Usage parcimonieux - l'or reste dominant
+
+**5. Sections alternées sombres**
+- Fond bleu moyen (`bg-secondary-light`)
+- Maximum 1-2 sections par page
+- Crée du rythme visuel
+
+**6. Couleurs de texte**
+- Bleu foncé sur fond clair (alternative au noir)
+- Liens : `text-secondary hover:text-primary`
+
+### Ne JAMAIS utiliser le Bleu pour :
+- ❌ Icônes de cartes (toujours or)
+- ❌ CTAs primaires (toujours or)
+- ❌ Underlines de titres principaux (toujours or)
+- ❌ Fonds dominants (crée une ambiance froide)
+- ❌ Petits éléments décoratifs (toujours or)
+
+### Tableau de Référence Rapide
+
+| Élément | Couleur | Alternative | Jamais |
+|---------|---------|-------------|--------|
+| **Icônes cartes** | Or | - | Bleu |
+| **Fonds cartes** | Blanc/Off-white | - | Bleu |
+| **Titres section** | Noir + underline or | - | Underline bleu |
+| **CTA primaire** | Fond or | - | Fond bleu |
+| **Navigation** | Fond blanc + texte foncé | Fond bleu + texte clair | - |
+| **Footer** | Fond bleu foncé | Fond gris foncé | Fond blanc |
+| **Overlay hero** | Bleu/noir foncé | - | Bleu clair |
+| **Texte principal** | Gris foncé | Bleu foncé | Noir pur |
+| **Liens** | Bleu foncé → Or hover | - | Bleu pur |
+| **Fonds sections** | Off-white (principal) | Blanc, Bleu foncé (accent) | Bleu clair |
+
+### Règles de Contraste
+- **Sections claires** (off-white/blanc) → Or + texte gris foncé
+- **Sections sombres** (bleu foncé) → Or + texte blanc
 
 ---
 
 ## 2. Typographie
 
-### Famille de polices
+### Configuration Tailwind CSS v4
 
-#### Police de logo et d'identité
 ```css
---font-logo: 'Medula One', serif;
-/* Utilisée pour : Logo, nom "Darshan", éléments d'identité visuelle */
+/* styles/tailwind.css */
+@theme {
+  /* Polices */
+  --font-logo: 'Medula One', serif;
+  --font-headings: 'Libre Baskerville', serif;
+  --font-body: 'Outfit', sans-serif;
+
+  /* Tailles de police responsive */
+  --font-size-h1: clamp(32px, 5vw, 48px);
+  --font-size-h2: clamp(26px, 4vw, 36px);
+  --font-size-h3: clamp(22px, 3vw, 28px);
+  --font-size-h4: clamp(18px, 2.5vw, 22px);
+  --font-size-h5: clamp(16px, 2vw, 18px);
+  --font-size-base: clamp(15px, 1.5vw, 16px);
+  --font-size-sm: 14px;
+}
 ```
 
-#### Police de titres
-```css
---font-headings: 'Libre Baskerville', serif;
-/* Utilisée pour : Tous les titres (H1 à H6), sous-titres importants */
+### Classes Tailwind pour Typographie
+
+#### Polices
+```tsx
+<h1 className="font-logo">DARSHAN</h1>              // Medula One
+<h2 className="font-headings">Titre</h2>            // Libre Baskerville
+<p className="font-body">Texte courant</p>          // Outfit (défaut)
 ```
 
-#### Police de texte
-```css
---font-body: 'Outfit', sans-serif;
-/* Utilisée pour : Texte courant, paragraphes, navigation, boutons */
+#### Hiérarchie typographique
+
+**Desktop (>1024px) :**
+```tsx
+<h1 className="text-5xl font-light leading-tight tracking-tight">
+  Titre Principal (48px)
+</h1>
+
+<h2 className="text-4xl font-normal leading-snug tracking-tight">
+  Sous-titre (36px)
+</h2>
+
+<h3 className="text-3xl font-medium leading-normal">
+  Section (28px)
+</h3>
+
+<h4 className="text-2xl font-medium leading-normal">
+  Sous-section (22px)
+</h4>
+
+<p className="text-base leading-relaxed">
+  Texte courant (16px, line-height: 1.7)
+</p>
+
+<span className="text-sm">Petit texte (14px)</span>
 ```
 
-### Hiérarchie typographique
-
-#### Desktop (>1024px)
-```css
---h1-size: 48px;
---h1-weight: 300;        /* Light */
---h1-line-height: 1.2;
---h1-letter-spacing: -0.5px;
-
---h2-size: 36px;
---h2-weight: 400;        /* Regular */
---h2-line-height: 1.3;
---h2-letter-spacing: -0.25px;
-
---h3-size: 28px;
---h3-weight: 500;        /* Medium */
---h3-line-height: 1.4;
-
---h4-size: 22px;
---h4-weight: 500;
---h4-line-height: 1.4;
-
---h5-size: 18px;
---h5-weight: 500;
---h5-line-height: 1.5;
-
---h6-size: 16px;
---h6-weight: 600;        /* Semi-bold */
---h6-line-height: 1.5;
-
---body-size: 16px;
---body-weight: 400;
---body-line-height: 1.7;
-
---small-size: 14px;
---small-weight: 400;
---small-line-height: 1.6;
+**Tablet (640px-1024px) :**
+```tsx
+<h1 className="text-4xl md:text-5xl">40px → 48px</h1>
+<h2 className="text-3xl md:text-4xl">32px → 36px</h2>
 ```
 
-#### Tablet (640px - 1024px)
-```css
---h1-size: 40px;
---h2-size: 32px;
---h3-size: 24px;
---h4-size: 20px;
---h5-size: 17px;
---h6-size: 16px;
---body-size: 16px;
---small-size: 14px;
-```
-
-#### Mobile (<640px)
-```css
---h1-size: 32px;
---h2-size: 26px;
---h3-size: 22px;
---h4-size: 18px;
---h5-size: 16px;
---h6-size: 15px;
---body-size: 15px;
---small-size: 13px;
+**Mobile (<640px) :**
+```tsx
+<h1 className="text-3xl md:text-5xl">32px → 48px</h1>
+<h2 className="text-2xl md:text-4xl">26px → 36px</h2>
 ```
 
 ### Règles typographiques
-- **Paragraphes** : Marge inférieure de 1.5em
-- **Largeur maximale du texte** : 70 caractères (≈700px) pour une lecture optimale
-- **Texte important** : Utiliser `font-weight: 500` plutôt que du gras total
-- **Citations** : Italic, `--accent` pour la bordure gauche
+```tsx
+// Paragraphes avec marge
+<p className="mb-6">Paragraphe avec espacement</p>
+
+// Largeur optimale de lecture (70 caractères)
+<p className="max-w-prose">Texte optimisé pour la lecture</p>
+
+// Texte important (medium au lieu de bold)
+<span className="font-medium">Important</span>
+
+// Citations
+<blockquote className="italic border-l-4 border-accent pl-4">
+  Citation
+</blockquote>
+```
 
 ---
 
 ## 3. Espacement
 
-### Système d'espacement basé sur 8px
+### Configuration Tailwind CSS v4
+
 ```css
---space-xs: 4px;      /* Espaces très serrés */
---space-sm: 8px;      /* Espaces internes petits */
---space-md: 16px;     /* Espacement standard */
---space-lg: 24px;     /* Entre sections de contenu */
---space-xl: 32px;     /* Entre blocs importants */
---space-2xl: 48px;    /* Entre sections majeures */
---space-3xl: 64px;    /* Espacements hero/header */
---space-4xl: 96px;    /* Marges de page desktop */
+/* styles/tailwind.css */
+@theme {
+  /* Système d'espacement basé sur 8px */
+  --spacing-xs: 4px;    /* 0.5 en Tailwind */
+  --spacing-sm: 8px;    /* 2 en Tailwind */
+  --spacing-md: 16px;   /* 4 en Tailwind */
+  --spacing-lg: 24px;   /* 6 en Tailwind */
+  --spacing-xl: 32px;   /* 8 en Tailwind */
+  --spacing-2xl: 48px;  /* 12 en Tailwind */
+  --spacing-3xl: 64px;  /* 16 en Tailwind */
+  --spacing-4xl: 96px;  /* 24 en Tailwind */
+}
 ```
 
-### Application
-- **Padding des sections** : `--space-2xl` (mobile: `--space-xl`)
-- **Margin entre sections** : `--space-3xl` (mobile: `--space-2xl`)
-- **Padding des cartes** : `--space-lg`
-- **Espacement entre paragraphes** : `--space-lg`
-- **Espacement entre titre et texte** : `--space-md`
+### Classes Tailwind pour Espacement
+
+```tsx
+// Padding des sections
+<section className="py-12 md:py-16">              // 48px → 64px
+<section className="px-6 md:px-8">                // 24px → 32px
+
+// Margin entre sections
+<div className="mb-16 md:mb-24">                  // 64px → 96px
+
+// Padding des cartes
+<div className="p-6">                             // 24px
+
+// Espacement entre paragraphes
+<p className="mb-6">                              // 24px
+
+// Espacement entre titre et texte
+<h2 className="mb-4">                             // 16px
+```
+
+### Système Tailwind par défaut (compatible)
+
+Tailwind utilise un système de spacing où `1 = 0.25rem (4px)` :
+- `p-1` = 4px
+- `p-2` = 8px (--spacing-sm)
+- `p-4` = 16px (--spacing-md)
+- `p-6` = 24px (--spacing-lg)
+- `p-8` = 32px (--spacing-xl)
+- `p-12` = 48px (--spacing-2xl)
+- `p-16` = 64px (--spacing-3xl)
+- `p-24` = 96px (--spacing-4xl)
 
 ---
 
 ## 4. Mise en page (Layout)
 
 ### Conteneur principal
-```css
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-lg);
-}
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .container {
-    max-width: 100%;
-    padding: 0 var(--space-md);
-  }
-}
+```tsx
+// Conteneur 1200px responsive
+<div className="max-w-[1200px] mx-auto px-6 md:px-4">
+  Contenu
+</div>
 
-/* Mobile */
-@media (max-width: 640px) {
-  .container {
-    padding: 0 var(--space-md);
-  }
-}
+// Conteneur Tailwind standard (1280px)
+<div className="container mx-auto px-6">
+  Contenu
+</div>
+
+// Conteneur texte (optimal pour lecture)
+<div className="max-w-3xl mx-auto px-6">
+  Texte optimisé (≈800px)
+</div>
 ```
 
-### Grille
-```css
-.grid {
-  display: grid;
-  gap: var(--space-lg);
-}
+### Grilles Tailwind
 
-.grid-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
+```tsx
+// Grille 2 colonnes (responsive)
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>Colonne 1</div>
+  <div>Colonne 2</div>
+</div>
 
-.grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
+// Grille 3 colonnes (responsive)
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div>Card 1</div>
+  <div>Card 2</div>
+  <div>Card 3</div>
+</div>
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+// Grille avec gap personnalisé
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+  Contenu avec espacements adaptatifs
+</div>
+```
 
-@media (max-width: 640px) {
-  .grid-2,
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-}
+### Flexbox
+
+```tsx
+// Centrage horizontal
+<div className="flex justify-center items-center">
+  Contenu centré
+</div>
+
+// Espace entre éléments
+<div className="flex justify-between items-center">
+  <div>Gauche</div>
+  <div>Droite</div>
+</div>
+
+// Colonnes responsive
+<div className="flex flex-col md:flex-row gap-6">
+  Mobile: vertical, Desktop: horizontal
+</div>
 ```
 
 ### Règles de contenu
-- **Largeur de contenu textuel** : Maximum 800px centré
-- **Largeur d'image pleine** : Toute la largeur du conteneur (1200px max)
+- **Largeur de contenu textuel** : `max-w-3xl` (≈800px) centré
+- **Largeur pleine** : `max-w-[1200px]` pour les conteneurs
 - **Pas de colonnes vides** : Le contenu doit utiliser tout l'espace disponible
 - **Images** : Toujours accompagnées de texte, jamais seules dans une section
 
@@ -253,184 +408,192 @@ Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design r
 ### Boutons
 
 #### Bouton primaire
-```css
-.btn-primary {
-  background: var(--primary);
-  color: var(--white);
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-height: 48px; /* Accessibilité tactile */
-}
-
-.btn-primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(139, 157, 131, 0.3);
-}
+```tsx
+<button className="
+  bg-primary text-white
+  px-8 py-3.5
+  text-base font-medium
+  rounded-lg
+  min-h-[48px]
+  transition-all duration-300
+  hover:bg-primary-dark hover:-translate-y-0.5
+  hover:shadow-[0_4px_12px_rgba(201,169,97,0.3)]
+  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+">
+  Réserver
+</button>
 ```
 
 #### Bouton secondaire
-```css
-.btn-secondary {
-  background: transparent;
-  color: var(--primary);
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 8px;
-  border: 2px solid var(--primary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-height: 48px;
-}
+```tsx
+<button className="
+  bg-transparent text-primary
+  px-8 py-3.5
+  text-base font-medium
+  rounded-lg
+  border-2 border-primary
+  min-h-[48px]
+  transition-all duration-300
+  hover:bg-primary hover:text-white
+  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+">
+  En savoir plus
+</button>
+```
 
-.btn-secondary:hover {
-  background: var(--primary);
-  color: var(--white);
+#### Classe @layer components (optionnel)
+```css
+/* styles/tailwind.css */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-8 py-3.5 text-base font-medium rounded-lg;
+    @apply min-h-[48px] transition-all duration-300;
+    @apply hover:bg-primary-dark hover:-translate-y-0.5;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-primary px-8 py-3.5 border-2 border-primary;
+    @apply text-base font-medium rounded-lg min-h-[48px];
+    @apply transition-all duration-300 hover:bg-primary hover:text-white;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
 }
 ```
 
 ### Cartes (Cards)
+
+```tsx
+<div className="
+  bg-white rounded-xl p-6
+  shadow-md
+  transition-all duration-300
+  hover:shadow-lg hover:-translate-y-1
+">
+  <img
+    src="/image.jpg"
+    alt="Description"
+    className="rounded-lg w-full h-auto object-cover mb-4"
+  />
+  <h3 className="text-2xl font-medium text-black mb-2">
+    Titre de la carte
+  </h3>
+  <p className="text-dark-gray leading-relaxed">
+    Description de la carte
+  </p>
+</div>
+```
+
+#### Classe @layer components pour Card
 ```css
-.card {
-  background: var(--white);
-  border-radius: 12px;
-  padding: var(--space-lg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
+@layer components {
+  .card {
+    @apply bg-white rounded-xl p-6 shadow-md;
+    @apply transition-all duration-300;
+    @apply hover:shadow-lg hover:-translate-y-1;
+  }
 
-.card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
-}
+  .card-image {
+    @apply rounded-lg w-full h-auto object-cover mb-4;
+  }
 
-.card-image {
-  border-radius: 8px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: var(--space-md);
-}
+  .card-title {
+    @apply text-2xl font-medium text-black mb-2;
+  }
 
-.card-title {
-  font-size: var(--h4-size);
-  font-weight: 500;
-  color: var(--black);
-  margin-bottom: var(--space-sm);
-}
-
-.card-description {
-  color: var(--dark-gray);
-  line-height: 1.7;
+  .card-description {
+    @apply text-dark-gray leading-relaxed;
+  }
 }
 ```
 
 ### Images
 
-#### Ratio et dimensions
-```css
-/* Image hero/bannière */
-.hero-image {
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  border-radius: 16px;
-}
+#### Ratio et dimensions avec Tailwind
+```tsx
+// Image hero/bannière (16:9)
+<img
+  src="/hero.jpg"
+  alt="Description"
+  className="aspect-video object-cover rounded-2xl w-full"
+/>
 
-/* Image de contenu */
-.content-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
+// Image de contenu
+<img
+  src="/content.jpg"
+  alt="Description"
+  className="max-w-full h-auto rounded-xl"
+/>
 
-/* Image portrait (pour les prestations) */
-.portrait-image {
-  aspect-ratio: 4/5;
-  object-fit: cover;
-  border-radius: 12px;
-}
+// Image portrait pour prestations (4:5)
+<img
+  src="/service.jpg"
+  alt="Description"
+  className="aspect-[4/5] object-cover rounded-xl w-full"
+/>
 ```
 
 #### Position des images
-- **Hero** : Pleine largeur, centrée
-- **Contenu alterné** : Image à gauche/droite avec texte adjacent
-- **Grilles de prestations** : Images en haut de carte
+- **Hero** : `w-full aspect-video` - Pleine largeur, ratio 16:9
+- **Contenu alterné** : Grid avec `md:grid-cols-2` - Image + texte côte à côte
+- **Grilles de prestations** : `aspect-[4/5]` en haut de carte
 - **Toujours** : Alt text descriptif pour l'accessibilité
 
 ### Navigation
-```css
-.nav {
-  background: var(--white);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: var(--space-md) 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
 
-.nav-link {
-  color: var(--dark-gray);
-  font-weight: 500;
-  padding: var(--space-sm) var(--space-md);
-  transition: color 0.3s ease;
-  min-height: 44px; /* Touch target */
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--primary);
-}
+```tsx
+<nav className="
+  bg-white shadow-md
+  py-4
+  sticky top-0 z-[100]
+">
+  <a href="/" className="
+    text-dark-gray font-medium
+    px-4 py-2
+    min-h-[44px]
+    inline-flex items-center
+    transition-colors duration-300
+    hover:text-primary
+    aria-[current=page]:text-primary
+  ">
+    Accueil
+  </a>
+</nav>
 ```
 
 ### Footer
-```css
-.footer {
-  background: var(--secondary);
-  color: var(--white);
-  padding: var(--space-3xl) 0 var(--space-xl);
-}
 
-.footer-link {
-  color: var(--off-white);
-  transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: var(--white);
-}
+```tsx
+<footer className="bg-secondary text-white py-16 pb-8">
+  <div className="max-w-[1200px] mx-auto px-6">
+    <a href="#" className="
+      text-off-white
+      transition-colors duration-300
+      hover:text-white
+    ">
+      Lien footer
+    </a>
+  </div>
+</footer>
 ```
 
 ### Sections
-```css
-.section {
-  padding: var(--space-3xl) 0;
-}
 
-.section-alt {
-  background: var(--white);
-  padding: var(--space-3xl) 0;
-}
+```tsx
+// Section standard
+<section className="py-16 md:py-24">
+  <div className="max-w-[1200px] mx-auto px-6">
+    <h2 className="text-center mb-12 text-black">Titre</h2>
+    <p className="text-center text-gray max-w-2xl mx-auto mb-12">
+      Sous-titre
+    </p>
+  </div>
+</section>
 
-.section-title {
-  text-align: center;
-  margin-bottom: var(--space-2xl);
-  color: var(--black);
-}
-
-.section-subtitle {
-  text-align: center;
-  color: var(--gray);
-  max-width: 700px;
-  margin: 0 auto var(--space-2xl);
-}
+// Section alternée (fond blanc)
+<section className="bg-white py-16 md:py-24">
+  Contenu
+</section>
 ```
 
 ---
@@ -468,12 +631,27 @@ Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design r
 - **Couleurs or** : JAMAIS sur fond blanc/clair pour du texte, uniquement sur fond bleu foncé ou en décoration
 - **Titres** : Toujours en noir (#2C2C2C) sur fond clair pour contraste maximal
 
-### Focus states
+### Focus states avec Tailwind
+
+```tsx
+// Focus visible global
+<button className="
+  focus:outline-none
+  focus-visible:ring-2
+  focus-visible:ring-primary
+  focus-visible:ring-offset-2
+  focus-visible:rounded
+">
+  Bouton accessible
+</button>
+```
+
+Configuration globale dans `tailwind.css` :
 ```css
-*:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  border-radius: 4px;
+@layer base {
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 rounded;
+  }
 }
 ```
 
@@ -481,65 +659,145 @@ Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design r
 
 ## 7. Animation et transitions
 
-### Durées standard
+### Configuration Tailwind CSS v4
+
 ```css
---transition-fast: 0.15s;
---transition-base: 0.3s;
---transition-slow: 0.5s;
+@theme {
+  /* Durées de transition */
+  --transition-fast: 150ms;
+  --transition-base: 300ms;
+  --transition-slow: 500ms;
+
+  /* Easing curves */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
 ```
 
-### Easing
-```css
---ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
---ease-out: cubic-bezier(0.0, 0, 0.2, 1);
---ease-in: cubic-bezier(0.4, 0, 1, 1);
+### Classes Tailwind pour Transitions
+
+```tsx
+// Hover avec transition
+<button className="
+  transition-all duration-300
+  hover:bg-primary-dark hover:-translate-y-1
+">
+  Bouton animé
+</button>
+
+// Transitions spécifiques
+<div className="transition-colors duration-300">Couleurs uniquement</div>
+<div className="transition-transform duration-500">Transform uniquement</div>
+
+// Easing personnalisé
+<div className="transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+  Custom easing
+</div>
 ```
 
 ### Applications
-- **Hover** : `transition: all 0.3s ease`
-- **Apparitions** : Fade-in subtil, pas de mouvements brusques
-- **Scroll** : Smooth scroll sur toute la page
-- **Interactions** : Feedback visuel immédiat (<0.15s)
+- **Hover** : `transition-all duration-300`
+- **Apparitions** : Fade-in avec `animate-fade-in` (custom)
+- **Scroll** : `scroll-smooth` sur `<html>`
+- **Interactions** : `transition-colors duration-150` pour feedback immédiat
 
 ### Animations subtiles recommandées
-```css
-/* Fade in au scroll */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.fade-in {
-  animation: fadeInUp 0.6s ease-out;
+```css
+/* styles/tailwind.css */
+@layer utilities {
+  /* Fade in au scroll */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
 }
+```
+
+Usage :
+```tsx
+<div className="animate-fade-in-up">
+  Contenu qui apparaît en douceur
+</div>
 ```
 
 ---
 
 ## 8. Responsive breakpoints
 
+### Breakpoints Tailwind CSS (par défaut)
+
 ```css
-/* Mobile first approach */
---mobile: 320px;      /* Minimum supporté */
---mobile-lg: 480px;   /* Grands mobiles */
---tablet: 640px;      /* Tablettes portrait */
---tablet-lg: 1024px;  /* Tablettes paysage */
---desktop: 1280px;    /* Desktop standard */
---desktop-lg: 1536px; /* Grands écrans */
+/* Tailwind breakpoints (mobile-first) */
+sm:  640px   /* Tablettes portrait */
+md:  768px   /* Tablettes paysage */
+lg:  1024px  /* Desktop */
+xl:  1280px  /* Grands écrans */
+2xl: 1536px  /* Très grands écrans */
+```
+
+### Configuration personnalisée (optionnel)
+
+```css
+/* styles/tailwind.css */
+@theme {
+  --breakpoint-mobile: 320px;
+  --breakpoint-tablet: 640px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
+}
+```
+
+### Usage des breakpoints
+
+```tsx
+// Mobile-first (défaut < 640px, puis sm:, md:, lg:, xl:)
+<div className="
+  text-sm           /* Mobile: 14px */
+  md:text-base      /* Tablet: 16px */
+  lg:text-lg        /* Desktop: 18px */
+">
+  Texte responsive
+</div>
+
+// Grid responsive
+<div className="
+  grid
+  grid-cols-1       /* Mobile: 1 colonne */
+  md:grid-cols-2    /* Tablet: 2 colonnes */
+  lg:grid-cols-3    /* Desktop: 3 colonnes */
+  gap-6
+">
+  Cards responsive
+</div>
+
+// Padding responsive
+<section className="
+  px-4 py-8         /* Mobile: 16px / 32px */
+  md:px-6 md:py-12  /* Tablet: 24px / 48px */
+  lg:px-8 lg:py-16  /* Desktop: 32px / 64px */
+">
+  Section adaptative
+</section>
 ```
 
 ### Stratégie responsive
-1. **Design mobile-first** : Commencer par mobile, enrichir pour desktop
-2. **Points de rupture majeurs** : 640px (tablet), 1024px (desktop)
-3. **Images responsive** : Utiliser srcset pour optimiser le chargement
-4. **Navigation** : Menu hamburger < 1024px, menu horizontal > 1024px
-5. **Grilles** : 1 colonne mobile, 2-3 colonnes desktop
+1. **Design mobile-first** : Styles de base pour mobile, préfixes `md:` `lg:` pour écrans plus larges
+2. **Points de rupture majeurs** : `md:640px` (tablet), `lg:1024px` (desktop)
+3. **Images responsive** : `srcset` + `aspect-ratio` pour optimiser le chargement
+4. **Navigation** : Menu hamburger `lg:hidden`, menu horizontal `hidden lg:flex`
+5. **Grilles** : `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
 
 ---
 
@@ -640,38 +898,384 @@ Lazy loading: Actif sur toutes les images hors viewport initial
 
 ---
 
-## 14. Instructions spécifiques pour Claude Code
+## 14. Architecture des Composants React + Tailwind
 
-### Lors de la création de composants
-1. Respecter strictement la palette de couleurs définie
-2. Utiliser le système d'espacement (multiples de 8px)
-3. Appliquer les tailles de police responsive
-4. Vérifier les contrastes pour l'accessibilité
-5. Ajouter les états hover/focus sur tous les éléments interactifs
-6. Utiliser des transitions douces (0.3s ease)
+### Philosophie : Composants réutilisables
 
-### Lors de la création de pages
-1. Commencer par une structure sémantique HTML5
-2. Alterner sections claires et blanches
-3. Centrer le contenu textuel (max 800px)
-4. Maximiser l'utilisation de l'espace (pas de vides inutiles)
-5. Images toujours accompagnées de texte
-6. Suivre la hiérarchie typographique H1 > H2 > H3
+**Principe :** Créer des **composants React TypeScript réutilisables** avec Tailwind, **pas des classes CSS globales**.
 
-### Checklist avant validation
-- [ ] Palette de couleurs respectée (or + bleu nuit)
-- [ ] Typographie : Medula One (logo), Libre Baskerville (titres), Outfit (texte)
-- [ ] Espacement cohérent (système 8px)
-- [ ] Contrastes WCAG AA validés (noir pour titres, or uniquement sur bleu)
-- [ ] Header : Fond bleu, logo or, nom "DARSHAN" en or
-- [ ] Responsive fonctionnel (mobile, tablet, desktop)
-- [ ] Images optimisées avec alt text
-- [ ] Navigation clavier fonctionnelle
-- [ ] Pas d'espace vide inutile au centre
-- [ ] Accents dorés utilisés avec parcimonie (lignes décoratives, bordures)
+✅ **Faire :**
+- Composants React avec props et variants
+- Classes Tailwind directement dans les composants
+- Type-safety avec TypeScript
+
+❌ **Ne pas faire :**
+- Classes CSS globales avec `@layer components`
+- Répéter les mêmes classes partout
+- Mixte CSS Modules + Tailwind
+
+### Structure des composants
+
+```
+components/
+├── ui/                     # Composants réutilisables génériques
+│   ├── Button.tsx          # Boutons avec variants
+│   ├── Card.tsx            # Cards réutilisables
+│   ├── Container.tsx       # Wrapper de contenu
+│   ├── Section.tsx         # Sections de page
+│   ├── Input.tsx           # Champs de formulaire
+│   └── Link.tsx            # Liens stylisés
+├── Header.tsx              # Composants spécifiques au site
+├── Footer.tsx
+├── Hero.tsx
+└── ...
+```
+
+### Exemples de composants réutilisables
+
+#### Button Component
+
+```tsx
+// components/ui/Button.tsx
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Button({
+  variant = 'primary',
+  children,
+  className = '',
+  ...props
+}: ButtonProps) {
+  const baseStyles = "px-8 py-3.5 text-base font-medium rounded-lg min-h-[48px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2";
+
+  const variants = {
+    primary: "bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5",
+    secondary: "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white"
+  };
+
+  return (
+    <button
+      className={`${baseStyles} ${variants[variant]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+**Usage :**
+```tsx
+<Button variant="primary" onClick={() => {}}>Réserver</Button>
+<Button variant="secondary">En savoir plus</Button>
+<Button variant="primary" className="w-full">Pleine largeur</Button>
+```
+
+#### Card Component
+
+```tsx
+// components/ui/Card.tsx
+interface CardProps {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  href?: string;
+  className?: string;
+}
+
+export default function Card({
+  title,
+  description,
+  image,
+  imageAlt,
+  href,
+  className = ''
+}: CardProps) {
+  const content = (
+    <>
+      {image && (
+        <img
+          src={image}
+          alt={imageAlt || title}
+          className="rounded-lg w-full aspect-[4/5] object-cover mb-4"
+        />
+      )}
+      <h3 className="text-2xl font-headings text-black mb-2">
+        {title}
+      </h3>
+      <p className="text-dark-gray leading-relaxed">
+        {description}
+      </p>
+    </>
+  );
+
+  const cardClasses = `
+    bg-white rounded-xl p-6 shadow-md
+    transition-all duration-300
+    hover:shadow-lg hover:-translate-y-1
+    ${className}
+  `;
+
+  if (href) {
+    return (
+      <a href={href} className={cardClasses}>
+        {content}
+      </a>
+    );
+  }
+
+  return <div className={cardClasses}>{content}</div>;
+}
+```
+
+**Usage :**
+```tsx
+<Card
+  title="Hydrothérapie"
+  description="Soins aquatiques apaisants..."
+  image="/images/hydro.jpg"
+  imageAlt="Séance d'hydrothérapie"
+/>
+```
+
+#### Container Component
+
+```tsx
+// components/ui/Container.tsx
+interface ContainerProps {
+  maxWidth?: 'full' | 'text' | 'default';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Container({
+  maxWidth = 'default',
+  children,
+  className = ''
+}: ContainerProps) {
+  const widths = {
+    default: 'max-w-[1200px]',
+    text: 'max-w-3xl',
+    full: 'max-w-full'
+  };
+
+  return (
+    <div className={`${widths[maxWidth]} mx-auto px-6 ${className}`}>
+      {children}
+    </div>
+  );
+}
+```
+
+**Usage :**
+```tsx
+<Container>Contenu 1200px</Container>
+<Container maxWidth="text">Texte optimisé lecture</Container>
+```
+
+#### Section Component
+
+```tsx
+// components/ui/Section.tsx
+interface SectionProps {
+  variant?: 'default' | 'white';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Section({
+  variant = 'default',
+  children,
+  className = ''
+}: SectionProps) {
+  const bgColor = variant === 'white' ? 'bg-white' : 'bg-off-white';
+
+  return (
+    <section className={`py-16 md:py-24 ${bgColor} ${className}`}>
+      <Container>
+        {children}
+      </Container>
+    </section>
+  );
+}
+```
+
+**Usage :**
+```tsx
+<Section>
+  <h2>Titre section</h2>
+  <p>Contenu...</p>
+</Section>
+
+<Section variant="white">
+  <h2>Section fond blanc</h2>
+</Section>
+```
+
+### Utilitaire pour classes conditionnelles (optionnel)
+
+Pour gérer proprement les classes conditionnelles :
+
+```bash
+npm install clsx tailwind-merge
+```
+
+```tsx
+// lib/utils.ts
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+**Usage dans Button amélioré :**
+```tsx
+import { cn } from '@/lib/utils';
+
+export default function Button({ variant = 'primary', className, ...props }: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        "px-8 py-3.5 text-base font-medium rounded-lg min-h-[48px]",
+        "transition-all duration-300",
+        "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+        variant === 'primary' && "bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5",
+        variant === 'secondary' && "bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+```
 
 ---
 
-**Version** : 1.0  
-**Date de création** : Octobre 2025  
-**Dernière mise à jour** : Octobre 2025
+## 15. Instructions spécifiques pour Claude Code
+
+### Lors de la création de composants
+
+1. **Toujours créer des composants React réutilisables** dans `components/ui/`
+2. **Palette de couleurs** : Utiliser les classes `bg-primary`, `text-secondary`, etc.
+3. **Espacement** : Classes `p-6`, `mb-4`, `gap-8` (système 8px via Tailwind)
+4. **Typographie responsive** : `text-3xl md:text-5xl`, `font-headings`, `font-logo`
+5. **Accessibilité** : Toujours ajouter `focus-visible:ring-2 focus-visible:ring-primary`
+6. **Hover states** : `hover:bg-primary-dark transition-all duration-300`
+7. **Mobile-first** : Classes de base pour mobile, préfixes `md:` `lg:` pour desktop
+8. **TypeScript** : Toujours typer les props avec des interfaces
+
+### Lors de la création de pages
+
+1. **Utiliser les composants UI** : `<Container>`, `<Section>`, `<Button>`, `<Card>`
+2. **Structure sémantique** : `<header>`, `<main>`, `<section>`, `<footer>`
+3. **Sections alternées** : `<Section>` et `<Section variant="white">`
+4. **Grilles responsive** : `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`
+5. **Images** : `aspect-video`, `aspect-[4/5]`, toujours avec `alt` text
+6. **Pas de répétition** : Si tu écris les mêmes classes 2+ fois, crée un composant
+
+### Exemple de page complète avec composants
+
+```tsx
+// pages/services.tsx
+import Container from '@/components/ui/Container';
+import Section from '@/components/ui/Section';
+import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
+
+export default function ServicesPage() {
+  const services = [
+    {
+      title: 'Hydrothérapie',
+      description: 'Soins aquatiques apaisants pour le corps et l\'esprit',
+      image: '/images/hydro.jpg'
+    },
+    // ...
+  ];
+
+  return (
+    <main>
+      {/* Hero Section */}
+      <Section>
+        <div className="text-center">
+          <h1 className="text-5xl font-headings text-black mb-4">
+            Nos Services
+          </h1>
+          <p className="text-gray max-w-2xl mx-auto mb-8">
+            Découvrez notre gamme de soins de bien-être
+          </p>
+          <Button variant="primary">Réserver une séance</Button>
+        </div>
+      </Section>
+
+      {/* Services Grid */}
+      <Section variant="white">
+        <h2 className="text-4xl font-headings text-black text-center mb-12">
+          Nos Prestations
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <Card
+              key={service.title}
+              title={service.title}
+              description={service.description}
+              image={service.image}
+              imageAlt={service.title}
+            />
+          ))}
+        </div>
+      </Section>
+
+      {/* CTA Section */}
+      <Section>
+        <Container maxWidth="text" className="text-center">
+          <h2 className="text-3xl font-headings text-black mb-4">
+            Prêt à commencer ?
+          </h2>
+          <p className="text-dark-gray mb-6">
+            Réservez votre première séance dès aujourd'hui
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Button variant="primary">Réserver</Button>
+            <Button variant="secondary">Nous contacter</Button>
+          </div>
+        </Container>
+      </Section>
+    </main>
+  );
+}
+```
+
+### Règles d'or
+
+1. **DRY (Don't Repeat Yourself)** : Si tu copies les mêmes classes → crée un composant
+2. **Composants UI génériques** : Dans `components/ui/`, réutilisables partout
+3. **Props TypeScript** : Toujours typer les props avec `interface`
+4. **Variants** : Utiliser des props `variant` plutôt que des classes conditionnelles complexes
+5. **className override** : Toujours permettre `className` pour ajustements ponctuels
+6. **Accessibilité** : Focus states, alt text, ARIA labels quand nécessaire
+
+### Checklist avant validation
+
+- [ ] **Couleurs** : `bg-primary`, `bg-secondary`, `text-primary` (or + bleu nuit)
+- [ ] **Polices** : `font-logo` (Medula One), `font-headings` (Libre Baskerville), `font-body` (Outfit)
+- [ ] **Espacement** : Classes Tailwind cohérentes (`p-6`, `mb-4`, `gap-8`)
+- [ ] **Contraste WCAG AA** : Noir (`text-black`) pour titres, or uniquement sur bleu
+- [ ] **Header** : `bg-secondary`, logo `text-primary`, nom "DARSHAN" en `font-logo`
+- [ ] **Responsive** : Mobile-first avec `md:` et `lg:` breakpoints
+- [ ] **Images** : `alt` text + `aspect-ratio` approprié
+- [ ] **Accessibilité clavier** : `focus-visible:ring-2` sur éléments interactifs
+- [ ] **Animations** : `transition-all duration-300` sur hover
+- [ ] **Layout** : Pas d'espace vide inutile, contenu centré avec `mx-auto`
+
+---
+
+**Version** : 2.0 (Tailwind CSS v4)
+**Date de création** : Octobre 2025
+**Dernière mise à jour** : Janvier 2025
+**Stack** : Next.js 15 + Tailwind CSS v4 + TypeScript

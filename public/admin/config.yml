@@ -1,23 +1,70 @@
+# Sveltia CMS Configuration
+# Documentation: https://github.com/sveltia/sveltia-cms
+
+# Backend Configuration
+# Uses GitHub backend with Netlify for OAuth authentication
+# Git Gateway is NOT supported by Sveltia (performance reasons)
 backend:
-  name: git-gateway
+  name: github
+  repo: labomeh/site-web-darshan # TODO: Update with your GitHub username
   branch: main
+  # Netlify handles OAuth for GitHub authentication
+  base_url: https://centre-darshan.netlify.app
+  auth_endpoint: /.netlify/functions/auth
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+# Local Development Mode
+# Enable local backend for testing without GitHub/authentication
+local_backend: true
 
-locale: 'fr'
+# Media Files
+media_folder: public/images/uploads
+public_folder: /images/uploads
 
+# Site Configuration
+locale: fr
+# Site URL is auto-detected from deploy context (supports branch deploys)
+# Production: https://centre-darshan.netlify.app
+# Staging: https://staging--centre-darshan.netlify.app
+# Branch deploys: https://BRANCH--centre-darshan.netlify.app
+site_url: https://centre-darshan.netlify.app
+display_url: https://centre-darshan.netlify.app
+logo_url: /images/logo.svg
+
+# Collections - Content Types
 collections:
-  - name: "events"
-    label: "Événements"
-    folder: "_events"
+  # Events Collection
+  - name: events
+    label: Événements
+    label_singular: Événement
+    folder: content/events
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Lieu", name: "location", widget: "string", required: false}
-      - {label: "Description", name: "body", widget: "markdown"}
-      - {label: "Image", name: "image", widget: "image", required: false}
-      - {label: "Places", name: "available_spots", widget: "number", required: false}
-      - {label: "Contact", name: "contact_info", widget: "text", required: false}
+      - { label: Titre, name: title, widget: string }
+      - { label: Date de début, name: date, widget: datetime }
+      - { label: Date de fin, name: endDate, widget: datetime, required: false }
+      - { label: Description courte, name: excerpt, widget: text, required: false }
+      - { label: Contenu, name: body, widget: markdown }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Lieu, name: location, widget: string, required: false }
+      - { label: Prix, name: price, widget: string, required: false }
+      - { label: Places disponibles, name: available_spots, widget: number, required: false }
+      - { label: Lien d'inscription, name: registrationUrl, widget: string, required: false }
+      - { label: Publié, name: published, widget: boolean, default: true }
+
+  # Services Collection (for future use)
+  - name: services
+    label: Services
+    label_singular: Service
+    folder: content/services
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: Titre, name: title, widget: string }
+      - { label: Description courte, name: excerpt, widget: text }
+      - { label: Contenu, name: body, widget: markdown }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Durée, name: duration, widget: string, required: false }
+      - { label: Prix, name: price, widget: string, required: false }
+      - { label: Ordre d'affichage, name: order, widget: number, default: 0 }
+      - { label: Publié, name: published, widget: boolean, default: true }

@@ -1,21 +1,9 @@
-/**
- * ═══════════════════════════════════════════════════════════════════
- * UTILS - Darshan
- * ═══════════════════════════════════════════════════════════════════
- *
- * Fonctions utilitaires diverses
- */
+import type { ClassValue } from 'clsx';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-/**
- * Combine les classes CSS (utile pour les composants avec classes conditionnelles)
- * Gère les valeurs falsy et les espaces multiples
- */
-export function cn(...classes: (string | undefined | null | false)[]): string {
-  return classes
-    .filter(Boolean)
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -63,6 +51,7 @@ export function slugify(text: string): string {
  */
 export function truncate(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
+
   return text.slice(0, maxLength).trim() + '...';
 }
 
@@ -72,6 +61,7 @@ export function truncate(text: string, maxLength: number): string {
 export function isPastDate(dateString: string): boolean {
   const date = new Date(dateString);
   const now = new Date();
+
   return date < now;
 }
 
@@ -96,5 +86,6 @@ export function daysUntil(dateString: string): number {
   const date = new Date(dateString);
   const now = new Date();
   const diff = date.getTime() - now.getTime();
+
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 }

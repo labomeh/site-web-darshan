@@ -10,7 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
-import { Event } from '@/types';
+import type { Event } from '@/types';
 
 const eventsDirectory = path.join(process.cwd(), '_events');
 
@@ -20,7 +20,8 @@ const eventsDirectory = path.join(process.cwd(), '_events');
 export async function getAllEvents(): Promise<Event[]> {
   // Vérifier si le dossier existe
   if (!fs.existsSync(eventsDirectory)) {
-    console.warn('Le dossier _events/ n\'existe pas');
+    console.warn("Le dossier _events/ n'existe pas");
+
     return [];
   }
 
@@ -41,9 +42,7 @@ export async function getAllEvents(): Promise<Event[]> {
       const bodyHtml = await marked(content);
 
       // Convertir la date en string si elle est un objet Date
-      const dateString = data.date instanceof Date
-        ? data.date.toISOString()
-        : (data.date || '');
+      const dateString = data.date instanceof Date ? data.date.toISOString() : data.date || '';
 
       // Construire l'objet événement en omettant les valeurs undefined
       const event: Event = {
@@ -64,6 +63,7 @@ export async function getAllEvents(): Promise<Event[]> {
     });
 
   const allEvents = await Promise.all(allEventsPromises);
+
   return allEvents;
 }
 
@@ -78,11 +78,13 @@ export async function getUpcomingEvents(): Promise<Event[]> {
   const upcomingEvents = allEvents
     .filter((event) => {
       const eventDate = new Date(event.date);
+
       return eventDate >= now;
     })
     .sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
+
       return dateA.getTime() - dateB.getTime();
     });
 
@@ -98,6 +100,7 @@ export async function getAllEventsSorted(): Promise<Event[]> {
   return allEvents.sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
+
     return dateB.getTime() - dateA.getTime();
   });
 }
@@ -107,6 +110,7 @@ export async function getAllEventsSorted(): Promise<Event[]> {
  */
 export function formatEventDate(dateString: string): string {
   const date = new Date(dateString);
+
   return date.toLocaleDateString('fr-FR', {
     weekday: 'long',
     year: 'numeric',
@@ -120,6 +124,7 @@ export function formatEventDate(dateString: string): string {
  */
 export function formatShortDate(dateString: string): string {
   const date = new Date(dateString);
+
   return date.toLocaleDateString('fr-FR', {
     day: 'numeric',
     month: 'short',

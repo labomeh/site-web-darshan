@@ -1,4 +1,4 @@
-import { Service } from '@/types';
+import type { Service } from '@/types';
 import Card from './ui/Card';
 
 interface ServiceCardProps {
@@ -7,31 +7,27 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <Card hoverable className="service-card h-full flex flex-col">
+    <Card hoverable className="service-card flex h-full flex-col">
       {service.image && (
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-48 object-cover rounded-md mb-md"
+          className="mb-md h-48 w-full rounded-md object-cover"
         />
       )}
 
       {service.icon && (
-        <div className="text-4xl text-primary mb-md text-center">
+        <div className="mb-md text-center text-4xl text-primary">
           <i className={service.icon} />
         </div>
       )}
 
-      <h3 className="text-h4 font-headings text-black mb-md text-center">
-        {service.title}
-      </h3>
+      <h3 className="text-h4 mb-md text-center font-headings text-black">{service.title}</h3>
 
-      <p className="text-dark-gray text-center mb-md flex-grow">
-        {service.description}
-      </p>
+      <p className="mb-md flex-grow text-center text-dark-gray">{service.description}</p>
 
       {service.details && (
-        <div className="text-sm text-gray border-t border-light-gray pt-md mt-auto">
+        <div className="mt-auto border-t border-light-gray pt-md text-sm text-gray">
           {service.details}
         </div>
       )}

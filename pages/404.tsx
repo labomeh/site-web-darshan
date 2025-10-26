@@ -1,32 +1,24 @@
 import Layout from '@/components/Layout';
-import Section from '@/components/ui/Section';
-import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';
+import Container from '@/components/ui/Container';
+import Section from '@/components/ui/Section';
+import { LABELS, METADATA } from '@/config/site';
 
 export default function Custom404() {
   return (
-    <Layout
-      title="Page non trouvée - Darshan"
-      description="La page que vous recherchez n'existe pas."
-    >
-      <Section variant="default" className="min-h-[60vh] flex items-center">
+    <Layout title={METADATA.notFoundTitle} description={METADATA.notFoundDescription}>
+      <Section variant="default" className="flex min-h-[60vh] items-center">
         <Container maxWidth="content">
-          <div className="text-center space-y-xl">
-            <div className="text-[120px] font-logo text-primary leading-none">
-              404
-            </div>
-            <h1 className="text-h1 font-headings text-black">
-              Page non trouvée
-            </h1>
-            <p className="text-lg text-dark-gray">
-              Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
-            </p>
-            <div className="flex gap-md justify-center flex-wrap">
+          <div className="space-y-xl text-center">
+            <div className="font-logo text-[120px] leading-none text-primary">404</div>
+            <h1 className="text-h1 font-headings text-black">{LABELS.notFound.heading}</h1>
+            <p className="text-lg text-dark-gray">{LABELS.notFound.description}</p>
+            <div className="flex flex-wrap justify-center gap-md">
               <Button href="/" variant="primary">
-                Retour à l'accueil
+                {LABELS.nav.backToHome}
               </Button>
               <Button href="/contact" variant="outline">
-                Contact
+                {LABELS.nav.contact}
               </Button>
             </div>
           </div>

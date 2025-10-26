@@ -8,7 +8,8 @@ Cette documentation couvre tous les aspects du projet Next.js du site Darshan.
 
 | Fichier | Description | Pour qui ? |
 |---------|-------------|-----------|
-| [**DESIGN_SYSTEM.md**](DESIGN_SYSTEM.md) | Design tokens, couleurs, typographie, composants | Développeurs, designers |
+| [**DESIGN_SYSTEM.md**](DESIGN_SYSTEM.md) | Design system complet : couleurs, typographie, composants, stratégie d'utilisation | Développeurs, designers |
+| [**CONFIGURATION.md**](CONFIGURATION.md) | Configuration TypeScript, ESLint, Prettier, outils | Développeurs |
 | [**BRANCHING_STRATEGY.md**](BRANCHING_STRATEGY.md) | Stratégie Git Flow avec rebase, workflow complet | Développeurs |
 | [**GIT_ALIASES.md**](GIT_ALIASES.md) | Guide des alias Git automatisés | Développeurs |
 
@@ -55,6 +56,30 @@ git deploy-prod
 - Gestion des conflits
 - Workflow complet
 - Exemples d'usage
+
+---
+
+## 📝 Philosophie de Documentation
+
+**Règle :** Privilégier le code auto-documenté, minimiser la documentation écrite.
+
+### ✅ Documenter :
+- Design systems et guidelines
+- Workflows de développement
+- Configuration des outils
+
+### ❌ Ne PAS documenter :
+- Refactorings simples → Commit messages
+- Explorations temporaires → Discussion puis suppression
+- Décisions ponctuelles → Commentaires inline
+- Logs de travail → Git history
+
+### 🔄 Workflow :
+1. **Création** → Uniquement si nécessaire pour référence permanente
+2. **Consolidation** → Intégrer dans docs existants si utile
+3. **Suppression** → Effacer quand obsolète (pas d'archive)
+
+---
 
 ## 🔗 Liens rapides
 

@@ -1,37 +1,37 @@
 import Head from 'next/head';
-import Header from './Header';
+import Script from 'next/script';
+import { METADATA } from '@/config/site';
+import type { LayoutProps } from '@/types';
 import Footer from './Footer';
-import { LayoutProps } from '@/types';
+import Header from './Header';
 
 export default function Layout({
   children,
   currentPage = '/',
-  title = 'Darshan - Hydrothérapie - Saint-Gingolph',
-  description = "Hydrothérapeute à Saint-Gingolph (Haute-Savoie). Soins d'hydrothérapie du côlon, massages ayurvédiques. 21 Route de Chez Monnet, 74500.",
+  title = METADATA.defaultTitle,
+  description = METADATA.defaultDescription,
 }: LayoutProps) {
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="robots" content="noindex, nofollow" />
+        {/* SEO robots controlled by netlify.toml X-Robots-Tag headers */}
+        {/* Production (main): indexed | Staging/branches: noindex */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-
-        {/* Font Awesome */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
-
-        {/* Netlify Identity */}
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
       </Head>
+
+      {/* Netlify Identity - loaded after page is interactive */}
+      <Script
+        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+        strategy="afterInteractive"
+      />
 
       <Header currentPage={currentPage} />
 
-      <main>{children}</main>
+      <main className="pt-[70px]">{children}</main>
 
       <Footer />
     </>
