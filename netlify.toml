@@ -1,6 +1,41 @@
 [build]
-publish = "."
+command = "npm run build"
+publish = "out"
 
+# Configuration spécifique à la branche staging
+[context.staging]
+command = "npm run build"
+publish = "out"
+
+# Headers spécifiques à la préproduction (branche staging)
+# Bloque l'indexation SEO sur l'environnement de test
+[context.staging.headers]
+  for = "/*"
+  [context.staging.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Headers pour tous les branch deploys (toutes les branches sauf main)
+# Empêche l'indexation SEO sur tous les environnements de test
+[context.branch-deploy]
+command = "npm run build"
+publish = "out"
+
+[context.branch-deploy.headers]
+  for = "/*"
+  [context.branch-deploy.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Headers pour les deploy previews (Pull Requests)
+[context.deploy-preview]
+command = "npm run build"
+publish = "out"
+
+[context.deploy-preview.headers]
+  for = "/*"
+  [context.deploy-preview.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Headers de sécurité et cache (tous environnements)
 [[headers]]
 for = "/*"
 [headers.values]
@@ -9,11 +44,16 @@ X-Content-Type-Options = "nosniff"
 Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[headers]]
-for = "/css/*"
+for = "/_next/static/*"
 [headers.values]
 Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-for = "/js/*"
+for = "/images/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/videos/*"
 [headers.values]
 Cache-Control = "public, max-age=31536000, immutable"
