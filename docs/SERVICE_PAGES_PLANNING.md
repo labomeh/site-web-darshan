@@ -40,7 +40,7 @@ The previous site (hydrotherapie-colon-savoie.com) mixed **practitioner informat
 
 **All pricing and service details are now fully defined:**
 
-- ✅ **6 Core Services** identified with complete pricing structure
+- ✅ **8 Core Services** identified with complete pricing structure (including 3 massage types)
 - ✅ **Package Pricing** for 3 and 5-session bundles (savings clearly shown)
 - ✅ **Trio de Soins Detox** composition clarified (Bol Kansu + Massage Métamorphique + Hydro = 260€)
 - ✅ **Détox Foie/VB Weekend** structure defined (315€ all-inclusive weekend)
@@ -69,26 +69,28 @@ The previous site (hydrotherapie-colon-savoie.com) mixed **practitioner informat
   - 3 séances: 340€ (économie de 20€)
   - 5 séances: 550€ (économie de 50€)
 
-#### 2. **Massages Ayurvédiques** (Ayurvedic Massages)
-- **Types offered**:
-  - **Abhyanga**: Full body oil massage (60-90 min)
-  - **Shirodhara**: Oil flow on forehead (30-45 min) - stress, sleep
-  - **Shiro Abhyanga**: Head/neck/shoulders massage (45 min)
-  - Each has specific benefits for different doshas
+#### 2. **Massage Ayurvédique** (Ayurvedic Massage)
+- **Single service** (general Ayurvedic massage, type not specified)
 - **Pricing**:
   - 1 séance: 100€
   - 3 séances: 280€ (économie de 20€)
   - 5 séances: 450€ (économie de 50€)
 
-#### 2bis. **Massages Complémentaires** (Complementary Massages)
-- **Massage Métamorphique**: Energy massage based on reflexology principles
-- **Bol Kansu**: Ayurvedic foot massage with brass bowl (balances fire element)
-- **Pricing** (both services):
+#### 3. **Massage Métamorphique** (Metamorphic Massage)
+- **Energy massage** based on reflexology principles
+- **Pricing**:
   - 1 séance: 80€
   - 3 séances: 220€ (économie de 20€)
   - 5 séances: 350€ (économie de 50€)
 
-#### 3. **Méditation Tantra de la Reconnaissance** (Tantric Meditation of Gratitude)
+#### 4. **Bol Kansu** (Kansu Bowl Massage)
+- **Ayurvedic foot massage** with brass bowl (balances fire element)
+- **Pricing**:
+  - 1 séance: 80€
+  - 3 séances: 220€ (économie de 20€)
+  - 5 séances: 350€ (économie de 50€)
+
+#### 5. **Méditation Tantra de la Reconnaissance** (Tantric Meditation of Gratitude)
 - **Format**: Weekly sessions + weekend workshops + multi-day retreats
 - **Key message**: NOT erotic, deeply spiritual practice focused on chakra activation and gratitude
 - **Pricing**:
@@ -99,7 +101,7 @@ The previous site (hydrotherapie-colon-savoie.com) mixed **practitioner informat
   - Séminaire Nouvel An: 605€ total (27/12/25 14h - 01/01/26)
     - Base: 390€ + nuits/repas: 215€
 
-#### 4. **Nettoyage du Foie/Vésicule Biliaire** (Liver/Gallbladder Cleansing) - Andreas Moritz Method
+#### 6. **Nettoyage du Foie/Vésicule Biliaire** (Liver/Gallbladder Cleansing) - Andreas Moritz Method
 - **Format**: Weekend retreat with comprehensive support
 - **Protocol**: 7-day process (5 days prep + 2-day intensive weekend)
 - **Requires**: malic acid, magnesium sulfate, olive oil, grapefruit juice
@@ -108,13 +110,13 @@ The previous site (hydrotherapie-colon-savoie.com) mixed **practitioner informat
 - **Pricing Weekend Retreat**: 315€
   - Inclus: 2 hydrothérapies + 2 nuits + 3 repas + méditations guidées
 
-#### 5. **Trio de Soins Detox** (Detox Care Trio)
+#### 7. **Trio de Soins Detox** (Detox Care Trio)
 - **Composition**: Bol Kansu + Massage Métamorphique + Hydrothérapie Côlon
 - **Duration**: Full treatment (~2.5-3 hours total)
 - **Benefits**: Complete detox experience combining reflexology, energy work, and colon cleansing
 - **Pricing**: 260€ (package price)
 
-#### 6. **Stage de Jeûne** (Fasting Retreat)
+#### 8. **Stage de Jeûne** (Fasting Retreat)
 - **Current info**: Listed in events
 - **Research found**:
   - Typical duration: 6-7 days (extendable to 10-14 days)
@@ -130,7 +132,8 @@ The previous site (hydrotherapie-colon-savoie.com) mixed **practitioner informat
 |---------|---------------|------------|------------|
 | **Hydrothérapie Côlon** | 120€ | 340€ (-20€) | 550€ (-50€) |
 | **Massage Ayurvédique** | 100€ | 280€ (-20€) | 450€ (-50€) |
-| **Massage Métamorphique / Bol Kansu** | 80€ | 220€ (-20€) | 350€ (-50€) |
+| **Massage Métamorphique** | 80€ | 220€ (-20€) | 350€ (-50€) |
+| **Bol Kansu** | 80€ | 220€ (-20€) | 350€ (-50€) |
 | **Méditation hebdomadaire** | 10€ (1h30) | - | - |
 
 #### Package Treatments
@@ -184,13 +187,12 @@ Home
 │   ├── Quick comparison
 │   └── Call-to-action
 │
-├── Services (Individual Pages) - 7-8 PAGES
+├── Services (Individual Pages) - 6 PAGES
 │   ├── /services/hydrotherapie-du-colon
-│   ├── /services/massages-ayurvediques (Abhyanga, Shirodhara, Shiro Abhyanga)
-│   ├── /services/massages-complementaires (Métamorphique, Bol Kansu)
-│   │   OR separate pages for each:
-│   │   ├── /services/massage-metamorphique
-│   │   └── /services/bol-kansu
+│   ├── /services/massages
+│   │   ├── Section: Massage Ayurvédique
+│   │   ├── Section: Massage Métamorphique
+│   │   └── Section: Bol Kansu
 │   ├── /services/meditation-tantrique
 │   ├── /services/nettoyage-du-foie
 │   ├── /services/trio-de-soins-detox
@@ -899,25 +901,30 @@ I propose **3 layout options** for service pages. Please choose one:
    - ✅ Meditation retreats with detailed breakdowns
    - ✅ Special events (Détox Foie/VB weekend) defined
 
+### ✅ RESOLVED QUESTIONS (continued):
+
+6. **Massage Services Structure** ✓
+   - ✅ Single `/services/massages` page with 3 sections:
+     - Massage Ayurvédique (100€/280€/450€)
+     - Massage Métamorphique (80€/220€/350€)
+     - Bol Kansu (80€/220€/350€)
+   - ✅ Single scroll page, clear h2/h3 hierarchy (best for SEO)
+
+7. **Event Landing Pages** ✓
+   - ✅ NO separate event type landing pages
+   - ✅ Service pages show related events dynamically
+   - ✅ Events page is chronological listing only
+
 ### ⚪ OPTIONAL DECISIONS:
-
-6. **Massage Services Structure**:
-   - Option A: Single page for "Massages Complémentaires" (Métamorphique + Bol Kansu together)
-   - Option B: Separate pages for each massage type (2 pages)
-   - *Note: They have the same pricing structure, so grouping makes sense*
-
-7. **Event Types Priority**:
-   - Which events are most frequent?
-   - Should we create landing pages for each event type (in addition to event listing)?
 
 8. **Testimonials Collection**:
    - Do you have existing testimonials to migrate?
    - Will you collect new ones systematically?
    - Public or moderated submission?
 
-9. **Scientific References**:
-   - How prominently should external references be displayed?
-   - Footnote style vs. dedicated "Resources" section?
+9. **Scientific References** ✓
+   - ✅ Resources section (complementary, not primary)
+   - ✅ Main information must be self-contained on the site
 
 ---
 

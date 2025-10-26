@@ -51,6 +51,225 @@ Built with **Next.js 15** (Pages Router), **Tailwind CSS v4** (CSS-first with `@
 - **Export:** Static site generation (`output: 'export'`)
 - **Hosting:** Netlify with automatic deployments
 - **React:** 19 - Functional components only
+- **Testing:** Vitest + Testing Library
+- **Component Development:** Ladle (Vite-based component documentation)
+
+---
+
+## Test-Driven Development (TDD) - MANDATORY
+
+**⚠️ ALL new components MUST be developed using TDD**
+
+### TDD Workflow
+
+1. **Write test first** (Red) - Component doesn't exist yet
+2. **Implement minimum code** (Green) - Make test pass
+3. **Create Ladle story** - Visual validation
+4. **Refactor** - Improve code quality
+5. **Repeat** - Add more tests for edge cases
+
+### Testing Stack
+
+- **Vitest** - Fast test runner (Vite-based, 10-100x faster than Jest)
+- **Testing Library** - Component testing utilities
+- **Ladle** - Component documentation & visual testing
+
+### Commands
+
+```bash
+# Run tests once
+npm run test
+
+# Watch mode (auto-run on file changes)
+npm run test:watch
+
+# Coverage report
+npm run test:coverage
+
+# Component documentation
+npm run ladle
+```
+
+### TDD Example
+
+```tsx
+// 1. WRITE TEST FIRST (Red)
+// components/services/PricingCard.test.tsx
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import PricingCard from './PricingCard';
+
+describe('PricingCard', () => {
+  it('renders price and name', () => {
+    render(<PricingCard name="Séance individuelle" price="120€" />);
+
+    expect(screen.getByText('Séance individuelle')).toBeInTheDocument();
+    expect(screen.getByText('120€')).toBeInTheDocument();
+  });
+
+  it('shows savings badge when provided', () => {
+    render(
+      <PricingCard
+        name="3 séances"
+        price="340€"
+        savings="Économie de 20€"
+      />
+    );
+
+    expect(screen.getByText('Économie de 20€')).toBeInTheDocument();
+  });
+
+  it('applies gold color to price', () => {
+    render(<PricingCard name="Test" price="100€" />);
+
+    const priceElement = screen.getByText('100€');
+    expect(priceElement).toHaveClass('text-primary');
+  });
+});
+
+// 2. IMPLEMENT COMPONENT (Green)
+// components/services/PricingCard.tsx
+interface PricingCardProps {
+  name: string;
+  price: string;
+  savings?: string;
+  duration?: string;
+  className?: string;
+}
+
+export default function PricingCard({
+  name,
+  price,
+  savings,
+  duration,
+  className
+}: PricingCardProps) {
+  return (
+    <div className={cn(
+      'rounded-lg border border-light-gray bg-white p-6 shadow-sm',
+      'transition-shadow duration-300 hover:shadow-md',
+      className
+    )}>
+      <h3 className="font-headings text-lg text-black">{name}</h3>
+      {duration && (
+        <p className="mt-1 text-sm text-dark-gray">{duration}</p>
+      )}
+      <p className="mt-4 text-3xl font-bold text-primary">{price}</p>
+      {savings && (
+        <span className="mt-2 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+          {savings}
+        </span>
+      )}
+    </div>
+  );
+}
+
+// 3. CREATE LADLE STORY (Visual validation)
+// components/services/PricingCard.stories.tsx
+import type { Story } from '@ladle/react';
+import PricingCard from './PricingCard';
+
+export const SingleSession: Story = () => (
+  <PricingCard
+    name="Séance individuelle"
+    price="120€"
+    duration="45-60 min"
+  />
+);
+
+export const PackageWithSavings: Story = () => (
+  <PricingCard
+    name="3 séances"
+    price="340€"
+    savings="Économie de 20€"
+  />
+);
+
+export const MobileView: Story = () => (
+  <PricingCard
+    name="5 séances"
+    price="550€"
+    savings="Économie de 50€"
+  />
+);
+MobileView.meta = {
+  width: 'xsmall', // Test mobile layout
+};
+```
+
+### Component Development Workflow
+
+**Terminal setup:**
+```bash
+# Terminal 1: Next.js dev server (Turbopack)
+npm run dev
+
+# Terminal 2: Ladle component documentation
+npm run ladle
+
+# Terminal 3: Tests in watch mode
+npm run test:watch
+```
+
+**Access:**
+- **Next.js app**: http://localhost:3000
+- **Ladle docs**: http://localhost:61000
+- **Tests**: Auto-run in terminal
+
+### Ladle Configuration
+
+Ladle is configured in `.ladle/` directory:
+
+- **`.ladle/config.mjs`** - Viewport presets, stories location
+- **`.ladle/components.tsx`** - Global provider (Tailwind styles)
+- **`.ladle/NextImage.tsx`** - Mock for `next/image`
+- **`.ladle/NextLink.tsx`** - Mock for `next/link`
+
+**Viewport presets for responsive testing:**
+- `xsmall`: 414px (Mobile)
+- `small`: 640px (sm:)
+- `medium`: 768px (md:) - Default
+- `large`: 1024px (lg:)
+- `xlarge`: 1280px (xl:)
+
+### Test Coverage Requirements
+
+- **Components**: 80%+ coverage
+- **Utilities**: 90%+ coverage
+- **Pages**: Integration tests for critical paths
+
+### What to Test
+
+**✅ DO test:**
+- Component rendering with different props
+- Conditional rendering (with/without optional props)
+- User interactions (clicks, form submissions)
+- Accessibility (ARIA attributes, keyboard navigation)
+- Responsive behavior (different breakpoints)
+- Design system compliance (colors, spacing, typography)
+
+**❌ DON'T test:**
+- Next.js internals
+- Tailwind class application details
+- Third-party library internals
+- Implementation details (internal state structure)
+
+### TDD Best Practices
+
+1. **Write failing test first** - Verify it actually fails
+2. **Minimum code to pass** - Don't over-engineer
+3. **Refactor with confidence** - Tests catch regressions
+4. **One test = one assertion** - Keep tests focused
+5. **Descriptive test names** - "it('shows savings badge when provided')"
+6. **Test behavior, not implementation** - Focus on user perspective
+
+### Before Committing
+
+```bash
+npm run validate  # Runs: type-check + lint + format + tests
+```
+
+**All tests must pass before commit.**
 
 ---
 
@@ -624,6 +843,7 @@ npm run validate  # Type-check + ESLint + Prettier
 
 Before writing code, verify:
 
+- [ ] **TDD**: Write test first, then implement?
 - [ ] **Design System**: Compliant with `/docs/DESIGN_SYSTEM.md`?
 - [ ] **TypeScript**: Explicit types, no `any`?
 - [ ] **Imports**: Use `import type` for types?
@@ -637,6 +857,8 @@ Before writing code, verify:
 - [ ] **Mobile-First**: Tailwind classes mobile first, then md:?
 - [ ] **Headings**: Use `<Heading>` component, not raw h1-h6?
 - [ ] **Color Strategy**: Gold for icons/CTAs/underlines, blue for structure only?
+- [ ] **Ladle Story**: Created story for visual validation?
+- [ ] **Tests Pass**: `npm run validate` passes before commit?
 
 ---
 
