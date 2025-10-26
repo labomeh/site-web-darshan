@@ -30,6 +30,4 @@ export default {
     },
   },
 
-  // Ladle UI customization
-  viteConfig: './.ladle/vite.config.ts',
 };
