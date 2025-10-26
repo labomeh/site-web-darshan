@@ -32,7 +32,7 @@ logo_url: /images/logo.svg
 
 # Collections - Content Types
 collections:
-  # Events Collection
+  # Events Collection (Enhanced)
   - name: events
     label: Événements
     label_singular: Événement
@@ -40,19 +40,64 @@ collections:
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
+      # Basic Info
       - { label: Titre, name: title, widget: string }
-      - { label: Date de début, name: date, widget: datetime }
-      - { label: Date de fin, name: endDate, widget: datetime, required: false }
-      - { label: Description courte, name: excerpt, widget: text, required: false }
-      - { label: Contenu, name: body, widget: markdown }
-      - { label: Image, name: image, widget: image, required: false }
-      - { label: Lieu, name: location, widget: string, required: false }
-      - { label: Prix, name: price, widget: string, required: false }
-      - { label: Places disponibles, name: available_spots, widget: number, required: false }
-      - { label: Lien d'inscription, name: registrationUrl, widget: string, required: false }
-      - { label: Publié, name: published, widget: boolean, default: true }
+      - label: Type d'événement
+        name: eventType
+        widget: select
+        options:
+          - { label: Nettoyage du foie, value: liver-cleanse }
+          - { label: Trio de soins detox, value: detox-trio }
+          - { label: Stage de jeûne, value: fasting-retreat }
+          - { label: Méditation Tantra, value: meditation }
+          - { label: Atelier, value: workshop }
+          - { label: Autre, value: other }
+        default: other
+      - label: Service associé
+        name: relatedService
+        widget: relation
+        collection: services
+        search_fields: [title]
+        value_field: slug
+        display_fields: [title]
+        required: false
+        hint: Lier cet événement à un service spécifique
 
-  # Services Collection (for future use)
+      # Dates
+      - { label: Date de début, name: startDate, widget: datetime }
+      - { label: Date de fin, name: endDate, widget: datetime, required: false }
+
+      # Content
+      - { label: Description courte, name: excerpt, widget: text, hint: "160 caractères max pour SEO" }
+      - { label: Programme détaillé, name: body, widget: markdown }
+      - { label: Image, name: image, widget: image, required: false }
+
+      # Logistics
+      - { label: Lieu, name: location, widget: string, required: false, default: "Centre Darshan, Saint-Gingolph" }
+      - { label: Prix, name: price, widget: string, required: false }
+      - { label: Places disponibles, name: availableSpots, widget: number, required: false }
+      - { label: Places totales, name: totalSpots, widget: number, required: false }
+
+      # Registration
+      - { label: Lien d'inscription, name: registrationUrl, widget: string, required: false }
+      - { label: Date limite d'inscription, name: registrationDeadline, widget: datetime, required: false }
+
+      # Includes
+      - label: Inclus dans le programme
+        name: includes
+        widget: list
+        required: false
+        hint: "Liste des éléments inclus (hébergement, repas, etc.)"
+        field: { label: Item, name: item, widget: string }
+
+      # Prerequisites
+      - { label: Prérequis, name: prerequisites, widget: text, required: false }
+
+      # Publishing
+      - { label: Publié, name: published, widget: boolean, default: true }
+      - { label: Mise en avant, name: featured, widget: boolean, default: false, hint: "Afficher sur la homepage" }
+
+  # Services Collection (Enhanced)
   - name: services
     label: Services
     label_singular: Service
@@ -60,11 +105,132 @@ collections:
     create: true
     slug: '{{slug}}'
     fields:
+      # Basic Info
       - { label: Titre, name: title, widget: string }
-      - { label: Description courte, name: excerpt, widget: text }
-      - { label: Contenu, name: body, widget: markdown }
-      - { label: Image, name: image, widget: image, required: false }
-      - { label: Durée, name: duration, widget: string, required: false }
-      - { label: Prix, name: price, widget: string, required: false }
+      - { label: Slug, name: slug, widget: string, hint: "URL-friendly name (ex: hydrotherapie-du-colon)" }
+      - { label: Description courte, name: excerpt, widget: text, hint: "160 caractères max pour SEO et cartes" }
+      - { label: Image principale, name: image, widget: image, required: false }
+
+      # Service Details
+      - { label: Durée, name: duration, widget: string, required: false, hint: "Ex: 45-60 minutes" }
+      - { label: Icône FontAwesome, name: icon, widget: string, default: "fas fa-spa", hint: "Ex: fas fa-water, fas fa-hands, fas fa-om" }
       - { label: Ordre d'affichage, name: order, widget: number, default: 0 }
+      - label: Niveau
+        name: level
+        widget: select
+        options:
+          - { label: Tous niveaux, value: all }
+          - { label: Débutant, value: beginner }
+          - { label: Intermédiaire, value: intermediate }
+          - { label: Avancé, value: advanced }
+        default: all
+        required: false
+
+      # Main Content
+      - { label: Contenu principal, name: body, widget: markdown, hint: "Description détaillée, bénéfices, processus" }
+
+      # Contraindications (optional)
+      - { label: Contre-indications, name: contraindications, widget: markdown, required: false, hint: "Liste des contre-indications et précautions" }
+
+      # Pricing Section
+      - label: Tarifs
+        name: pricing
+        widget: list
+        required: false
+        hint: "Définir les différents tarifs pour ce service"
+        fields:
+          - { label: Nom, name: name, widget: string, hint: "Ex: Séance individuelle, 3 séances, 5 séances" }
+          - { label: Prix, name: price, widget: string, hint: "Ex: 120€" }
+          - { label: Économie, name: savings, widget: string, required: false, hint: "Ex: Économie de 20€" }
+          - { label: Durée, name: duration, widget: string, required: false, hint: "Ex: 45-60 min" }
+          - { label: Description, name: description, widget: text, required: false }
+
+      # FAQ Section
+      - label: FAQ
+        name: faq
+        widget: list
+        required: false
+        hint: "Questions fréquentes spécifiques à ce service"
+        fields:
+          - { label: Question, name: question, widget: string }
+          - { label: Réponse, name: answer, widget: markdown }
+
+      # External Resources
+      - label: Ressources externes
+        name: externalResources
+        widget: list
+        required: false
+        hint: "Liens vers articles, études, livres, vidéos"
+        fields:
+          - { label: Titre, name: title, widget: string }
+          - { label: URL, name: url, widget: string }
+          - label: Type
+            name: type
+            widget: select
+            options:
+              - Article
+              - Étude scientifique
+              - Livre
+              - Vidéo
+              - Site web
+          - { label: Description, name: description, widget: text, required: false }
+
+      # SEO
+      - { label: Meta Title (SEO), name: metaTitle, widget: string, required: false, hint: "Si vide, utilise le titre" }
+      - { label: Meta Description (SEO), name: metaDescription, widget: text, required: false, hint: "Si vide, utilise la description courte" }
+
+      # Publishing
       - { label: Publié, name: published, widget: boolean, default: true }
+
+  # Testimonials Collection (NEW)
+  - name: testimonials
+    label: Témoignages
+    label_singular: Témoignage
+    folder: content/testimonials
+    create: true
+    slug: '{{year}}-{{month}}-{{slug}}'
+    fields:
+      # Author Info
+      - { label: Nom (initiales), name: authorName, widget: string, hint: "Ex: M.P., J.D." }
+      - { label: Localisation (optionnel), name: location, widget: string, required: false, hint: "Ex: Evian, Thonon" }
+
+      # Testimonial Content
+      - { label: Témoignage, name: content, widget: text, hint: "Le témoignage complet" }
+      - label: Note
+        name: rating
+        widget: number
+        min: 1
+        max: 5
+        value_type: int
+        default: 5
+
+      # Service Related
+      - label: Services concernés
+        name: relatedServices
+        widget: relation
+        collection: services
+        search_fields: [title]
+        value_field: slug
+        display_fields: [title]
+        multiple: true
+        required: false
+        hint: "Sélectionner un ou plusieurs services"
+
+      # Meta
+      - { label: Date, name: date, widget: datetime }
+      - { label: Vérifié, name: verified, widget: boolean, default: false, hint: "Témoignage vérifié" }
+      - { label: Publié, name: published, widget: boolean, default: true }
+
+  # Settings - Contact Information & Global Configuration
+  - name: settings
+    label: Paramètres
+    files:
+      # Contact Information
+      - label: Informations de contact
+        name: contact
+        file: content/settings/contact.json
+        fields:
+          - { label: Email, name: email, widget: string, hint: "Email principal du centre" }
+          - { label: Téléphone, name: phone, widget: string, hint: "Format: +33 X XX XX XX XX" }
+          - { label: Adresse, name: address, widget: text, hint: "Adresse complète" }
+          - { label: Horaires, name: hours, widget: text, required: false }
