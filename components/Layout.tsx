@@ -31,7 +31,7 @@ export default function Layout({
 
       <Header currentPage={currentPage} />
 
-      <main className="pt-[70px]">{children}</main>
+      <main>{children}</main>
 
       <Footer />
     </>

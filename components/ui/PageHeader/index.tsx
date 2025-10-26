@@ -11,7 +11,7 @@ interface PageHeaderProps {
 export default function PageHeader({ title, subtitle, compact = false }: PageHeaderProps) {
   if (compact) {
     return (
-      <section className="border-b border-light-gray bg-white px-6 py-8 text-center">
+      <section className="border-b border-light-gray bg-white px-6 pb-8 pt-[86px] text-center md:pt-[94px]">
         <Container>
           <Heading level={1} className="!mb-0">
             {title}
@@ -22,7 +22,7 @@ export default function PageHeader({ title, subtitle, compact = false }: PageHea
   }
 
   return (
-    <section className="border-b border-light-gray bg-white px-12 py-24 text-center max-md:px-6 max-md:py-16">
+    <section className="border-b border-light-gray bg-white px-12 pb-24 pt-[110px] text-center max-md:px-6 max-md:pb-16 max-md:pt-[102px]">
       <Container>
         <Heading level={1} className="mb-4">
           {title}

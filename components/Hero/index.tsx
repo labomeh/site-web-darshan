@@ -99,7 +99,7 @@ export default function Hero({
   }, [activeVideo]);
 
   return (
-    <section className="relative flex min-h-[100dvh] w-full max-w-full items-center justify-center overflow-hidden bg-secondary pb-16 pt-[70px] text-center md:pb-20">
+    <section className="relative flex min-h-dvh w-full max-w-full items-center justify-center overflow-hidden bg-secondary pb-16 pt-[86px] text-center md:pb-20 md:pt-[94px]">
       <video
         ref={video1Ref}
         className={`absolute top-0 left-0 h-full w-full object-cover ${
