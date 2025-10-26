@@ -16,6 +16,7 @@ export default function Hero({
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
   const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
   useEffect(() => {
     const video1 = video1Ref.current;
@@ -98,6 +99,25 @@ export default function Hero({
     };
   }, [activeVideo]);
 
+  useEffect(() => {
+    const showIndicatorTimer = setTimeout(() => {
+      setShowScrollIndicator(true);
+    }, 2500);
+
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowScrollIndicator(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(showIndicatorTimer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <section className="relative flex min-h-dvh w-full max-w-full items-center justify-center overflow-hidden bg-secondary pb-16 pt-[86px] text-center md:pb-20 md:pt-[94px]">
       <video
@@ -165,8 +185,11 @@ export default function Hero({
 
       <a
         href="#content"
-        className="animate-bounce absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 cursor-pointer transition-opacity hover:opacity-80 md:bottom-8"
+        className={`animate-bounce absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 cursor-pointer transition-opacity duration-500 hover:opacity-80 md:bottom-8 ${
+          showScrollIndicator ? 'opacity-100' : 'opacity-0'
+        }`}
         aria-label="Défiler vers le bas"
+        aria-hidden={!showScrollIndicator}
       >
         <i className="fas fa-chevron-down text-3xl text-primary [filter:drop-shadow(0_2px_4px_rgba(0,0,0,0.3))] md:text-4xl" />
       </a>
