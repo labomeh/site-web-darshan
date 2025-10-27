@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
 import EventCard from './EventCard';
 
 describe('EventCard', () => {
@@ -89,7 +89,7 @@ describe('EventCard', () => {
         title="Weekend spécial"
         startDate="2025-09-01T10:00:00"
         excerpt="Événement exceptionnel"
-        featured={true}
+        featured
       />
     );
 
@@ -111,11 +111,7 @@ describe('EventCard', () => {
 
   it('renders with minimum required props', () => {
     render(
-      <EventCard
-        title="Simple Event"
-        startDate="2025-11-01T10:00:00"
-        excerpt="Basic event"
-      />
+      <EventCard title="Simple Event" startDate="2025-11-01T10:00:00" excerpt="Basic event" />
     );
 
     expect(screen.getByText('Simple Event')).toBeInTheDocument();

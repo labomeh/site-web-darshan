@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { HeroProps } from '@/types';
-import { SERVICES } from '@/config/site';
 import Logo from '@/components/ui/Logo';
+import { SERVICES } from '@/config/site';
+import type { HeroProps } from '@/types';
 import ServiceItem from './ServiceItem';
 
 export default function Hero({
@@ -28,8 +28,10 @@ export default function Hero({
 
     const loadVideo = (videoElement: HTMLVideoElement) => {
       const source = videoElement.querySelector('source');
+
       if (source && !source.getAttribute('src')) {
         const src = source.getAttribute('data-src');
+
         if (src) {
           source.setAttribute('src', src);
           videoElement.load();
@@ -39,20 +41,22 @@ export default function Hero({
 
     const handleVideo1TimeUpdate = () => {
       const timeRemaining = video1.duration - video1.currentTime;
+
       if (timeRemaining <= fadeStartTime && timeRemaining > 0 && activeVideo === 1) {
         // Start video2 and begin fade transition
         video2.currentTime = 0;
-        video2.play().catch((err) => console.log('Video 2 play prevented:', err));
+        video2.play().catch(() => {});
         setActiveVideo(2);
       }
     };
 
     const handleVideo2TimeUpdate = () => {
       const timeRemaining = video2.duration - video2.currentTime;
+
       if (timeRemaining <= fadeStartTime && timeRemaining > 0 && activeVideo === 2) {
         // Start video1 and begin fade transition
         video1.currentTime = 0;
-        video1.play().catch((err) => console.log('Video 1 play prevented:', err));
+        video1.play().catch(() => {});
         setActiveVideo(1);
       }
     };
@@ -67,9 +71,7 @@ export default function Hero({
             video1.addEventListener(
               'canplay',
               () => {
-                video1.play().catch((err) => {
-                  console.log('Autoplay prevented:', err);
-                });
+                video1.play().catch(() => {});
               },
               { once: true }
             );
@@ -104,9 +106,42 @@ export default function Hero({
       setShowScrollIndicator(true);
     }, 2500);
 
+    // Only enable snap behavior if page was loaded at the top
+    const wasAtTop = window.scrollY === 0;
+    let hasSnapped = false;
+    let scrollTimeout: NodeJS.Timeout;
+
     const handleScroll = () => {
       if (window.scrollY > 100) {
         setShowScrollIndicator(false);
+      }
+
+      // Only execute snap logic if:
+      // 1. Page was initially at top (wasAtTop)
+      // 2. We haven't snapped yet
+      if (!wasAtTop || hasSnapped) return;
+
+      const heroHeight = window.innerHeight;
+      const scrollPos = window.scrollY;
+
+      // Trigger snap immediately on any scroll down within the hero section
+      if (scrollPos > 0 && scrollPos < heroHeight * 0.8) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          const contentElement = document.getElementById('content');
+
+          if (contentElement && !hasSnapped) {
+            hasSnapped = true;
+            // Get header height and account for it
+            const headerHeight = 86; // Desktop header height from Hero pt-[86px]
+            const targetPos = contentElement.offsetTop + contentElement.offsetHeight - headerHeight;
+
+            window.scrollTo({
+              top: targetPos,
+              behavior: 'smooth',
+            });
+          }
+        }, 50);
       }
     };
 
@@ -114,16 +149,19 @@ export default function Hero({
 
     return () => {
       clearTimeout(showIndicatorTimer);
+      clearTimeout(scrollTimeout);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <section className="relative flex min-h-dvh w-full max-w-full items-center justify-center overflow-hidden bg-secondary pb-16 pt-[86px] text-center md:pb-20 md:pt-[94px]">
+    <section className="relative flex min-h-dvh w-full max-w-full items-center justify-center overflow-hidden bg-secondary pt-[86px] pb-16 text-center md:pt-[94px] md:pb-20">
       <video
         ref={video1Ref}
         className={`absolute top-0 left-0 h-full w-full object-cover ${
-          activeVideo === 1 ? 'z-0 opacity-85 transition-none' : 'z-[1] opacity-0 transition-opacity duration-[1500ms]'
+          activeVideo === 1
+            ? 'z-0 opacity-85 transition-none'
+            : 'z-[1] opacity-0 transition-opacity duration-[1500ms]'
         }`}
         muted
         playsInline
@@ -135,7 +173,9 @@ export default function Hero({
       <video
         ref={video2Ref}
         className={`absolute top-0 left-0 h-full w-full object-cover ${
-          activeVideo === 2 ? 'z-0 opacity-85 transition-none' : 'z-[1] opacity-0 transition-opacity duration-[1500ms]'
+          activeVideo === 2
+            ? 'z-0 opacity-85 transition-none'
+            : 'z-[1] opacity-0 transition-opacity duration-[1500ms]'
         }`}
         muted
         playsInline
@@ -156,7 +196,7 @@ export default function Hero({
             alt="Darshan"
             className="animate-fade-in-down mb-2 h-auto w-auto md:mb-4 md:h-[200px]"
           />
-          <h1 className="animate-fade-in-down-delay whitespace-nowrap font-logo text-4xl font-normal leading-none tracking-[2px] text-primary md:text-[64px] md:tracking-[8px]">
+          <h1 className="animate-fade-in-down-delay font-logo text-4xl leading-none font-normal tracking-[2px] whitespace-nowrap text-primary md:text-[64px] md:tracking-[8px]">
             {title}
           </h1>
         </div>
@@ -167,7 +207,12 @@ export default function Hero({
         {showServices && (
           <div className="animate-fade-in-up-delay-2 mb-3 grid grid-cols-2 place-items-center gap-x-4 gap-y-2 md:mb-6 md:gap-x-8 md:gap-y-4 lg:grid-cols-3">
             {SERVICES.map((service) => (
-              <ServiceItem key={service.id} icon={service.icon} label={service.name} />
+              <ServiceItem
+                key={service.id}
+                icon={service.icon}
+                label={service.name}
+                slug={service.slug}
+              />
             ))}
           </div>
         )}
@@ -185,7 +230,7 @@ export default function Hero({
 
       <a
         href="#content"
-        className={`animate-bounce absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 cursor-pointer transition-opacity duration-500 hover:opacity-80 md:bottom-8 ${
+        className={`absolute bottom-6 left-1/2 z-[2] -translate-x-1/2 animate-bounce cursor-pointer transition-opacity duration-500 hover:opacity-80 md:bottom-8 ${
           showScrollIndicator ? 'opacity-100' : 'opacity-0'
         }`}
         aria-label="Défiler vers le bas"

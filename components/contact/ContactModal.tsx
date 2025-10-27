@@ -40,6 +40,7 @@ export default function ContactModal({
     };
 
     document.addEventListener('keydown', handleEscape);
+
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
 
@@ -64,16 +65,16 @@ export default function ContactModal({
       ? `Demande de réservation - ${serviceName}`
       : 'Demande de réservation'
     : serviceName
-    ? `Question - ${serviceName}`
-    : 'Question';
+      ? `Question - ${serviceName}`
+      : 'Question';
 
   const contextMessage = isBooking
     ? serviceName
       ? `Demande de réservation - ${serviceName}`
       : 'Demande de réservation'
     : serviceName
-    ? `Question - ${serviceName}`
-    : 'Question générale';
+      ? `Question - ${serviceName}`
+      : 'Question générale';
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -93,6 +94,7 @@ export default function ContactModal({
       console.error('Web3Forms access key is not configured');
       setSubmitStatus('error');
       setIsSubmitting(false);
+
       return;
     }
 
@@ -134,7 +136,7 @@ export default function ContactModal({
         aria-modal="true"
         aria-labelledby="modal-title"
         className={cn(
-          'relative w-full max-w-2xl max-h-full rounded-lg bg-white p-6 shadow-2xl',
+          'relative max-h-full w-full max-w-2xl rounded-lg bg-white p-6 shadow-2xl',
           'overflow-y-auto',
           'animate-fadeIn',
           className
@@ -144,16 +146,13 @@ export default function ContactModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-dark-gray transition-colors hover:bg-gray-100 hover:text-black"
+          className="absolute top-4 right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-dark-gray transition-colors hover:bg-gray-100 hover:text-black"
           aria-label="Fermer"
         >
           <i className="fa-solid fa-xmark text-xl" aria-hidden="true" />
         </button>
 
-        <h2
-          id="modal-title"
-          className="mb-4 pr-8 font-headings text-2xl font-semibold text-black"
-        >
+        <h2 id="modal-title" className="mb-4 pr-8 font-headings text-2xl font-semibold text-black">
           {title}
         </h2>
 
@@ -188,7 +187,7 @@ export default function ContactModal({
                 name="name"
                 autoComplete="name"
                 required
-                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 placeholder="Votre nom complet"
               />
             </div>
@@ -202,7 +201,7 @@ export default function ContactModal({
                 id="email"
                 name="email"
                 required
-                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 placeholder="votre@email.com"
               />
             </div>
@@ -216,7 +215,7 @@ export default function ContactModal({
                 id="phone"
                 name="phone"
                 required
-                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 placeholder="06 12 34 56 78"
               />
             </div>
@@ -226,7 +225,10 @@ export default function ContactModal({
                 Message <span className="text-primary">*</span>
               </label>
               <div className="mb-2 flex items-start gap-2 rounded-lg bg-primary/10 p-3">
-                <i className="fa-solid fa-info-circle mt-0.5 text-sm text-primary" aria-hidden="true" />
+                <i
+                  className="fa-solid fa-info-circle mt-0.5 text-sm text-primary"
+                  aria-hidden="true"
+                />
                 <p className="text-sm text-dark-gray">
                   <span className="font-medium text-black">Contexte : </span>
                   {contextMessage}
@@ -238,7 +240,7 @@ export default function ContactModal({
                 required
                 rows={6}
                 placeholder="Écrivez votre message..."
-                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full rounded-lg border border-light-gray bg-white px-4 py-3 text-black transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none"
               />
             </div>
 
@@ -259,8 +261,8 @@ export default function ContactModal({
               className={cn(
                 'w-full rounded-lg px-6 py-3 font-semibold text-white transition-all',
                 'bg-primary hover:bg-primary-dark',
-                'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-                isSubmitting && 'cursor-not-allowed opacity-50'
+                'focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none',
+                isSubmitting ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
               )}
             >
               {isSubmitting ? (

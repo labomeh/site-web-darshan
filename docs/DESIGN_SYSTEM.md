@@ -7,6 +7,83 @@ Site vitrine pour Darshan, centre de bien-être et d'hydrothérapie. Le design r
 
 ---
 
+## 0. RÈGLES STRICTES - Composants Obligatoires
+
+### ⚠️ COMPOSANTS À TOUJOURS UTILISER
+
+**INTERDICTION ABSOLUE** d'utiliser des balises HTML natives pour ces éléments. **TOUJOURS** utiliser les composants React correspondants :
+
+| Élément | ❌ NE JAMAIS UTILISER | ✅ TOUJOURS UTILISER | Raison |
+|---------|---------------------|-------------------|--------|
+| **Boutons** | `<button>` | `<Button variant="primary\|secondary\|outline">` | Styles cohérents, accessibilité, cursor-pointer |
+| **Titres** | `<h1>`, `<h2>`, `<h3>` | `<Heading level={1\|2\|3}>` | Underline dorée automatique, styles cohérents |
+| **Conteneur** | `<div className="max-w-[1200px] mx-auto px-6">` | `<Container>` | Largeur fixe, padding responsive |
+| **Section** | `<section className="py-16">` | `<Section>` | Padding vertical cohérent |
+| **Carte** | `<div className="bg-white rounded-xl...">` | `<Card>` | Effets hover, ombres, styles uniformes |
+
+### Exemples d'utilisation OBLIGATOIRE
+
+```tsx
+// ❌ INTERDIT
+<button className="bg-primary px-6 py-4 rounded-lg...">
+  Réserver
+</button>
+
+// ✅ OBLIGATOIRE
+<Button variant="primary" size="lg">
+  Réserver
+</Button>
+
+// ❌ INTERDIT
+<h2 className="text-3xl font-headings text-black">
+  Mon Titre
+</h2>
+<div className="h-[3px] w-[60px] bg-primary mt-4" />
+
+// ✅ OBLIGATOIRE
+<Heading level={2}>Mon Titre</Heading>
+
+// ❌ INTERDIT
+<section className="py-16 bg-off-white">
+  <div className="max-w-[1200px] mx-auto px-6">
+    ...
+  </div>
+</section>
+
+// ✅ OBLIGATOIRE
+<Section>
+  <Container>
+    ...
+  </Container>
+</Section>
+```
+
+### Composants disponibles dans `components/ui/`
+
+- `<Button>` - Tous les boutons
+- `<Heading>` - Tous les titres (h1-h6)
+- `<Container>` - Wrapper de contenu
+- `<Section>` - Sections de page
+- `<Card>` - Cartes de contenu
+- `<PageHeader>` - En-têtes de page
+- `<Logo>` - Logo du site
+
+### Tests obligatoires
+
+**TOUT nouveau composant UI DOIT avoir :**
+1. ✅ Fichier de test (`*.test.tsx`)
+2. ✅ Fichier Ladle (`*.stories.tsx`) pour documentation visuelle
+3. ✅ Couverture de test minimum 80%
+
+### Refactoring obligatoire
+
+**Si vous voyez :**
+- Un `<button>` → Remplacer par `<Button>`
+- Un `<h1>`, `<h2>`, `<h3>` → Remplacer par `<Heading>`
+- Des classes répétées 2+ fois → Créer un composant réutilisable
+
+---
+
 ## 1. Palette de couleurs
 
 ### Configuration Tailwind CSS v4

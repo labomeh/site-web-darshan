@@ -14,14 +14,7 @@ interface LinkProps {
   [key: string]: unknown;
 }
 
-export default function Link({
-  href,
-  children,
-  className,
-  target,
-  rel,
-  ...props
-}: LinkProps) {
+export default function Link({ href, children, className, target, rel, ...props }: LinkProps) {
   return (
     <a href={href} className={className} target={target} rel={rel} {...props}>
       {children}

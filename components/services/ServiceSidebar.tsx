@@ -1,3 +1,4 @@
+import Button from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
 export interface PricingItem {
@@ -30,13 +31,7 @@ export default function ServiceSidebar({
   className,
 }: ServiceSidebarProps) {
   return (
-    <aside
-      className={cn(
-        'sticky top-[94px] space-y-6',
-        'hidden lg:block',
-        className
-      )}
-    >
+    <aside className={cn('sticky top-[94px] space-y-6', 'hidden lg:block', className)}>
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
         <div className="mb-6 flex items-center gap-3">
           <i className="fa-solid fa-clock text-primary" aria-hidden="true" />
@@ -47,22 +42,15 @@ export default function ServiceSidebar({
         </div>
 
         <div className="mb-6">
-          <h3 className="mb-4 font-headings text-lg font-semibold text-black">
-            Tarifs
-          </h3>
+          <h3 className="mb-4 font-headings text-lg font-semibold text-black">Tarifs</h3>
           <div className="space-y-3">
             {pricing.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-lg border border-light-gray bg-off-white p-4"
-              >
+              <div key={index} className="rounded-lg border border-light-gray bg-off-white p-4">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1">
                     <p className="font-medium text-black">{item.name}</p>
                     {item.duration && (
-                      <p className="mt-1 text-sm text-dark-gray">
-                        {item.duration}
-                      </p>
+                      <p className="mt-1 text-sm text-dark-gray">{item.duration}</p>
                     )}
                   </div>
                   <p className="text-xl font-bold text-primary">{item.price}</p>
@@ -78,22 +66,14 @@ export default function ServiceSidebar({
         </div>
 
         <div className="space-y-3">
-          <button
-            type="button"
-            onClick={onBookingClick}
-            className="w-full rounded-lg bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary-dark"
-          >
+          <Button onClick={onBookingClick} variant="primary" size="md" className="w-full">
             <i className="fa-solid fa-calendar-check mr-2" aria-hidden="true" />
             Réserver
-          </button>
-          <button
-            type="button"
-            onClick={onQuestionClick}
-            className="w-full rounded-lg border-2 border-primary bg-white px-6 py-3 font-medium text-primary transition-colors hover:bg-primary/5"
-          >
+          </Button>
+          <Button onClick={onQuestionClick} variant="outline" size="md" className="w-full">
             <i className="fa-solid fa-message mr-2" aria-hidden="true" />
             Une question ?
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -104,16 +84,10 @@ export default function ServiceSidebar({
           </h3>
           <div className="space-y-3">
             {relatedEvents.map((event, index) => (
-              <div
-                key={index}
-                className="rounded-lg border border-light-gray bg-off-white p-3"
-              >
+              <div key={index} className="rounded-lg border border-light-gray bg-off-white p-3">
                 <p className="font-medium text-black">{event.title}</p>
                 <p className="mt-1 text-sm text-dark-gray">
-                  <i
-                    className="fa-solid fa-calendar mr-1 text-primary"
-                    aria-hidden="true"
-                  />
+                  <i className="fa-solid fa-calendar mr-1 text-primary" aria-hidden="true" />
                   {event.date}
                 </p>
               </div>

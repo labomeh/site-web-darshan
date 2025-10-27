@@ -29,6 +29,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - If Tailwind classes repeat 3+ times → Extract into a component
    - Always look to reuse existing components in `components/ui/`
 
+4. **MANDATORY COMPONENTS - NEVER USE RAW HTML**:
+   - ❌ **NEVER** use `<button>` → ✅ **ALWAYS** use `<Button>`
+   - ❌ **NEVER** use `<h1>`-`<h6>` → ✅ **ALWAYS** use `<Heading>`
+   - ❌ **NEVER** manually create containers → ✅ **ALWAYS** use `<Container>` and `<Section>`
+   - **See `/docs/DESIGN_SYSTEM.md` Section 0 for full enforcement rules**
+
 ---
 
 ## Project Overview

@@ -15,6 +15,7 @@ export interface EventCardProps {
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
+
   return date.toLocaleDateString('fr-FR', {
     day: 'numeric',
     month: 'long',
@@ -43,14 +44,13 @@ export default function EventCard({
         'rounded-lg bg-white p-6 shadow-md',
         'border border-gray-200',
         'transition-all duration-300',
-        'hover:shadow-lg hover:border-primary/30',
+        'hover:border-primary/30 hover:shadow-lg',
         className
       )}
     >
       {featured && (
         <div className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-          <i className="fa-solid fa-star mr-1" aria-hidden="true" />
-          À la une
+          <i className="fa-solid fa-star mr-1" aria-hidden="true" />À la une
         </div>
       )}
 
@@ -75,14 +75,11 @@ export default function EventCard({
 
       <div className="flex items-center justify-between border-t border-gray-200 pt-4">
         <div className="flex flex-col gap-2">
-          {price && (
-            <div className="font-headings text-lg font-bold text-primary">
-              {price}
-            </div>
-          )}
+          {price && <div className="font-headings text-lg font-bold text-primary">{price}</div>}
           {availableSpots !== undefined && (
             <div className="text-sm text-dark-gray">
-              {availableSpots} places disponibles
+              {availableSpots}
+              {totalSpots ? `/${totalSpots}` : ''} places disponibles
             </div>
           )}
         </div>

@@ -23,17 +23,13 @@ export default function TestimonialCard({
         'rounded-lg bg-white p-6 shadow-md',
         'border border-gray-200',
         'transition-all duration-300',
-        'hover:shadow-lg hover:border-primary/30',
+        'hover:border-primary/30 hover:shadow-lg',
         className
       )}
     >
       <div className="mb-4 flex items-center gap-1">
         {Array.from({ length: rating }).map((_, index) => (
-          <i
-            key={index}
-            className="fa-solid fa-star text-primary"
-            aria-hidden="true"
-          />
+          <i key={index} className="fa-solid fa-star text-primary" aria-hidden="true" />
         ))}
       </div>
 
@@ -41,9 +37,7 @@ export default function TestimonialCard({
 
       <div className="flex items-center justify-between">
         <div>
-          <p className="font-headings font-semibold text-black">
-            {authorName}
-          </p>
+          <p className="font-headings font-semibold text-black">{authorName}</p>
           {location && <p className="text-sm text-dark-gray">{location}</p>}
         </div>
 

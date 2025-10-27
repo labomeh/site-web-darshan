@@ -1,27 +1,17 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
 import StickyBottomBar from './StickyBottomBar';
 
 describe('StickyBottomBar', () => {
   it('renders booking button', () => {
-    render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
-    );
+    render(<StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />);
 
     expect(screen.getByRole('button', { name: /Réserver/i })).toBeInTheDocument();
   });
 
   it('renders question button', () => {
-    render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
-    );
+    render(<StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />);
 
     expect(screen.getByRole('button', { name: /Question/i })).toBeInTheDocument();
   });
@@ -30,14 +20,10 @@ describe('StickyBottomBar', () => {
     const user = userEvent.setup();
     const handleBookingClick = vi.fn();
 
-    render(
-      <StickyBottomBar
-        onBookingClick={handleBookingClick}
-        onQuestionClick={() => {}}
-      />
-    );
+    render(<StickyBottomBar onBookingClick={handleBookingClick} onQuestionClick={() => {}} />);
 
     const bookingButton = screen.getByRole('button', { name: /Réserver/i });
+
     await user.click(bookingButton);
 
     expect(handleBookingClick).toHaveBeenCalledTimes(1);
@@ -47,14 +33,10 @@ describe('StickyBottomBar', () => {
     const user = userEvent.setup();
     const handleQuestionClick = vi.fn();
 
-    render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={handleQuestionClick}
-      />
-    );
+    render(<StickyBottomBar onBookingClick={() => {}} onQuestionClick={handleQuestionClick} />);
 
     const questionButton = screen.getByRole('button', { name: /Question/i });
+
     await user.click(questionButton);
 
     expect(handleQuestionClick).toHaveBeenCalledTimes(1);
@@ -62,10 +44,7 @@ describe('StickyBottomBar', () => {
 
   it('has fixed positioning', () => {
     const { container } = render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
+      <StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />
     );
 
     expect(container.firstChild).toHaveClass('fixed');
@@ -73,10 +52,7 @@ describe('StickyBottomBar', () => {
 
   it('is positioned at bottom', () => {
     const { container } = render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
+      <StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />
     );
 
     expect(container.firstChild).toHaveClass('bottom-0');
@@ -84,10 +60,7 @@ describe('StickyBottomBar', () => {
 
   it('has high z-index for layering', () => {
     const { container } = render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
+      <StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />
     );
 
     expect(container.firstChild).toHaveClass('z-50');
@@ -95,10 +68,7 @@ describe('StickyBottomBar', () => {
 
   it('is hidden on desktop (lg and above)', () => {
     const { container } = render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
+      <StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />
     );
 
     expect(container.firstChild).toHaveClass('lg:hidden');
@@ -118,10 +88,7 @@ describe('StickyBottomBar', () => {
 
   it('has white background', () => {
     const { container } = render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
+      <StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />
     );
 
     expect(container.firstChild).toHaveClass('bg-white');
@@ -129,13 +96,11 @@ describe('StickyBottomBar', () => {
 
   it('has shadow for depth', () => {
     const { container } = render(
-      <StickyBottomBar
-        onBookingClick={() => {}}
-        onQuestionClick={() => {}}
-      />
+      <StickyBottomBar onBookingClick={() => {}} onQuestionClick={() => {}} />
     );
 
-    const element = container.firstChild;
-    expect(element?.classList.toString()).toMatch(/shadow/);
+    const element = container.firstChild as HTMLElement;
+
+    expect(element.classList.toString()).toMatch(/shadow/);
   });
 });

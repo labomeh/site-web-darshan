@@ -28,7 +28,7 @@ export const LiverCleanse: Story = () => (
     location="Centre Darshan, Saint-Gingolph"
     availableSpots={5}
     totalSpots={10}
-    featured={true}
+    featured
   />
 );
 
@@ -105,7 +105,7 @@ export const MobileView: Story = () => (
       price="450€"
       availableSpots={3}
       totalSpots={8}
-      featured={true}
+      featured
     />
     <EventCard
       title="Nettoyage du foie"
@@ -140,7 +140,7 @@ export const DesktopGrid: Story = () => (
       location="Centre Darshan"
       availableSpots={3}
       totalSpots={8}
-      featured={true}
+      featured
     />
     <EventCard
       title="Nettoyage du foie"

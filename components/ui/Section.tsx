@@ -6,6 +6,7 @@ interface SectionProps {
   variant?: 'default' | 'white' | 'alt' | 'blue-light' | 'blue-accent';
   noPadding?: boolean;
   noContainer?: boolean;
+  snapStart?: boolean;
   children: ReactNode;
   className?: string;
   id?: string;
@@ -15,6 +16,7 @@ export default function Section({
   variant = 'default',
   noPadding = false,
   noContainer = false,
+  snapStart = false,
   children,
   className,
   id,
@@ -26,6 +28,7 @@ export default function Section({
       id={id}
       className={cn(
         !noPadding && 'py-16 md:py-24',
+        snapStart && 'md:snap-start md:snap-always',
         variant === 'default' && 'bg-off-white',
         variant === 'white' && 'bg-white',
         variant === 'alt' && 'bg-white',

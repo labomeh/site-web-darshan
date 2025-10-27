@@ -17,11 +17,13 @@ export default function FAQAccordion({ items, className }: FAQAccordionProps) {
   const toggleItem = (index: number) => {
     setOpenItems((prev) => {
       const newSet = new Set(prev);
+
       if (newSet.has(index)) {
         newSet.delete(index);
       } else {
         newSet.add(index);
       }
+
       return newSet;
     });
   };
@@ -43,12 +45,10 @@ export default function FAQAccordion({ items, className }: FAQAccordionProps) {
             <button
               type="button"
               onClick={() => toggleItem(index)}
-              className="flex w-full items-center justify-between p-4 text-left transition-colors"
+              className="flex w-full cursor-pointer items-center justify-between p-4 text-left transition-colors"
               aria-expanded={isOpen}
             >
-              <span className="font-headings font-semibold text-black">
-                {item.question}
-              </span>
+              <span className="font-headings font-semibold text-black">{item.question}</span>
               <i
                 className={cn(
                   'fa-solid fa-chevron-down text-primary transition-transform duration-300',
@@ -61,15 +61,11 @@ export default function FAQAccordion({ items, className }: FAQAccordionProps) {
             <div
               className={cn(
                 'grid transition-all duration-300',
-                isOpen
-                  ? 'grid-rows-[1fr] opacity-100'
-                  : 'grid-rows-[0fr] opacity-0'
+                isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
               )}
             >
               <div className="overflow-hidden">
-                <div className="border-t border-gray-200 p-4 text-dark-gray">
-                  {item.answer}
-                </div>
+                <div className="border-t border-gray-200 p-4 text-dark-gray">{item.answer}</div>
               </div>
             </div>
           </div>

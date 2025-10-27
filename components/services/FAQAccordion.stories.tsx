@@ -26,8 +26,7 @@ export const SingleItem: Story = () => (
     items={[
       {
         question: 'Puis-je annuler ma réservation?',
-        answer:
-          'Oui, vous pouvez annuler votre réservation jusqu\'à 24 heures avant la séance.',
+        answer: "Oui, vous pouvez annuler votre réservation jusqu'à 24 heures avant la séance.",
       },
     ]}
   />
@@ -51,8 +50,7 @@ export const ManyItems: Story = () => (
       },
       {
         question: 'Puis-je annuler ma réservation?',
-        answer:
-          'Oui, vous pouvez annuler votre réservation jusqu\'à 24 heures avant la séance.',
+        answer: "Oui, vous pouvez annuler votre réservation jusqu'à 24 heures avant la séance.",
       },
       {
         question: 'Est-ce que les séances sont adaptées aux débutants?',
@@ -61,8 +59,7 @@ export const ManyItems: Story = () => (
       },
       {
         question: 'Faut-il être à jeun?',
-        answer:
-          'Il est recommandé de ne pas manger de repas lourd 2 heures avant la séance.',
+        answer: 'Il est recommandé de ne pas manger de repas lourd 2 heures avant la séance.',
       },
     ]}
   />
@@ -72,9 +69,9 @@ export const LongContent: Story = () => (
   <FAQAccordion
     items={[
       {
-        question: 'Quels sont les bienfaits de l\'hydrothérapie du côlon?',
+        question: "Quels sont les bienfaits de l'hydrothérapie du côlon?",
         answer:
-          'L\'hydrothérapie du côlon offre de nombreux bienfaits pour la santé: amélioration de la digestion, réduction des ballonnements, augmentation de l\'énergie, renforcement du système immunitaire, amélioration de la qualité de la peau, et bien-être général. Elle aide à éliminer les toxines accumulées dans le côlon et favorise un meilleur fonctionnement du système digestif.',
+          "L'hydrothérapie du côlon offre de nombreux bienfaits pour la santé: amélioration de la digestion, réduction des ballonnements, augmentation de l'énergie, renforcement du système immunitaire, amélioration de la qualité de la peau, et bien-être général. Elle aide à éliminer les toxines accumulées dans le côlon et favorise un meilleur fonctionnement du système digestif.",
       },
       {
         question: 'Combien de séances sont recommandées?',

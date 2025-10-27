@@ -29,5 +29,4 @@ export default {
       enabled: false, // We use Tailwind, not built-in theming
     },
   },
-
 };

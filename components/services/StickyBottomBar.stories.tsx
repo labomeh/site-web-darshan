@@ -4,21 +4,20 @@ import StickyBottomBar from './StickyBottomBar';
 export const Default: Story = () => (
   <div className="min-h-screen bg-off-white p-4 pb-24">
     <div className="rounded-lg bg-white p-6">
-      <h1 className="mb-4 font-headings text-2xl text-black">
-        Hydrothérapie du Côlon
-      </h1>
+      <h1 className="mb-4 font-headings text-2xl text-black">Hydrothérapie du Côlon</h1>
       <p className="mb-4 text-dark-gray">
-        L'hydrothérapie du côlon est une méthode douce de nettoyage intestinal qui permet d'éliminer les toxines accumulées dans le côlon.
-      </p>
-      <p className="mb-4 text-dark-gray">
-        Cette technique, pratiquée depuis l'Antiquité, consiste en une irrigation douce du côlon avec de l'eau filtrée à température contrôlée.
+        L'hydrothérapie du côlon est une méthode douce de nettoyage intestinal qui permet d'éliminer
+        les toxines accumulées dans le côlon.
       </p>
       <p className="mb-4 text-dark-gray">
-        Les séances durent entre 45 et 60 minutes et se déroulent dans un environnement calme et professionnel.
+        Cette technique, pratiquée depuis l'Antiquité, consiste en une irrigation douce du côlon
+        avec de l'eau filtrée à température contrôlée.
       </p>
-      <p className="text-sm text-dark-gray">
-        Scroll down to see the sticky bottom bar...
+      <p className="mb-4 text-dark-gray">
+        Les séances durent entre 45 et 60 minutes et se déroulent dans un environnement calme et
+        professionnel.
       </p>
+      <p className="text-sm text-dark-gray">Scroll down to see the sticky bottom bar...</p>
     </div>
 
     <StickyBottomBar
@@ -32,14 +31,14 @@ export const WithLongContent: Story = () => (
   <div className="min-h-[200vh] bg-off-white p-4 pb-24">
     <div className="space-y-6">
       <div className="rounded-lg bg-white p-6">
-        <h1 className="mb-4 font-headings text-2xl text-black">
-          Massage Ayurvédique
-        </h1>
+        <h1 className="mb-4 font-headings text-2xl text-black">Massage Ayurvédique</h1>
         <p className="mb-4 text-dark-gray">
-          Le massage ayurvédique est une pratique millénaire issue de la médecine traditionnelle indienne.
+          Le massage ayurvédique est une pratique millénaire issue de la médecine traditionnelle
+          indienne.
         </p>
         <p className="mb-4 text-dark-gray">
-          Cette technique utilise des huiles chaudes et des mouvements spécifiques pour rééquilibrer les doshas et favoriser la circulation de l'énergie vitale.
+          Cette technique utilise des huiles chaudes et des mouvements spécifiques pour rééquilibrer
+          les doshas et favoriser la circulation de l'énergie vitale.
         </p>
       </div>
 
@@ -92,11 +91,10 @@ export const WithLongContent: Story = () => (
 export const MobileView: Story = () => (
   <div className="min-h-screen bg-off-white p-4 pb-24">
     <div className="rounded-lg bg-white p-6">
-      <h1 className="mb-4 font-headings text-xl text-black">
-        Nettoyage du Foie
-      </h1>
+      <h1 className="mb-4 font-headings text-xl text-black">Nettoyage du Foie</h1>
       <p className="mb-4 text-dark-gray">
-        Le nettoyage du foie selon la méthode Andreas Moritz est un protocole naturel qui permet d'éliminer les calculs biliaires.
+        Le nettoyage du foie selon la méthode Andreas Moritz est un protocole naturel qui permet
+        d'éliminer les calculs biliaires.
       </p>
       <p className="mb-4 text-dark-gray">
         Ce processus nécessite une préparation de 5 jours suivie d'un week-end intensif au centre.

@@ -8,7 +8,7 @@ Cette documentation couvre tous les aspects du projet Next.js du site Darshan.
 
 | Fichier | Description | Pour qui ? |
 |---------|-------------|-----------|
-| [**DESIGN_SYSTEM.md**](DESIGN_SYSTEM.md) | Design system complet : couleurs, typographie, composants, stratégie d'utilisation | Développeurs, designers |
+| [**DESIGN_SYSTEM.md**](DESIGN_SYSTEM.md) | **⚠️ CRITICAL** - Design system complet : règles strictes, couleurs, typographie, composants | Développeurs, designers |
 | [**CONFIGURATION.md**](CONFIGURATION.md) | Configuration TypeScript, ESLint, Prettier, outils | Développeurs |
 | [**BRANCHING_STRATEGY.md**](BRANCHING_STRATEGY.md) | Stratégie Git Flow avec rebase, workflow complet | Développeurs |
 | [**GIT_ALIASES.md**](GIT_ALIASES.md) | Guide des alias Git automatisés | Développeurs |

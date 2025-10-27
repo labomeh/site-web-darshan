@@ -34,18 +34,19 @@ export const Default: Story = () => (
   <div className="min-h-screen bg-off-white p-8">
     <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_380px]">
       <div>
-        <h1 className="mb-6 font-headings text-4xl text-black">
-          Hydrothérapie du Côlon
-        </h1>
+        <h1 className="mb-6 font-headings text-4xl text-black">Hydrothérapie du Côlon</h1>
         <div className="rounded-lg bg-white p-6">
           <p className="mb-4 text-dark-gray">
-            L'hydrothérapie du côlon est une méthode douce de nettoyage intestinal qui permet d'éliminer les toxines accumulées dans le côlon.
+            L'hydrothérapie du côlon est une méthode douce de nettoyage intestinal qui permet
+            d'éliminer les toxines accumulées dans le côlon.
           </p>
           <p className="mb-4 text-dark-gray">
-            Cette technique, pratiquée depuis l'Antiquité, consiste en une irrigation douce du côlon avec de l'eau filtrée à température contrôlée.
+            Cette technique, pratiquée depuis l'Antiquité, consiste en une irrigation douce du côlon
+            avec de l'eau filtrée à température contrôlée.
           </p>
           <p className="text-dark-gray">
-            Les séances durent entre 45 et 60 minutes et se déroulent dans un environnement calme et professionnel.
+            Les séances durent entre 45 et 60 minutes et se déroulent dans un environnement calme et
+            professionnel.
           </p>
         </div>
       </div>
@@ -68,10 +69,12 @@ export const WithEvents: Story = () => (
         </h1>
         <div className="rounded-lg bg-white p-6">
           <p className="mb-4 text-dark-gray">
-            Le nettoyage du foie selon la méthode Andreas Moritz est un protocole naturel qui permet d'éliminer les calculs biliaires et d'améliorer le fonctionnement hépatique.
+            Le nettoyage du foie selon la méthode Andreas Moritz est un protocole naturel qui permet
+            d'éliminer les calculs biliaires et d'améliorer le fonctionnement hépatique.
           </p>
           <p className="text-dark-gray">
-            Ce processus nécessite une préparation de 5 jours suivie d'un week-end intensif au centre.
+            Ce processus nécessite une préparation de 5 jours suivie d'un week-end intensif au
+            centre.
           </p>
         </div>
       </div>
@@ -95,12 +98,11 @@ export const SinglePrice: Story = () => (
   <div className="min-h-screen bg-off-white p-8">
     <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_380px]">
       <div>
-        <h1 className="mb-6 font-headings text-4xl text-black">
-          Trio de Soins Detox
-        </h1>
+        <h1 className="mb-6 font-headings text-4xl text-black">Trio de Soins Detox</h1>
         <div className="rounded-lg bg-white p-6">
           <p className="text-dark-gray">
-            Le Trio de Soins Detox combine trois techniques complémentaires pour une expérience de détoxification complète.
+            Le Trio de Soins Detox combine trois techniques complémentaires pour une expérience de
+            détoxification complète.
           </p>
         </div>
       </div>
@@ -123,15 +125,15 @@ export const DesktopView: Story = () => (
   <div className="min-h-screen bg-off-white p-8">
     <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_380px]">
       <div>
-        <h1 className="mb-6 font-headings text-4xl text-black">
-          Massage Ayurvédique
-        </h1>
+        <h1 className="mb-6 font-headings text-4xl text-black">Massage Ayurvédique</h1>
         <div className="space-y-4 rounded-lg bg-white p-6">
           <p className="text-dark-gray">
-            Le massage ayurvédique est une pratique millénaire issue de la médecine traditionnelle indienne.
+            Le massage ayurvédique est une pratique millénaire issue de la médecine traditionnelle
+            indienne.
           </p>
           <p className="text-dark-gray">
-            Cette technique utilise des huiles chaudes et des mouvements spécifiques pour rééquilibrer les doshas et favoriser la circulation de l'énergie vitale.
+            Cette technique utilise des huiles chaudes et des mouvements spécifiques pour
+            rééquilibrer les doshas et favoriser la circulation de l'énergie vitale.
           </p>
         </div>
       </div>

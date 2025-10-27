@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { describe, it, expect, vi } from 'vitest';
 import ServiceSidebar from './ServiceSidebar';
 
 describe('ServiceSidebar', () => {
@@ -112,6 +112,7 @@ describe('ServiceSidebar', () => {
     );
 
     const bookingButton = screen.getByRole('button', { name: /Réserver/i });
+
     await user.click(bookingButton);
 
     expect(handleBookingClick).toHaveBeenCalledTimes(1);
@@ -131,6 +132,7 @@ describe('ServiceSidebar', () => {
     );
 
     const questionButton = screen.getByRole('button', { name: /Une question/i });
+
     await user.click(questionButton);
 
     expect(handleQuestionClick).toHaveBeenCalledTimes(1);

@@ -1,4 +1,6 @@
 import Hero from '@/components/Hero';
+import ServicesGrid from '@/components/home/ServicesGrid';
+import UpcomingEvents from '@/components/home/UpcomingEvents';
 import Layout from '@/components/Layout';
 import { METADATA, SITE } from '@/config/site';
 
@@ -13,6 +15,10 @@ export default function Home() {
         showLocation
       />
       <div id="content" className="h-1" aria-hidden="true" />
+
+      <ServicesGrid />
+
+      <UpcomingEvents />
     </Layout>
   );
 }

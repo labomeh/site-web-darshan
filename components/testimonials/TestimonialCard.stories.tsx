@@ -20,7 +20,7 @@ export const FourStarsVerified: Story = () => (
     content="Très professionnel et à l'écoute. L'environnement est calme et apaisant. Je reviendrai certainement."
     rating={4}
     location="Thonon-les-Bains"
-    verified={true}
+    verified
   />
 );
 
@@ -46,7 +46,7 @@ export const LongTestimonial: Story = () => (
     content="J'ai découvert le Centre Darshan lors d'un week-end de jeûne. L'expérience a été transformative. L'accompagnement est exceptionnel, les locaux sont magnifiques avec vue sur le lac, et l'équipe est vraiment bienveillante. J'ai fait plusieurs séances d'hydrothérapie et je me sens revivre. Je recommande à 100%!"
     rating={5}
     location="Genève"
-    verified={true}
+    verified
   />
 );
 
@@ -55,11 +55,7 @@ LongTestimonial.meta = {
 };
 
 export const MinimalTestimonial: Story = () => (
-  <TestimonialCard
-    authorName="C.D."
-    content="Très bien, merci!"
-    rating={5}
-  />
+  <TestimonialCard authorName="C.D." content="Très bien, merci!" rating={5} />
 );
 
 MinimalTestimonial.meta = {
@@ -73,7 +69,7 @@ export const MobileView: Story = () => (
       content="Excellente expérience, je recommande vivement!"
       rating={5}
       location="Evian"
-      verified={true}
+      verified
     />
     <TestimonialCard
       authorName="J.D."
@@ -81,11 +77,7 @@ export const MobileView: Story = () => (
       rating={4}
       location="Thonon"
     />
-    <TestimonialCard
-      authorName="S.L."
-      content="Bonne prestation dans l'ensemble."
-      rating={3}
-    />
+    <TestimonialCard authorName="S.L." content="Bonne prestation dans l'ensemble." rating={3} />
   </div>
 );
 
@@ -101,7 +93,7 @@ export const DesktopGrid: Story = () => (
       content="Excellente expérience avec l'hydrotherapie du côlon."
       rating={5}
       location="Evian"
-      verified={true}
+      verified
     />
     <TestimonialCard
       authorName="J.D."
@@ -109,16 +101,12 @@ export const DesktopGrid: Story = () => (
       rating={4}
       location="Thonon"
     />
-    <TestimonialCard
-      authorName="S.L."
-      content="Bonne prestation dans l'ensemble."
-      rating={3}
-    />
+    <TestimonialCard authorName="S.L." content="Bonne prestation dans l'ensemble." rating={3} />
     <TestimonialCard
       authorName="A.B."
       content="Accompagnement exceptionnel, équipe bienveillante."
       rating={5}
-      verified={true}
+      verified
     />
     <TestimonialCard
       authorName="C.D."

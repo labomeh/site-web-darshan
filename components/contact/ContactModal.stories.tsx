@@ -8,9 +8,7 @@ export const BookingMode: Story = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
       <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
-        <h2 className="mb-4 font-headings text-2xl text-black">
-          Test du Modal de Réservation
-        </h2>
+        <h2 className="mb-4 font-headings text-2xl text-black">Test du Modal de Réservation</h2>
         <p className="mb-4 text-dark-gray">
           Cliquez sur le bouton ci-dessous pour ouvrir le modal de réservation avec formulaire.
         </p>
@@ -26,11 +24,7 @@ export const BookingMode: Story = () => {
         </button>
       </div>
 
-      <ContactModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        mode="booking"
-      />
+      <ContactModal isOpen={isOpen} onClose={() => setIsOpen(false)} mode="booking" />
     </div>
   );
 };
@@ -75,9 +69,7 @@ export const QuestionMode: Story = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
       <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
-        <h2 className="mb-4 font-headings text-2xl text-black">
-          Test du Modal Questions
-        </h2>
+        <h2 className="mb-4 font-headings text-2xl text-black">Test du Modal Questions</h2>
         <p className="mb-4 text-dark-gray">
           Cliquez sur le bouton ci-dessous pour poser une question.
         </p>
@@ -93,11 +85,7 @@ export const QuestionMode: Story = () => {
         </button>
       </div>
 
-      <ContactModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        mode="question"
-      />
+      <ContactModal isOpen={isOpen} onClose={() => setIsOpen(false)} mode="question" />
     </div>
   );
 };
@@ -142,9 +130,7 @@ export const MobileView: Story = () => {
   return (
     <div className="min-h-screen bg-off-white p-4">
       <div className="rounded-lg bg-white p-4 shadow-md">
-        <h2 className="mb-3 font-headings text-xl text-black">
-          Vue Mobile
-        </h2>
+        <h2 className="mb-3 font-headings text-xl text-black">Vue Mobile</h2>
         <p className="mb-4 text-sm text-dark-gray">
           Testez le modal sur mobile. Le formulaire s'adapte automatiquement à la taille de l'écran.
         </p>
@@ -177,9 +163,7 @@ export const InteractionDemo: Story = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
       <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
-        <h2 className="mb-4 font-headings text-2xl text-black">
-          Démo Interactive
-        </h2>
+        <h2 className="mb-4 font-headings text-2xl text-black">Démo Interactive</h2>
         <p className="mb-6 text-dark-gray">
           Testez les deux modes du modal: réservation et question.
         </p>
@@ -223,9 +207,7 @@ export const FormInteraction: Story = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-off-white p-4">
       <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-md">
-        <h2 className="mb-4 font-headings text-2xl text-black">
-          Test d'Interaction du Formulaire
-        </h2>
+        <h2 className="mb-4 font-headings text-2xl text-black">Test d'Interaction du Formulaire</h2>
         <p className="mb-4 text-dark-gray">
           Modal ouvert par défaut pour tester le formulaire facilement.
         </p>
