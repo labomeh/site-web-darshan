@@ -2,19 +2,22 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { LABELS, SITE } from '@/config/site';
-import { cn } from '@/lib/utils';
+import DropdownMenu from '@/components/Header/DropdownMenu';
 import Logo from '@/components/ui/Logo';
+import { LABELS, SITE, SERVICES } from '@/config/site';
+import { cn } from '@/lib/utils';
 
 interface NavItem {
   href: string;
   label: string;
 }
 
-const navItems: NavItem[] = [
-  { href: '/', label: LABELS.nav.home },
-  { href: '/contact', label: LABELS.nav.contact },
-];
+const navItems: NavItem[] = [{ href: '/', label: LABELS.nav.home }];
+
+const serviceMenuItems: { href: string; label: string }[] = SERVICES.map((service) => ({
+  href: `/services/${service.slug}`,
+  label: service.name,
+}));
 
 interface HeaderProps {
   currentPage?: string;
@@ -25,7 +28,7 @@ export default function Header({ currentPage = '/' }: HeaderProps) {
 
   return (
     <header>
-      <nav className="fixed top-0 left-0 right-0 z-[200] bg-secondary shadow-md">
+      <nav className="fixed top-0 right-0 left-0 z-[200] bg-secondary shadow-md">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
           <Link
             href="/"
@@ -99,6 +102,34 @@ export default function Header({ currentPage = '/' }: HeaderProps) {
                 </Link>
               </li>
             ))}
+
+            <li>
+              <DropdownMenu
+                label="Services"
+                items={serviceMenuItems}
+                currentPage={currentPage}
+                onItemClick={() => setMenuOpen(false)}
+              />
+            </li>
+
+            <li>
+              <Link
+                href="/contact"
+                className={cn(
+                  'relative inline-flex min-h-[48px] items-center px-4 py-2',
+                  'font-medium text-off-white no-underline transition-colors duration-300',
+                  'hover:text-primary',
+                  'focus-visible:rounded focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none',
+                  'after:absolute after:bottom-2 after:left-4 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300',
+                  'hover:after:w-[calc(100%-2rem)]',
+                  currentPage === '/contact' && 'text-primary after:w-[calc(100%-2rem)]',
+                  'max-lg:after:hidden'
+                )}
+                onClick={() => setMenuOpen(false)}
+              >
+                {LABELS.nav.contact}
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

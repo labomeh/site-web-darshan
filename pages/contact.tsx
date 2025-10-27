@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import ContactInfoCard from '@/components/contact/ContactInfoCard';
+import ContactModal from '@/components/contact/ContactModal';
 import Layout from '@/components/Layout';
+import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
 import PageHeader from '@/components/ui/PageHeader';
 import { BUSINESS_HOURS, CONTACT, LABELS, METADATA } from '@/config/site';
 
 export default function Contact() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Layout
       currentPage="/contact"
@@ -42,7 +47,7 @@ export default function Contact() {
               <ContactInfoCard icon="fas fa-envelope" title={LABELS.contact.email}>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="break-all text-sm font-medium text-secondary underline decoration-primary decoration-2 underline-offset-4 transition-colors hover:text-primary"
+                  className="text-sm font-medium break-all text-secondary underline decoration-primary decoration-2 underline-offset-4 transition-colors hover:text-primary"
                 >
                   {CONTACT.email}
                 </a>
@@ -51,7 +56,8 @@ export default function Contact() {
               <ContactInfoCard icon="fas fa-clock" title={LABELS.contact.hours}>
                 <div className="text-sm">
                   <p className="mb-2">
-                    <strong>{BUSINESS_HOURS.weekdays.label} :</strong> {BUSINESS_HOURS.weekdays.hours}
+                    <strong>{BUSINESS_HOURS.weekdays.label} :</strong>{' '}
+                    {BUSINESS_HOURS.weekdays.hours}
                   </p>
                   <p className="mb-2">
                     <strong>{BUSINESS_HOURS.sunday.label} :</strong> {BUSINESS_HOURS.sunday.hours}
@@ -59,6 +65,16 @@ export default function Contact() {
                   <p className="text-sm text-dark-gray">{BUSINESS_HOURS.note}</p>
                 </div>
               </ContactInfoCard>
+
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                variant="primary"
+                size="lg"
+                className="w-full"
+              >
+                <i className="fa-solid fa-envelope mr-2" aria-hidden="true" />
+                Formulaire de contact
+              </Button>
             </div>
 
             {/* Map - Main Content */}
@@ -88,6 +104,8 @@ export default function Contact() {
           </div>
         </Container>
       </section>
+
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} mode="question" />
     </Layout>
   );
 }

@@ -19,7 +19,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const buttonClasses = cn(
-    'inline-flex items-center justify-center',
+    'inline-flex cursor-pointer items-center justify-center',
     'rounded-lg font-medium transition-all duration-300',
     'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none',
     'disabled:cursor-not-allowed disabled:opacity-50',

@@ -24,7 +24,12 @@ interface LogoProps {
   alt?: string;
 }
 
-export default function Logo({ variant = 'primary', size = 'md', className, alt = 'Darshan' }: LogoProps) {
+export default function Logo({
+  variant = 'primary',
+  size = 'md',
+  className,
+  alt = 'Darshan',
+}: LogoProps) {
   const sizeMap = {
     sm: 'h-10',
     md: 'h-[45px]',
